@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Donation Cases</title>
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+
+            min-height:100vh;
+
+            background: linear-gradient(
+                180deg,
+                #5a5df0 0%,
+                #8f2fff 55%,
+                #ff3ba7 100%
+            );
+
+            padding-bottom:40px;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+
+            width:100%;
+
+            padding:20px 8%;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            background:rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(10px);
+
+            margin-bottom:50px;
+        }
+
+        .logo{
+
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .logo-icon{
+
+            width:45px;
+            height:45px;
+
+            border-radius:50%;
+
+            background:rgba(255,255,255,0.15);
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            color:white;
+            font-size:18px;
+        }
+
+        .logo h2{
+
+            color:white;
+            font-size:28px;
+        }
+
+        .nav-links{
+
+            display:flex;
+            align-items:center;
+            gap:25px;
+        }
+
+        .nav-links a{
+
+            color:white;
+            text-decoration:none;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+
+            opacity:0.8;
+        }
+
+        /* PAGE TITLE */
+
+        .page-title{
+
+            text-align:center;
+
+            color:white;
+
+            font-size:48px;
+
+            margin-bottom:15px;
+        }
+
+        .subtitle{
+
+            text-align:center;
+
+            color:#f3f4f6;
+
+            font-size:18px;
+
+            margin-bottom:45px;
+        }
+
+        /* CASES GRID */
+
+        .cases-container{
+
+            width:90%;
+            max-width:1400px;
+
+            margin:auto;
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(340px, 1fr));
+
+            gap:30px;
+        }
+
+        /* CASE CARD */
+
+        .case-card{
+
+            background:rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(14px);
+
+            border-radius:22px;
+
+            padding:28px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.18);
+
+            color:white;
+
+            transition:0.3s;
+        }
+
+        .case-card:hover{
+
+            transform:translateY(-5px);
+        }
+
+        /* TOP */
+
+        .card-top{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:20px;
+        }
+
+        .category{
+
+            background:linear-gradient(
+                90deg,
+                #4f46e5,
+                #a200ff
+            );
+
+            padding:8px 14px;
+
+            border-radius:30px;
+
+            font-size:13px;
+
+            font-weight:bold;
+        }
+
+        .priority{
+
+            background:crimson;
+
+            padding:8px 14px;
+
+            border-radius:30px;
+
+            font-size:13px;
+
+            font-weight:bold;
+        }
+
+        /* TITLE */
+
+        .case-card h2{
+
+            font-size:28px;
+
+            margin-bottom:18px;
+
+            line-height:1.3;
+        }
+
+        /* DESCRIPTION */
+
+        .case-card p{
+
+            color:#f3f4f6;
+
+            line-height:1.7;
+
+            margin-bottom:25px;
+        }
+
+        /* PROGRESS */
+
+        .progress-wrapper{
+
+            margin-bottom:20px;
+        }
+
+        .progress-info{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            margin-bottom:10px;
+
+            font-size:14px;
+        }
+
+        .progress-container{
+
+            width:100%;
+
+            height:18px;
+
+            background:rgba(255,255,255,0.2);
+
+            border-radius:20px;
+
+            overflow:hidden;
+        }
+
+        .progress-bar{
+
+            height:100%;
+
+            background:linear-gradient(
+                90deg,
+                #22c55e,
+                #16a34a
+            );
+
+            border-radius:20px;
+
+            text-align:center;
+
+            font-size:11px;
+
+            font-weight:bold;
+
+            line-height:18px;
+        }
+
+        /* AMOUNTS */
+
+        .amounts{
+
+            margin-top:20px;
+
+            line-height:2;
+
+            font-size:15px;
+        }
+
+        .amounts strong{
+
+            color:white;
+        }
+
+        /* BUTTON */
+
+        .donate-btn{
+
+            width:100%;
+
+            display:flex;
+
+            justify-content:center;
+            align-items:center;
+
+            gap:10px;
+
+            margin-top:28px;
+
+            padding:15px;
+
+            border-radius:12px;
+
+            text-decoration:none;
+
+            color:white;
+
+            font-size:16px;
+
+            font-weight:bold;
+
+            background:linear-gradient(
+                90deg,
+                #4f46e5,
+                #a200ff
+            );
+
+            transition:0.3s;
+        }
+
+        .donate-btn:hover{
+
+            opacity:0.92;
+
+            transform:translateY(-2px);
+        }
+
+        /* FOOTER */
+
+        .footer-text{
+
+            text-align:center;
+
+            margin-top:50px;
+
+            color:white;
+
+            font-size:14px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            .navbar{
+
+                flex-direction:column;
+
+                gap:20px;
+            }
+
+            .nav-links{
+
+                flex-wrap:wrap;
+
+                justify-content:center;
+            }
+
+            .page-title{
+
+                font-size:36px;
+            }
+
+            .subtitle{
+
+                font-size:16px;
+                padding:0 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-heart"></i>
+
+            </div>
+
+            <h2>CharityLens</h2>
+
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/cases-view">
+                Cases
+            </a>
+
+            <a href="/donor/dashboard">
+                My Donations
+            </a>
+
+            <a href="/auth/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- TITLE -->
+
+    <h1 class="page-title">
+
+        Active Donation Cases
+
+    </h1>
+
+    <p class="subtitle">
+
+        Support verified causes and help people in need
+        through secure and transparent donations.
+
+    </p>
+
+    <!-- CASES -->
+
+    <div class="cases-container">
+
+        <% cases.forEach(singleCase => { %>
+
+            <div class="case-card">
+
+                <!-- TOP -->
+
+                <div class="card-top">
+
+                    <span class="category">
+
+                        <%= singleCase.category %>
+
+                    </span>
+
+                    <span class="priority">
+
+                        <%= singleCase.priority %>
+
+                    </span>
+
+                </div>
+
+                <!-- TITLE -->
+
+                <h2>
+
+                    <%= singleCase.title %>
+
+                </h2>
+
+                <!-- DESCRIPTION -->
+
+                <p>
+
+                    <%= singleCase.description %>
+
+                </p>
+
+                <!-- PROGRESS -->
+
+                <%
+
+                    const progress = Math.min(
+
+                        (
+                            (
+                                singleCase.collectedAmount /
+
+                                singleCase.requiredAmount
+                            ) * 100
+                        ).toFixed(1),
+
+                        100
+
+                    );
+
+                %>
+
+                <div class="progress-wrapper">
+
+                    <div class="progress-info">
+
+                        <span>Donation Progress</span>
+
+                        <span><%= progress %>%</span>
+
+                    </div>
+
+                    <div class="progress-container">
+
+                        <div
+
+                            class="progress-bar"
+
+                            style="width: <%= progress %>%"
+
+                        >
+
+                            <%= progress %>%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- AMOUNTS -->
+
+                <div class="amounts">
+
+                    <strong>Collected:</strong>
+
+                    ₹<%= singleCase.collectedAmount %>
+
+                    <br>
+
+                    <strong>Required:</strong>
+
+                    ₹<%= singleCase.requiredAmount %>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <a
+
+                    href="/cases-view/<%= singleCase._id %>"
+
+                    class="donate-btn"
+
+                >
+
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+
+                    Donate Now
+
+                </a>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer-text">
+
+        Protected by end-to-end encryption
+
+    </div>
+
+</body>
+
+</html>

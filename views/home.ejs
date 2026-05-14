@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>CharityLens</title>
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+
+            min-height:100vh;
+
+            background: linear-gradient(
+                180deg,
+                #5a5df0 0%,
+                #8f2fff 55%,
+                #ff3ba7 100%
+            );
+
+            color:white;
+        }
+
+        /* NAVBAR */
+
+        nav{
+
+            width:100%;
+
+            padding:20px 8%;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            background:rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .logo{
+
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .logo-icon{
+
+            width:45px;
+            height:45px;
+
+            border-radius:50%;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background:rgba(255,255,255,0.15);
+
+            font-size:18px;
+        }
+
+        .logo h2{
+
+            margin:0;
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        nav .links{
+
+            display:flex;
+            align-items:center;
+            gap:25px;
+        }
+
+        nav .links a{
+
+            color:white;
+            text-decoration:none;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        nav .links a:hover{
+
+            opacity:0.8;
+        }
+
+        /* HERO SECTION */
+
+        .hero-section{
+
+            min-height:calc(100vh - 90px);
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            padding:40px 20px;
+        }
+
+        .hero-card{
+
+            width:100%;
+            max-width:950px;
+
+            background:rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(14px);
+
+            border-radius:25px;
+
+            padding:70px 60px;
+
+            text-align:center;
+
+            box-shadow:0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .top-icon{
+
+            width:90px;
+            height:90px;
+
+            margin:0 auto 30px;
+
+            border-radius:50%;
+
+            background:linear-gradient(
+                135deg,
+                #5d5fff,
+                #b100ff
+            );
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:35px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.25);
+        }
+
+        .hero-card h1{
+
+            font-size:55px;
+            line-height:1.2;
+            margin-bottom:25px;
+        }
+
+        .hero-card p{
+
+            font-size:20px;
+            line-height:1.8;
+
+            color:#f3f4f6;
+
+            max-width:700px;
+            margin:0 auto 45px;
+        }
+
+        /* BUTTONS */
+
+        .buttons{
+
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            gap:20px;
+        }
+
+        .btn{
+
+            padding:16px 35px;
+
+            border-radius:12px;
+
+            text-decoration:none;
+
+            color:white;
+
+            font-size:17px;
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        .primary{
+
+            background:linear-gradient(
+                90deg,
+                #4f46e5,
+                #a200ff
+            );
+        }
+
+        .secondary{
+
+            background:linear-gradient(
+                90deg,
+                #16a34a,
+                #22c55e
+            );
+        }
+
+        .btn:hover{
+
+            transform:translateY(-2px);
+            opacity:0.92;
+        }
+
+        /* FOOTER TEXT */
+
+        .footer-text{
+
+            text-align:center;
+
+            padding-bottom:20px;
+
+            color:white;
+
+            font-size:14px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            nav{
+
+                flex-direction:column;
+                gap:20px;
+            }
+
+            nav .links{
+
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+
+            .hero-card{
+
+                padding:50px 25px;
+            }
+
+            .hero-card h1{
+
+                font-size:38px;
+            }
+
+            .hero-card p{
+
+                font-size:17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+
+            <h2>CharityLens</h2>
+
+        </div>
+
+        <div class="links">
+
+            <a href="/">Home</a>
+
+            <a href="/login">Login</a>
+
+            <a href="/register">Register</a>
+
+            <a href="/cases-view">Cases</a>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero-section">
+
+        <div class="hero-card">
+
+            <!-- ICON -->
+
+            <div class="top-icon">
+
+                <i class="fa-solid fa-hand-holding-heart"></i>
+
+            </div>
+
+            <!-- HEADING -->
+
+            <h1>
+
+                Smart Donation & <br>
+                Fund Allocation System
+
+            </h1>
+
+            <!-- PARAGRAPH -->
+
+            <p>
+
+                Transparent and secure charity platform
+                powered by modern web technologies.
+
+            </p>
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a
+                    href="/register"
+                    class="btn primary"
+                >
+
+                    Get Started
+
+                </a>
+
+                <a
+                    href="/cases-view"
+                    class="btn secondary"
+                >
+
+                    View Cases
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <div class="footer-text">
+
+        Protected by end-to-end encryption
+
+    </div>
+
+</body>
+
+</html>
+
