@@ -48,6 +48,11 @@ router.post(
         priority
       } = req.body;
 
+      const cleanAmount =
+Number(
+    requiredAmount.replace(/,/g, '')
+);
+
 
       // validation
       if (!title || !description || !category || !requiredAmount) {
@@ -63,7 +68,7 @@ router.post(
         title,
         description,
         category,
-        requiredAmount,
+        requiredAmount: cleanAmount,
         priority,
 
         beneficiaryId: req.session.user.id,
@@ -100,7 +105,7 @@ router.post(
 // get logged-in beneficiary cases
 // ----------------------
 
-router.get('/cases/my', isAuth, async (req, res) => {
+router.get('/beneficiary/my-cases', isAuth, async (req, res) => {
 
   try {
 
@@ -306,11 +311,31 @@ router.get('/beneficiary/dashboard', isAuth, async (req, res) => {
 
 
     // render dashboard
-    res.render('beneficiary/dashboard', {
+   console.log(req.session.user);
 
-      cases
+   const totalRaised = cases.reduce(
+  (sum, c) => sum + (c.collectedAmount || 0),
+  0
+);
 
-    });
+const pendingCases = cases.filter(
+  c => !c.isVerified
+).length;
+
+const approvedCases = cases.filter(
+  c => c.isVerified
+).length;
+
+console.log("BENEFICIARY DASHBOARD ROUTE HIT");
+console.log(totalRaised);
+
+res.render('beneficiary/dashboard', {
+    cases,
+    user: req.session.user,
+    totalRaised,
+    pendingCases,
+    approvedCases
+});
 
   } catch (error) {
 
@@ -334,7 +359,9 @@ router.get(
 
   (req, res) => {
 
-    res.render('beneficiary/submit-case');
+    res.render('beneficiary/submit-case', {
+    user: req.session.user
+});
 
   }
 

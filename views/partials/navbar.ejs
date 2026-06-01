@@ -1,0 +1,155 @@
+<nav class="navbar">
+
+   <a href="/" class="logo">
+
+    <img
+        src="/images/favicon.png"
+        alt="CharityLens Logo"
+        class="navbar-logo"
+    >
+
+    <h2>CharityLens</h2>
+
+</a>
+
+    <div class="nav-links">
+
+        <% const currentPath = typeof path !== 'undefined'
+            ? path
+            : '';
+        %>
+
+        
+
+        <!-- CASES -->
+
+        <% if (currentPath !== '/cases-view') { %>
+
+            <a href="/cases-view">Cases</a>
+
+        <% } %>
+
+        <% if (typeof user !== 'undefined' && user) { %>
+
+            <!-- ADMIN -->
+
+            <% if (user.role === 'admin') { %>
+
+                <% if (currentPath !== '/admin/dashboard') { %>
+
+                    <a href="/admin/dashboard">
+                        Dashboard
+                    </a>
+
+                <% } %>
+
+                <% if (currentPath !== '/admin/cases') { %>
+
+                    <a href="/admin/cases">
+                        Manage Cases
+                    </a>
+
+                <% } %>
+
+            <% } %>
+
+
+            <!-- DONOR -->
+
+            <% if (user.role === 'donor') { %>
+
+                <% if (currentPath !== '/donor/dashboard') { %>
+
+                    <a href="/donor/dashboard">
+                        My Donations
+                    </a>
+
+                <% } %>
+
+            <% } %>
+
+
+            <!-- BENEFICIARY -->
+
+<% if (user.role === 'beneficiary') { %>
+
+    <% if (
+        currentPath !== '/beneficiary/my-cases'
+    ) { %>
+
+        <a href="/beneficiary/my-cases">
+            My Cases
+        </a>
+
+    <% } %>
+
+    <% if (
+        currentPath !== '/submit-case'
+    ) { %>
+
+        <a href="/submit-case">
+            Submit Case
+        </a>
+
+    <% } %>
+
+<% } %>
+
+            <!-- LOGOUT -->
+
+            <a href="/auth/logout" class="logout-btn">
+
+                Logout
+
+            </a>
+
+
+            <!-- USER AVATAR -->
+
+            <div class="user-avatar
+                <%= user.role === 'admin'
+                    ? 'avatar-admin'
+                    : user.role === 'donor'
+                    ? 'avatar-donor'
+                    : 'avatar-beneficiary'
+                %>">
+
+                <% if (user.role === 'admin') { %>
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                <% } else if (user.role === 'donor') { %>
+
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+
+                <% } else { %>
+
+                    <i class="fa-solid fa-user"></i>
+
+                <% } %>
+
+            </div>
+
+        <% } else { %>
+
+            <!-- LOGIN -->
+
+            <% if (currentPath !== '/login') { %>
+
+                <a href="/login">Login</a>
+
+            <% } %>
+
+            <!-- REGISTER -->
+
+            <% if (currentPath !== '/register') { %>
+
+                <a href="/register">Register</a>
+
+            <% } %>
+
+        <% } %>
+
+    </div>
+
+</nav>

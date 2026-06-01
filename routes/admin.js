@@ -55,7 +55,8 @@ router.get('/admin/cases', isAdmin, async (req, res) => {
 
   {
 
-    cases
+    cases,
+    user: req.session.user
 
   }
 
@@ -232,7 +233,7 @@ router.get('/admin/cases-view', isAdmin, async (req, res) => {
       .populate('beneficiaryId', 'name email');
 
     // render page
-    res.render('admin/cases', { cases });
+    res.render('admin/cases', { cases, user: req.session.user });
 
   } catch (error) {
 
@@ -319,7 +320,9 @@ res.render('admin/dashboard', {
 
   pendingVerifications,
 
-  recentDonations
+  recentDonations,
+
+  user: req.session.user
 
 });
 

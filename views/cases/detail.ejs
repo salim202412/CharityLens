@@ -14,462 +14,155 @@
 
     <!-- Font Awesome -->
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body{
-
-            min-height:100vh;
-
-            background: linear-gradient(
-                180deg,
-                #5a5df0 0%,
-                #8f2fff 55%,
-                #ff3ba7 100%
-            );
-
-            padding:40px 20px;
-        }
-
-        /* MAIN CARD */
-
-        .container{
-
-            max-width:900px;
-
-            margin:auto;
-
-            background:rgba(255,255,255,0.12);
-
-            backdrop-filter: blur(14px);
-
-            border-radius:25px;
-
-            padding:35px;
-
-            color:white;
-
-            box-shadow:0 10px 40px rgba(0,0,0,0.2);
-        }
-
-        /* TOP */
-
-        .top-section{
-
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:center;
-
-            margin-bottom:25px;
-
-            flex-wrap:wrap;
-
-            gap:15px;
-        }
-
-        .category{
-
-            display:inline-block;
-
-            background:linear-gradient(
-                90deg,
-                #4f46e5,
-                #a200ff
-            );
-
-            padding:10px 18px;
-
-            border-radius:30px;
-
-            font-size:14px;
-
-            font-weight:bold;
-        }
-
-        .priority{
-
-            background:crimson;
-
-            padding:10px 18px;
-
-            border-radius:30px;
-
-            font-size:14px;
-
-            font-weight:bold;
-        }
-
-        /* TITLE */
-
-        h1{
-
-            font-size:42px;
-
-            margin-bottom:20px;
-
-            line-height:1.3;
-        }
-
-        /* DESCRIPTION */
-
-        .description{
-
-            color:#f3f4f6;
-
-            line-height:1.8;
-
-            font-size:17px;
-
-            margin-bottom:30px;
-        }
-
-        /* IMAGE */
-
-        .proof-image{
-
-            width:100%;
-
-            max-height:420px;
-
-            object-fit:cover;
-
-            border-radius:18px;
-
-            margin-top:25px;
-
-            box-shadow:0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        /* PROGRESS */
-
-        .progress-wrapper{
-
-            margin-top:30px;
-        }
-
-        .progress-info{
-
-            display:flex;
-
-            justify-content:space-between;
-
-            margin-bottom:12px;
-
-            font-size:15px;
-        }
-
-        .progress-container{
-
-            width:100%;
-
-            height:22px;
-
-            background:rgba(255,255,255,0.2);
-
-            border-radius:30px;
-
-            overflow:hidden;
-        }
-
-        .progress-bar{
-
-            height:100%;
-
-            background:linear-gradient(
-                90deg,
-                #22c55e,
-                #16a34a
-            );
-
-            text-align:center;
-
-            line-height:22px;
-
-            font-size:12px;
-
-            font-weight:bold;
-
-            border-radius:30px;
-        }
-
-        /* AMOUNTS */
-
-        .amounts{
-
-            margin-top:25px;
-
-            line-height:2;
-
-            font-size:16px;
-        }
-
-        .amounts strong{
-
-            color:white;
-        }
-
-        /* BENEFICIARY */
-
-        .beneficiary{
-
-            margin-top:18px;
-
-            font-size:16px;
-
-            color:#f3f4f6;
-        }
-
-        /* DONATION SECTION */
-
-        .donation-section{
-
-            margin-top:40px;
-
-            background:rgba(255,255,255,0.08);
-
-            padding:25px;
-
-            border-radius:18px;
-        }
-
-        .donation-section h3{
-
-            margin-bottom:20px;
-
-            font-size:28px;
-        }
-
-        input{
-
-            width:100%;
-
-            padding:15px;
-
-            border:none;
-
-            outline:none;
-
-            border-radius:12px;
-
-            background:rgba(255,255,255,0.9);
-
-            font-size:15px;
-
-            margin-bottom:12px;
-        }
-
-        .max-amount{
-
-            color:#e5e7eb;
-
-            font-size:14px;
-
-            margin-bottom:20px;
-        }
-
-        /* BUTTON */
-
-        .donate-btn{
-
-            width:100%;
-
-            border:none;
-
-            padding:16px;
-
-            border-radius:14px;
-
-            background:linear-gradient(
-                90deg,
-                #4f46e5,
-                #a200ff
-            );
-
-            color:white;
-
-            font-size:17px;
-
-            font-weight:bold;
-
-            cursor:pointer;
-
-            transition:0.3s;
-        }
-
-        .donate-btn:hover{
-
-            opacity:0.92;
-
-            transform:translateY(-2px);
-        }
-
-        /* FOOTER */
-
-        .footer{
-
-            text-align:center;
-
-            margin-top:30px;
-
-            color:white;
-
-            font-size:14px;
-        }
-
-        /* RESPONSIVE */
-
-        @media(max-width:768px){
-
-            h1{
-
-                font-size:32px;
-            }
-
-            .container{
-
-                padding:25px;
-            }
-
-        }
-
-    </style>
+   <link rel="stylesheet" href="/css/global.css">
+   <link rel="stylesheet" href="/css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 </head>
 
 <body>
+    <%- include('../partials/navbar', {
+    currentPage: 'cases'
+}) %>
+<%- include('../partials/page-navigation') %>
 
-    <div class="container">
+    <div class="case-details-page">
 
-        <!-- TOP -->
+    <div class="details-layout">
 
-        <div class="top-section">
+        <!-- LEFT SIDE -->
 
-            <span class="category">
+        <div class="details-left">
 
-                <%= foundCase.category %>
+            <div class="top-section">
 
-            </span>
+                <span class="category">
 
-            <span class="priority">
+                    <%= foundCase.category %>
 
-                <%= foundCase.priority %>
+                </span>
 
-            </span>
+                <span class="priority">
 
-        </div>
+                    <%= foundCase.priority %>
 
-        <!-- TITLE -->
-
-        <h1>
-
-            <%= foundCase.title %>
-
-        </h1>
-
-        <!-- DESCRIPTION -->
-
-        <p class="description">
-
-            <%= foundCase.description %>
-
-        </p>
-
-        <!-- PROGRESS -->
-
-        <%
-
-            const progress = Math.min(
-
-                (
-                    (
-                        foundCase.collectedAmount /
-
-                        foundCase.requiredAmount
-                    ) * 100
-                ).toFixed(1),
-
-                100
-
-            );
-
-        %>
-
-        <div class="progress-wrapper">
-
-            <div class="progress-info">
-
-                <span>Donation Progress</span>
-
-                <span><%= progress %>%</span>
+                </span>
 
             </div>
 
-            <div class="progress-container">
+            <!-- TITLE -->
 
-                <div
+            <h1>
 
-                    class="progress-bar"
+                <%= foundCase.title %>
 
-                    style="width: <%= progress %>%"
+            </h1>
 
-                >
+            <!-- DESCRIPTION -->
 
-                    <%= progress %>%
+            <p class="description">
+
+                <%= foundCase.description %>
+
+            </p>
+
+            <!-- PROGRESS -->
+
+            <%
+
+                const progress = Math.min(
+
+                    (
+
+                        (
+
+                            foundCase.collectedAmount /
+
+                            foundCase.requiredAmount
+
+                        ) * 100
+
+                    ).toFixed(1),
+
+                    100
+
+                );
+
+            %>
+
+            <div class="progress-wrapper">
+
+                <div class="progress-info">
+
+                    <span>Donation Progress</span>
+
+                    <span><%= progress %>%</span>
+
+                </div>
+
+                <div class="progress-container">
+
+                    <div
+
+                        class="progress-bar"
+
+                        style="width: <%= progress %>%"
+
+                    >
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+            <!-- AMOUNTS -->
 
-        <!-- AMOUNTS -->
+            <div class="amounts">
 
-        <div class="amounts">
+                <p>
 
-            <p>
+                    <strong>Collected:</strong>
 
-                <strong>Collected:</strong>
+                    ₹<%= foundCase.collectedAmount.toLocaleString('en-IN') %>
 
-                ₹<%= foundCase.collectedAmount %>
+                </p>
+
+                <p>
+
+                    <strong>Required:</strong>
+
+                    ₹<%= foundCase.requiredAmount.toLocaleString('en-IN') %>
+
+                </p>
+
+            </div>
+
+            <!-- BENEFICIARY -->
+
+            <p class="beneficiary">
+
+                <strong>Beneficiary:</strong>
+
+                <%= foundCase.beneficiaryId.name %>
 
             </p>
 
-            <p>
+           <!-- DOCUMENT -->
 
-                <strong>Required:</strong>
+<% if(foundCase.proofImage) { %>
 
-                ₹<%= foundCase.requiredAmount %>
+    <div class="proof-section">
 
-            </p>
+        <h3>
 
-        </div>
+            Supporting Document
 
-        <!-- BENEFICIARY -->
+        </h3>
 
-        <p class="beneficiary">
-
-            <strong>Beneficiary:</strong>
-
-            <%= foundCase.beneficiaryId.name %>
-
-        </p>
-
-        <!-- IMAGE -->
-
-        <% if(foundCase.proofImage) { %>
+        <div class="proof-preview">
 
             <img
 
@@ -477,64 +170,21 @@
 
                 alt="Proof Image"
 
-                class="proof-image"
+                class="proof-thumbnail"
 
             >
-
-        <% } %>
-
-        <!-- DONATION SECTION -->
-
-        <div class="donation-section">
-
-            <h3>
-
-                Donate to this Case
-
-            </h3>
-
-            <%
-
-                const remainingAmount =
-
-                foundCase.requiredAmount -
-
-                foundCase.collectedAmount;
-
-            %>
-
-            <input
-
-                type="number"
-
-                id="donationAmount"
-
-                placeholder="Enter donation amount"
-
-                min="1"
-
-                max="<%= remainingAmount %>"
-
-            >
-
-            <p class="max-amount">
-
-                Maximum allowed:
-                ₹<%= remainingAmount %>
-
-            </p>
 
             <button
 
-                class="donate-btn"
+                class="view-proof-btn"
 
-                onclick="startPayment()"
+                onclick="openProofModal()"
 
             >
 
-                <i class="fa-solid fa-hand-holding-heart"></i>
+                <i class="fa-solid fa-expand"></i>
 
-                Donate Now
+                View Document
 
             </button>
 
@@ -542,13 +192,100 @@
 
     </div>
 
-    <!-- FOOTER -->
+    <!-- MODAL -->
 
-    <div class="footer">
+    <div class="proof-modal" id="proofModal">
 
-        Protected by end-to-end encryption
+        <span
+
+            class="close-modal"
+
+            onclick="closeProofModal()"
+
+        >
+
+            &times;
+
+        </span>
+
+        <img
+
+            src="<%= foundCase.proofImage %>"
+
+            class="modal-image"
+
+        >
 
     </div>
+
+<% } %>
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="details-right">
+
+            <div class="donation-section">
+
+                <h3>
+
+                    Donate to this Case
+
+                </h3>
+
+                <%
+
+                    const remainingAmount =
+
+                    foundCase.requiredAmount -
+
+                    foundCase.collectedAmount;
+
+                %>
+
+              <input
+
+    type="text"
+
+    id="donationAmount"
+
+    placeholder="Enter donation amount"
+
+    inputmode="numeric"
+
+    autocomplete="off"
+
+>
+
+                <p class="max-amount">
+
+                    Maximum allowed:
+                    ₹<%= remainingAmount.toLocaleString('en-IN') %>
+
+                </p>
+
+                <button
+
+                    class="donate-btn"
+
+                    onclick="handleDonation()"
+
+                >
+
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+
+                    Donate Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+   
 
     <!-- RAZORPAY -->
 
@@ -557,24 +294,56 @@
     <!-- YOUR EXISTING PAYMENT SCRIPT -->
 
     <script>
+        
+        function handleDonation() {
 
+    <% if (typeof user === 'undefined' || !user) { %>
+
+        window.location.href = '/login';
+
+        return;
+
+    <% } %>
+
+    <% if (typeof user !== 'undefined' && user && user.role !== 'donor') { %>
+
+        alert('Only donors can donate');
+
+        return;
+
+    <% } %>
+
+    startPayment();
+}
         async function startPayment() {
 
             console.log("Donate button clicked");
 
             try {
 
-                const amount = document
+                const amount = Number(document
                     .getElementById('donationAmount')
-                    .value;
+                    .value
+                    .replace(/,/g, ''));
 
-                if (!amount || amount <= 0) {
+               if (!amount || amount <= 0) {
 
-                    alert("Valid donation amount required");
+    alert("Valid donation amount required");
 
-                    return;
+    return;
+}
 
-                }
+const maxAmount =
+    <%= remainingAmount %>;
+
+if (amount > maxAmount) {
+
+    alert(
+        `Maximum donation allowed is ₹${maxAmount.toLocaleString('en-IN')}`
+    );
+
+    return;
+}
 
                 const response = await fetch(
 
@@ -677,11 +446,9 @@
 
                             if (verifyResponse.ok) {
 
-                                alert(
-                                    "✅ Donation successful!"
-                                );
-
-                                location.reload();
+                                document
+    .getElementById('successModal')
+    .classList.add('active');
 
                             } else {
 
@@ -711,9 +478,7 @@
 
                         ondismiss: function () {
 
-                            alert(
-                                "❌ Payment cancelled"
-                            );
+                            console.log("Payment cancelled");
 
                         }
 
@@ -730,13 +495,54 @@
 
                 console.error(error);
 
-                alert("Payment failed");
+                showErrorModal("Payment failed");
 
             }
 
         }
 
     </script>
+
+    <script>
+
+    function openProofModal() {
+
+        document
+            .getElementById('proofModal')
+            .classList.add('active');
+    }
+
+    function closeProofModal() {
+
+        document
+            .getElementById('proofModal')
+            .classList.remove('active');
+    }
+
+    function closeSuccessModal() {
+
+    window.location.href =
+        '/donor/dashboard';
+}
+
+    const proofModal =
+    document.getElementById('proofModal');
+
+if (proofModal) {
+
+    proofModal.addEventListener('click', function(e) {
+
+        if (e.target === proofModal) {
+
+            closeProofModal();
+
+        }
+
+    });
+
+}
+
+</script>
 
     <!-- SERVICE WORKER -->
 
@@ -769,6 +575,66 @@
         }
 
     </script>
+    <script>
+
+    const donationInput =
+        document.getElementById('donationAmount');
+
+    donationInput.addEventListener('input', function(e) {
+
+        let value =
+            e.target.value.replace(/,/g, '');
+
+        value =
+            value.replace(/\D/g, '');
+        value = 
+            value.replace(/^0+/, '');
+
+        if (!value) {
+
+            e.target.value = '';
+
+            return;
+
+        }
+
+        e.target.value =
+            Number(value).toLocaleString('en-IN');
+
+    });
+
+</script>
+
+<!-- SUCCESS MODAL -->
+
+<div class="success-modal" id="successModal">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+        <h2>Donation Successful!</h2>
+
+        <p>
+
+            Thank you for supporting this cause.
+            Your contribution will help make a real impact.
+
+        </p>
+
+        <button onclick="closeSuccessModal()">
+
+            Continue
+
+        </button>
+
+    </div>
+
+</div>
 
 </body>
 

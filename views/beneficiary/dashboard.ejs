@@ -9,551 +9,260 @@
     <title>Beneficiary Dashboard</title>
 
     <!-- Font Awesome -->
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body{
-
-            min-height:100vh;
-
-            background: linear-gradient(
-                180deg,
-                #5a5df0 0%,
-                #8f2fff 55%,
-                #ff3ba7 100%
-            );
-
-            padding-bottom:40px;
-        }
-
-        /* NAVBAR */
-
-        .navbar{
-
-            width:100%;
-
-            padding:20px 8%;
-
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:center;
-
-            background:rgba(255,255,255,0.08);
-
-            backdrop-filter: blur(10px);
-
-            margin-bottom:50px;
-        }
-
-        .logo{
-
-            display:flex;
-            align-items:center;
-            gap:10px;
-        }
-
-        .logo-icon{
-
-            width:45px;
-            height:45px;
-
-            border-radius:50%;
-
-            background:rgba(255,255,255,0.15);
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            color:white;
-            font-size:18px;
-        }
-
-        .logo h2{
-
-            color:white;
-            font-size:28px;
-        }
-
-        .nav-links{
-
-            display:flex;
-            align-items:center;
-            gap:25px;
-        }
-
-        .nav-links a{
-
-            color:white;
-
-            text-decoration:none;
-
-            font-weight:600;
-
-            transition:0.3s;
-        }
-
-        .nav-links a:hover{
-
-            opacity:0.8;
-        }
-
-        /* PAGE TITLE */
-
-        .page-title{
-
-            text-align:center;
-
-            color:white;
-
-            font-size:48px;
-
-            margin-bottom:15px;
-        }
-
-        .subtitle{
-
-            text-align:center;
-
-            color:#f3f4f6;
-
-            font-size:18px;
-
-            margin-bottom:45px;
-        }
-
-        /* GRID */
-
-        .cases-grid{
-
-            width:90%;
-
-            max-width:1400px;
-
-            margin:auto;
-
-            display:grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(340px, 1fr));
-
-            gap:30px;
-        }
-
-        /* CARD */
-
-        .case-card{
-
-            background:rgba(255,255,255,0.12);
-
-            backdrop-filter: blur(14px);
-
-            border-radius:24px;
-
-            padding:28px;
-
-            color:white;
-
-            box-shadow:0 10px 35px rgba(0,0,0,0.2);
-
-            transition:0.3s;
-        }
-
-        .case-card:hover{
-
-            transform:translateY(-5px);
-        }
-
-        /* TITLE */
-
-        .case-card h2{
-
-            font-size:28px;
-
-            margin-bottom:18px;
-
-            line-height:1.4;
-        }
-
-        /* CATEGORY */
-
-        .category{
-
-            margin-bottom:18px;
-
-            color:#f3f4f6;
-
-            line-height:1.7;
-        }
-
-        /* STATUS */
-
-        .status{
-
-            display:inline-block;
-
-            padding:9px 18px;
-
-            border-radius:30px;
-
-            color:white;
-
-            font-size:13px;
-
-            font-weight:bold;
-
-            text-transform:uppercase;
-
-            margin-bottom:20px;
-        }
-
-        .verified{
-
-            background:#22c55e;
-        }
-
-        .pending{
-
-            background:#f59e0b;
-        }
-
-        .closed{
-
-            background:#6b7280;
-        }
-
-        .rejected{
-
-            background:crimson;
-        }
-
-        /* PROGRESS */
-
-        .progress-wrapper{
-
-            margin-top:10px;
-        }
-
-        .progress-info{
-
-            display:flex;
-
-            justify-content:space-between;
-
-            margin-bottom:10px;
-
-            font-size:14px;
-        }
-
-        .progress-container{
-
-            width:100%;
-
-            height:20px;
-
-            background:rgba(255,255,255,0.2);
-
-            border-radius:20px;
-
-            overflow:hidden;
-        }
-
-        .progress-bar{
-
-            height:100%;
-
-            background:linear-gradient(
-                90deg,
-                #22c55e,
-                #16a34a
-            );
-
-            text-align:center;
-
-            color:white;
-
-            line-height:20px;
-
-            font-size:12px;
-
-            font-weight:bold;
-
-            border-radius:20px;
-        }
-
-        /* AMOUNTS */
-
-        .amounts{
-
-            margin-top:22px;
-
-            line-height:2;
-
-            font-size:15px;
-        }
-
-        .amounts strong{
-
-            color:white;
-        }
-
-        /* FOOTER */
-
-        .footer-text{
-
-            text-align:center;
-
-            margin-top:50px;
-
-            color:white;
-
-            font-size:14px;
-        }
-
-        /* RESPONSIVE */
-
-        @media(max-width:768px){
-
-            .navbar{
-
-                flex-direction:column;
-
-                gap:20px;
-            }
-
-            .nav-links{
-
-                flex-wrap:wrap;
-
-                justify-content:center;
-            }
-
-            .page-title{
-
-                font-size:36px;
-            }
-
-            .subtitle{
-
-                font-size:16px;
-
-                padding:0 15px;
-            }
-
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 </head>
 
 <body>
 
     <!-- NAVBAR -->
+    <%- include('../partials/navbar', {
+        currentPage: 'dashboard'
+    }) %>
 
-    <nav class="navbar">
+    <!-- PAGE NAVIGATION -->
+    <%- include('../partials/page-navigation') %>
 
-        <div class="logo">
+    <div class="dashboard-page">
 
-            <div class="logo-icon">
+        <!-- HERO -->
+        <section class="dashboard-hero">
 
-                <i class="fa-solid fa-heart"></i>
+            <div>
+
+                <p class="dashboard-tag">
+                    BENEFICIARY PORTAL
+                </p>
+
+                <h1>
+                    Welcome Back,
+                    <span>
+                        <%= typeof user !== 'undefined' && user && user.name
+                            ? user.name
+                            : 'User'
+                        %>
+                    </span>
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    Track your submitted cases, monitor donations,
+                    and manage verification progress.
+                </p>
 
             </div>
 
-            <h2>CharityLens</h2>
+            <div class="hero-actions">
 
-        </div>
+                <a href="/submit-case" class="btn btn-primary">
+                    Submit New Case
+                </a>
 
-        <div class="nav-links">
+            </div>
 
-            <a href="/beneficiary/dashboard">
-                Dashboard
-            </a>
+        </section>
 
-            <a href="/submit-case">
-                Submit Case
-            </a>
+        <!-- STATS -->
+        <section class="stats-grid">
 
-            <a href="/cases/my">
-                My Cases
-            </a>
+            <div class="stats-card">
 
-            <a href="/auth/logout">
-                Logout
-            </a>
+                <div class="stats-icon purple">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
 
-        </div>
+                <div>
 
-    </nav>
+                    <h3>
+                        <%= cases ? cases.length : 0 %>
+                    </h3>
 
-    <!-- PAGE TITLE -->
+                    <p>Active Cases</p>
 
-    <h1 class="page-title">
+                </div>
 
-        Beneficiary Dashboard
+            </div>
 
-    </h1>
+            <div class="stats-card">
 
-    <p class="subtitle">
+                <div class="stats-icon pink">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
 
-        Manage your submitted cases, track donations,
-        and monitor verification progress.
+                <div>
 
-    </p>
+                    <h3>
+                        ₹<%= (totalRaised || 0).toLocaleString('en-IN') %>
+                    </h3>
 
-    <!-- GRID -->
+                    <p>Total Donations</p>
 
-    <div class="cases-grid">
+                </div>
 
-        <% cases.forEach(singleCase => { %>
+            </div>
 
-            <div class="case-card">
+            <div class="stats-card">
 
-                <!-- TITLE -->
+                <div class="stats-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
 
-                <h2>
+                <div>
 
-                    <%= singleCase.title %>
+                    <h3>
+                        <%= pendingCases || 0 %>
+                    </h3>
 
-                </h2>
+                    <p>Pending Verification</p>
 
-                <!-- CATEGORY -->
+                </div>
 
-                <p class="category">
+            </div>
 
-                    <strong>Category:</strong>
+            <div class="stats-card">
 
-                    <%= singleCase.category %>
+                <div class="stats-icon green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
 
-                </p>
+                <div>
 
-                <!-- STATUS -->
+                    <h3>
+                        <%= approvedCases || 0 %>
+                    </h3>
 
-                <% if(singleCase.isRejected) { %>
+                    <p>Approved Cases</p>
 
-                    <span class="status rejected">
+                </div>
 
-                        Rejected
+            </div>
 
-                    </span>
+        </section>
 
-                <% } else if(singleCase.isClosed) { %>
+        <!-- RECENT CASES -->
+        <section class="dashboard-section">
 
-                    <span class="status closed">
+            <div class="section-header">
 
-                        Closed
+                <h2>Your Recent Cases</h2>
 
-                    </span>
+                <a href="/beneficiary/my-cases">
+                    View All
+                </a>
 
-                <% } else if(singleCase.isVerified) { %>
+            </div>
 
-                    <span class="status verified">
+            <div class="cases-grid">
 
-                        Verified
+                <% if (cases && cases.length > 0) { %>
 
-                    </span>
+                    <% cases.forEach(singleCase => { %>
 
-                <% } else { %>
+                        <div class="case-card">
 
-                    <span class="status pending">
+                            <div class="case-card-top">
 
-                        Pending
+                                <div class="case-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
 
-                    </span>
+                                <span class="case-category">
+                                    <%= singleCase.category %>
+                                </span>
 
-                <% } %>
+                            </div>
 
-                <!-- PROGRESS -->
+                            <h3>
+                                <%= singleCase.title %>
+                            </h3>
 
-                <% 
+                            <p class="case-description">
+                                <%= singleCase.description %>
+                            </p>
 
-                    const progress = Math.min(
+                            <div class="case-progress">
 
-                        (
-                            (
-                                singleCase.collectedAmount /
+                                <div class="progress-info">
 
-                                singleCase.requiredAmount
-                            ) * 100
-                        ).toFixed(1),
+                                    <span>
+                                        ₹<%= (singleCase.collectedAmount || 0)
+                                        .toLocaleString('en-IN') %>
+                                    </span>
 
-                        100
-                    );
+                                    <span>
+                                        ₹<%= (singleCase.requiredAmount || 0)
+                                        .toLocaleString('en-IN') %>
+                                    </span>
 
-                %>
+                                </div>
 
-                <div class="progress-wrapper">
+                                <%
+                                const progress = Math.min(
+                                    ((singleCase.collectedAmount || 0) /
+                                    (singleCase.requiredAmount || 1)) * 100,
+                                    100
+                                );
+                                %>
 
-                    <div class="progress-info">
+                                <div class="progress-bar">
 
-                        <span>Donation Progress</span>
+                                    <div
+                                        class="progress-fill"
+                                        style="width: <%= progress %>%"
+                                    ></div>
 
-                        <span><%= progress %>%</span>
+                                </div>
 
-                    </div>
+                            </div>
 
-                    <div class="progress-container">
+                            <div class="priority-wrapper">
 
-                        <div
-                            class="progress-bar"
-                            style="width: <%= progress %>%"
-                        >
+                                <span class="priority-label">
+                                    <%= singleCase.priority || 'Medium' %>
+                                </span>
 
-                            <%= progress %>%
+                                <div class="priority-battery">
+
+                                    <div class="
+                                        battery-level
+                                        priority-<%= (singleCase.priority || 'medium')
+                                        .toLowerCase() %>
+                                    "></div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-folder-open"></i>
+
+                        <h3>No Cases Yet</h3>
+
+                        <p>
+                            You haven't submitted any cases yet.
+                        </p>
+
+                        <a href="/submit-case" class="btn btn-primary">
+                            Submit First Case
+                        </a>
+
                     </div>
 
-                </div>
-
-                <!-- AMOUNTS -->
-
-                <div class="amounts">
-
-                    <p>
-
-                        <strong>Collected:</strong>
-
-                        ₹<%= singleCase.collectedAmount %>
-
-                    </p>
-
-                    <p>
-
-                        <strong>Required:</strong>
-
-                        ₹<%= singleCase.requiredAmount %>
-
-                    </p>
-
-                </div>
+                <% } %>
 
             </div>
 
-        <% }) %>
-
-    </div>
-
-    <!-- FOOTER -->
-
-    <div class="footer-text">
-
-        Protected by end-to-end encryption
+        </section>
 
     </div>
 

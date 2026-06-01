@@ -7,12 +7,12 @@
   <title>Register</title>
 
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
-
-  <style>
+  <link rel="stylesheet" href="/css/global.css">
+<link rel="stylesheet" href="/css/auth.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <!-- <style>
 
     *{
       margin:0;
@@ -35,7 +35,7 @@
     }
 
     .main-container{
-      width:360px;
+      width: 30%;
       padding:20px;
     }
 
@@ -202,7 +202,7 @@
     @media(max-width:400px){
 
       .main-container{
-        width:95%;
+        width: 100%;
       }
 
       h1{
@@ -211,9 +211,11 @@
 
     }
 
-  </style>
+  </style> -->
 </head>
 <body>
+  <%- include('partials/navbar', { currentPage: 'register' }) %>
+  <%- include('partials/page-navigation') %>
 
   <div class="main-container">
 
@@ -227,9 +229,9 @@
 
       <h1>Create Account</h1>
 
-      <p class="subtitle">
-        Register to start helping and receiving support
-      </p>
+      <p class="auth-subtext">
+    Register to start helping and receiving support
+</p>
 
       <form action="/auth/register" method="POST">
 
@@ -302,7 +304,7 @@
 
           <label>Select Role</label>
 
-          <div class="input-box">
+          <div class="input-box select-box">
 
             <i class="fa-solid fa-user-tag left-icon"></i>
 
@@ -320,33 +322,39 @@
 
         <!-- button -->
 
-        <button type="submit" class="register-btn">
-          Create Account
-        </button>
+       <button type="submit" class="auth-btn">
+    Create Account
+</button>
 
       </form>
 
-      <!-- divider -->
+      
 
-      <div class="divider">
-        <span>or</span>
-      </div>
+  
 
       <!-- login -->
 
-      <div class="login-link">
+      <div class="auth-footer">
+    
+        <!-- divider -->
+
+    <div class="divider">
+        <span>OR</span>
+    </div>
+
+    <p>
         Already have an account?
-        <a href="/login">Login now</a>
-      </div>
+
+        <a href="/login">
+            Login now
+        </a>
+    </p>
+
+</div>
 
     </div>
 
-    <!-- footer -->
-
-    <div class="footer-text">
-      Protected by end-to-end encryption
-    </div>
-
+   
   </div>
 
 </body>

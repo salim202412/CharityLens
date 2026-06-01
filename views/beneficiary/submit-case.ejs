@@ -10,411 +10,62 @@
 
     <!-- Font Awesome -->
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body{
-
-            min-height:100vh;
-
-            background: linear-gradient(
-                180deg,
-                #5a5df0 0%,
-                #8f2fff 55%,
-                #ff3ba7 100%
-            );
-
-            padding-bottom:40px;
-        }
-
-        /* NAVBAR */
-
-        .navbar{
-
-            width:100%;
-
-            padding:20px 8%;
-
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:center;
-
-            background:rgba(255,255,255,0.08);
-
-            backdrop-filter: blur(10px);
-
-            margin-bottom:60px;
-        }
-
-        .logo{
-
-            display:flex;
-            align-items:center;
-            gap:10px;
-        }
-
-        .logo-icon{
-
-            width:45px;
-            height:45px;
-
-            border-radius:50%;
-
-            background:rgba(255,255,255,0.15);
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            color:white;
-            font-size:18px;
-        }
-
-        .logo h2{
-
-            color:white;
-            font-size:28px;
-        }
-
-        .nav-links{
-
-            display:flex;
-            align-items:center;
-            gap:25px;
-        }
-
-        .nav-links a{
-
-            color:white;
-
-            text-decoration:none;
-
-            font-weight:600;
-
-            transition:0.3s;
-        }
-
-        .nav-links a:hover{
-
-            opacity:0.8;
-        }
-
-        /* MAIN CONTAINER */
-
-        .main-container{
-
-            width:100%;
-            max-width:650px;
-
-            margin:auto;
-
-            padding:0 20px;
-        }
-
-        /* FORM CARD */
-
-        .form-card{
-
-            background:rgba(255,255,255,0.12);
-
-            backdrop-filter: blur(14px);
-
-            border-radius:24px;
-
-            padding:70px 35px 35px;
-
-            position:relative;
-
-            color:white;
-
-            box-shadow:0 10px 35px rgba(0,0,0,0.2);
-        }
-
-        /* TOP ICON */
-
-        .icon-box{
-
-            width:75px;
-            height:75px;
-
-            border-radius:50%;
-
-            background:linear-gradient(
-                135deg,
-                #4f46e5,
-                #a200ff
-            );
-
-            display:flex;
-
-            justify-content:center;
-
-            align-items:center;
-
-            font-size:28px;
-
-            color:white;
-
-            position:absolute;
-
-            top:-38px;
-
-            left:50%;
-
-            transform:translateX(-50%);
-
-            box-shadow:0 10px 25px rgba(0,0,0,0.25);
-        }
-
-        /* TITLE */
-
-        h1{
-
-            text-align:center;
-
-            font-size:42px;
-
-            margin-bottom:12px;
-        }
-
-        .subtitle{
-
-            text-align:center;
-
-            color:#f3f4f6;
-
-            margin-bottom:35px;
-
-            line-height:1.7;
-        }
-
-        /* FORM GROUP */
-
-        .form-group{
-
-            margin-bottom:22px;
-        }
-
-        .form-group label{
-
-            display:block;
-
-            margin-bottom:10px;
-
-            font-size:15px;
-
-            font-weight:600;
-
-            color:white;
-        }
-
-        /* INPUT BOX */
-
-        .input-box{
-
-            position:relative;
-        }
-
-        .input-box i{
-
-            position:absolute;
-
-            left:15px;
-
-            top:18px;
-
-            color:#9ca3af;
-
-            font-size:15px;
-        }
-
-        input,
-        textarea,
-        select{
-
-            width:100%;
-
-            padding:15px 15px 15px 45px;
-
-            border:none;
-
-            outline:none;
-
-            border-radius:12px;
-
-            background:rgba(255,255,255,0.92);
-
-            font-size:15px;
-
-            color:#111827;
-        }
-
-        textarea{
-
-            resize:none;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus{
-
-            background:white;
-        }
-
-        /* FILE INPUT */
-
-        .file-input{
-
-            padding:14px;
-
-            background:rgba(255,255,255,0.92);
-
-            border-radius:12px;
-
-            color:#111827;
-        }
-
-        /* BUTTON */
-
-        .submit-btn{
-
-            width:100%;
-
-            padding:16px;
-
-            border:none;
-
-            border-radius:14px;
-
-            background:linear-gradient(
-                90deg,
-                #4f46e5,
-                #a200ff
-            );
-
-            color:white;
-
-            font-size:17px;
-
-            font-weight:bold;
-
-            cursor:pointer;
-
-            transition:0.3s;
-
-            margin-top:10px;
-        }
-
-        .submit-btn:hover{
-
-            opacity:0.92;
-
-            transform:translateY(-2px);
-        }
-
-        /* FOOTER */
-
-        .footer-text{
-
-            text-align:center;
-
-            margin-top:25px;
-
-            color:white;
-
-            font-size:14px;
-        }
-
-        /* RESPONSIVE */
-
-        @media(max-width:768px){
-
-            .navbar{
-
-                flex-direction:column;
-
-                gap:20px;
-            }
-
-            .nav-links{
-
-                flex-wrap:wrap;
-
-                justify-content:center;
-            }
-
-            .form-card{
-
-                padding:65px 25px 30px;
-            }
-
-            h1{
-
-                font-size:34px;
-            }
-
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+       
 
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-
-    <nav class="navbar">
-
-        <div class="logo">
-
-            <div class="logo-icon">
-
-                <i class="fa-solid fa-heart"></i>
-
-            </div>
-
-            <h2>CharityLens</h2>
-
-        </div>
-
-        <div class="nav-links">
-
-            <a href="/beneficiary/dashboard">
-                Dashboard
-            </a>
-
-            <a href="/submit-case">
-                Submit Case
-            </a>
-
-            <a href="/cases/my">
-                My Cases
-            </a>
-
-            <a href="/auth/logout">
-                Logout
-            </a>
-
-        </div>
-
-    </nav>
+   <%- include('../partials/navbar', {
+    currentPage: 'submit-case',
+    user: user
+}) %>
+<%- include('../partials/page-navigation') %>
 
     <!-- MAIN -->
 
-    <div class="main-container">
+    <div class="submit-page">
+        <div class="submit-layout">
+            <div class="submit-info">
+
+    <span class="submit-tag">
+        FUNDRAISING PORTAL
+    </span>
+
+    <h1>
+        Start a Verified
+        Fundraising Campaign
+    </h1>
+
+    <p>
+        Share your story, upload proof,
+        and receive transparent support
+        from donors around the world.
+    </p>
+
+    <div class="info-points">
+
+        <div class="info-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Secure & verified fundraising
+        </div>
+
+        <div class="info-item">
+            <i class="fa-solid fa-shield-heart"></i>
+            Admin reviewed submissions
+        </div>
+
+        
+
+    </div>
+
+</div>
+    <div class="submit-form-section">
 
         <div class="form-card">
 
@@ -534,22 +185,26 @@
 
                     <label>Required Amount</label>
 
-                    <div class="input-box">
+                    <div class="amount-input">
 
-                        <i class="fa-solid fa-indian-rupee-sign"></i>
+    <span class="currency-symbol">
+        ₹
+    </span>
 
-                        <input
-                            type="number"
-                            name="requiredAmount"
-                            placeholder="Enter required amount"
-                            required
-                        >
+    <input
+        type="text"
+        id="requiredAmount"
+        name="requiredAmount"
+        placeholder="Enter required amount"
+        autocomplete="off"
+        required
+    >
 
-                    </div>
+</div>
 
                 </div>
 
-                <!-- PRIORITY -->
+                <!-- PRIORITY
 
                 <div class="form-group">
 
@@ -567,7 +222,7 @@
 
                     </div>
 
-                </div>
+                </div> -->
 
                 <!-- IMAGE -->
 
@@ -575,11 +230,45 @@
 
                     <label>Proof Image</label>
 
-                    <input
-                        type="file"
-                        name="proofImage"
-                        class="file-input"
-                    >
+                   <div class="form-group">
+
+    <label></label>
+
+    <div class="upload-area" id="uploadArea">
+
+        <input
+            type="file"
+            name="proofImage"
+            id="proofImage"
+            accept="image/*"
+            required
+            hidden
+        >
+
+        <div class="upload-content">
+
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+            <h3>Upload Proof Image</h3>
+
+            <p>
+                Drag & drop or click to browse
+            </p>
+
+            <span>
+                PNG, JPG supported
+            </span>
+
+        </div>
+
+        <img
+            id="previewImage"
+            class="preview-image"
+        >
+
+    </div>
+
+</div>
 
                 </div>
 
@@ -599,16 +288,77 @@
             </form>
 
         </div>
-
-        <!-- FOOTER -->
-
-        <div class="footer-text">
-
-            Protected by end-to-end encryption
-
         </div>
-
     </div>
+
+    <script>
+
+const uploadArea =
+document.getElementById('uploadArea');
+
+const fileInput =
+document.getElementById('proofImage');
+
+const previewImage =
+document.getElementById('previewImage');
+
+
+uploadArea.addEventListener('click', () => {
+
+    fileInput.click();
+
+});
+
+
+fileInput.addEventListener('change', e => {
+
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = event => {
+
+        previewImage.src =
+            event.target.result;
+
+        previewImage.style.display = 'block';
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+const amountInput =
+document.getElementById('requiredAmount');
+
+amountInput.addEventListener('input', e => {
+
+    let value =
+    e.target.value.replace(/,/g, '');
+
+    if (!value) {
+
+        e.target.value = '';
+        return;
+    }
+
+    value = value.replace(/\D/g, '');
+
+    const number = Number(value);
+
+    if (isNaN(number)) {
+        return;
+    }
+
+    e.target.value =
+        number.toLocaleString('en-IN');
+
+});
+
+</script>
 
 </body>
 

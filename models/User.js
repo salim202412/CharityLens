@@ -1,56 +1,161 @@
 const mongoose = require('mongoose');
+
 const bcrypt = require('bcrypt');
 
+
+// ======================
+// USER SCHEMA
+// ======================
+
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
 
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true
-  },
+    name: {
 
-  password: {
-    type: String,
-    required: true
-  },
+        type: String,
 
-  role: {
-    type: String,
-    enum: ['donor', 'beneficiary', 'admin'],
-    default: 'donor'
-  },
+        required: true,
 
-  createdAt: {
+        trim: true
+
+    },
+
+    email: {
+
+        type: String,
+
+        required: true,
+
+        unique: true,
+
+        lowercase: true,
+
+        trim: true
+
+    },
+
+    password: {
+
+        type: String,
+
+        required: true
+
+    },
+
+    role: {
+
+        type: String,
+
+        enum: [
+
+            'donor',
+            'beneficiary',
+            'admin'
+
+        ],
+
+        default: 'donor'
+
+    },
+
+    // forgot password token
+    resetPasswordToken: {
+
+        type: String
+
+    },
+
+    // token expiry
+    resetPasswordExpires: {
+
+    type: Date
+
+},
+
+// Email OTP
+emailOTP: {
+
+    type: String
+
+},
+
+emailOTPExpires: {
+
+    type: Date
+
+},
+
+// Email verification
+isVerified: {
+
+    type: Boolean,
+
+    default: false
+
+},
+
+createdAt: {
+
     type: Date,
+
     default: Date.now
-  }
+
+}
 });
 
 
 // ======================
-// 🔐 Hash password before saving (FIXED)
+// HASH PASSWORD
 // ======================
-userSchema.pre('save', async function () {
-  if (!this.isModified('password')) return;
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+userSchema.pre('save', async function() {
+
+    // skip if password unchanged
+    if (!this.isModified('password')) {
+
+        return;
+
+    }
+
+    // generate salt
+    const salt = await bcrypt.genSalt(10);
+
+    // hash password
+    this.password = await bcrypt.hash(
+
+        this.password,
+
+        salt
+
+    );
+
 });
 
 
 // ======================
-// 🔑 Compare password (for login)
+// COMPARE PASSWORD
 // ======================
-userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+
+userSchema.methods.comparePassword = async function(password) {
+
+    return await bcrypt.compare(
+
+        password,
+
+        this.password
+
+    );
+
 };
 
 
-module.exports = mongoose.model('User', userSchema);
+// ======================
+// EXPORT MODEL
+// ======================
+
+module.exports = mongoose.model(
+
+    'User',
+
+    userSchema
+
+);

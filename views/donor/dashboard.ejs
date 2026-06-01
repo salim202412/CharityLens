@@ -4,379 +4,25 @@
 <head>
 
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
 
     <title>Donor Dashboard</title>
 
-    <!-- Font Awesome -->
+    <!-- GLOBAL CSS -->
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+    <!-- FONT AWESOME -->
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body{
-
-            min-height:100vh;
-
-            background: linear-gradient(
-                180deg,
-                #5a5df0 0%,
-                #8f2fff 55%,
-                #ff3ba7 100%
-            );
-
-            padding-bottom:40px;
-        }
-
-        /* NAVBAR */
-
-        .navbar{
-
-            width:100%;
-
-            padding:20px 8%;
-
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:center;
-
-            background:rgba(255,255,255,0.08);
-
-            backdrop-filter: blur(10px);
-
-            margin-bottom:50px;
-        }
-
-        .logo{
-
-            display:flex;
-            align-items:center;
-            gap:10px;
-        }
-
-        .logo-icon{
-
-            width:45px;
-            height:45px;
-
-            border-radius:50%;
-
-            background:rgba(255,255,255,0.15);
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            color:white;
-            font-size:18px;
-        }
-
-        .logo h2{
-
-            color:white;
-            font-size:28px;
-        }
-
-        .nav-links{
-
-            display:flex;
-            align-items:center;
-            gap:25px;
-        }
-
-        .nav-links a{
-
-            color:white;
-
-            text-decoration:none;
-
-            font-weight:600;
-
-            transition:0.3s;
-        }
-
-        .nav-links a:hover{
-
-            opacity:0.8;
-        }
-
-        /* PAGE TITLE */
-
-        .page-title{
-
-            text-align:center;
-
-            color:white;
-
-            font-size:48px;
-
-            margin-bottom:15px;
-        }
-
-        .subtitle{
-
-            text-align:center;
-
-            color:#f3f4f6;
-
-            font-size:18px;
-
-            margin-bottom:45px;
-        }
-
-        /* STATS SECTION */
-
-        .stats-container{
-
-            display:flex;
-
-            justify-content:center;
-
-            margin-bottom:45px;
-        }
-
-        .stat-card{
-
-            width:350px;
-
-            background:rgba(255,255,255,0.12);
-
-            backdrop-filter: blur(14px);
-
-            border-radius:24px;
-
-            padding:35px;
-
-            text-align:center;
-
-            color:white;
-
-            box-shadow:0 10px 35px rgba(0,0,0,0.2);
-        }
-
-        .stat-icon{
-
-            width:80px;
-            height:80px;
-
-            margin:0 auto 20px;
-
-            border-radius:50%;
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            font-size:30px;
-
-            background:linear-gradient(
-                135deg,
-                #4f46e5,
-                #a200ff
-            );
-
-            box-shadow:0 10px 25px rgba(0,0,0,0.25);
-        }
-
-        .stat-card h2{
-
-            font-size:48px;
-
-            margin-bottom:12px;
-
-            color:#ffffff;
-        }
-
-        .stat-card p{
-
-            font-size:18px;
-
-            color:#f3f4f6;
-        }
-
-        /* TABLE CARD */
-
-        .table-wrapper{
-
-            width:90%;
-
-            max-width:1200px;
-
-            margin:auto;
-
-            background:rgba(255,255,255,0.12);
-
-            backdrop-filter: blur(14px);
-
-            border-radius:24px;
-
-            padding:30px;
-
-            box-shadow:0 10px 35px rgba(0,0,0,0.2);
-
-            overflow-x:auto;
-        }
-
-        .table-heading{
-
-            color:white;
-
-            font-size:30px;
-
-            margin-bottom:25px;
-
-            text-align:center;
-        }
-
-        /* TABLE */
-
-        table{
-
-            width:100%;
-
-            border-collapse:collapse;
-
-            color:white;
-
-            min-width:700px;
-        }
-
-        th{
-
-            background:rgba(255,255,255,0.18);
-
-            padding:18px;
-
-            font-size:16px;
-
-            text-transform:uppercase;
-
-            letter-spacing:0.5px;
-        }
-
-        td{
-
-            padding:18px;
-
-            text-align:center;
-
-            border-bottom:1px solid rgba(255,255,255,0.12);
-
-            color:#f3f4f6;
-        }
-
-        tr:hover{
-
-            background:rgba(255,255,255,0.06);
-        }
-
-        /* STATUS */
-
-        .success,
-        .pending,
-        .failed{
-
-            padding:8px 16px;
-
-            border-radius:30px;
-
-            font-size:13px;
-
-            font-weight:bold;
-
-            text-transform:uppercase;
-
-            display:inline-block;
-        }
-
-        .success{
-
-            background:#22c55e;
-
-            color:white;
-        }
-
-        .pending{
-
-            background:#f59e0b;
-
-            color:white;
-        }
-
-        .failed{
-
-            background:crimson;
-
-            color:white;
-        }
-
-        /* FOOTER */
-
-        .footer-text{
-
-            text-align:center;
-
-            margin-top:40px;
-
-            color:white;
-
-            font-size:14px;
-        }
-
-        /* RESPONSIVE */
-
-        @media(max-width:768px){
-
-            .navbar{
-
-                flex-direction:column;
-
-                gap:20px;
-            }
-
-            .nav-links{
-
-                flex-wrap:wrap;
-
-                justify-content:center;
-            }
-
-            .page-title{
-
-                font-size:36px;
-            }
-
-            .subtitle{
-
-                font-size:16px;
-                padding:0 10px;
-            }
-
-            .table-wrapper{
-
-                padding:20px;
-            }
-
-            .stat-card{
-
-                width:90%;
-            }
-
-        }
-
-    </style>
 
 </head>
 
@@ -384,163 +30,135 @@
 
     <!-- NAVBAR -->
 
-    <nav class="navbar">
+    <%- include('../partials/navbar', {
+        currentPage: 'donor-dashboard',
+        user: user
+    }) %>
+   <%- include('../partials/page-navigation') %>
 
-        <div class="logo">
+    <!-- PAGE CONTAINER -->
 
-            <div class="logo-icon">
+    <div class="page-container">
 
-                <i class="fa-solid fa-heart"></i>
+        <!-- TITLE -->
 
-            </div>
+        <h1 class="page-title">
 
-            <h2>CharityLens</h2>
+            My Donation Dashboard
 
-        </div>
+        </h1>
 
-        <div class="nav-links">
+        <p class="subtitle">
 
-            <a href="/">
-                Home
-            </a>
+            Track your donations, monitor contribution history,
+            and see the impact you are making.
 
-            <a href="/cases-view">
-                Cases
-            </a>
+        </p>
 
-            <a href="/donor/dashboard">
-                My Donations
-            </a>
+        <!-- STATS -->
 
-            <a href="/auth/logout">
-                Logout
-            </a>
+        <div class="stats-grid">
 
-        </div>
+            <div class="stat-card">
 
-    </nav>
+                <div class="stat-icon">
 
-    <!-- PAGE TITLE -->
+                    <i class="fa-solid fa-hand-holding-heart"></i>
 
-    <h1 class="page-title">
+                </div>
 
-        My Donation Dashboard
+                <div>
 
-    </h1>
+                    <h2>
 
-    <p class="subtitle">
+                        ₹<%= totalDonated.toLocaleString('en-IN') %>
 
-        Track your donations, monitor contribution history,
-        and see the impact you are making.
+                    </h2>
 
-    </p>
+                    <p>
 
-    <!-- STATS SECTION -->
+                        Total Donated
 
-    <div class="stats-container">
+                    </p>
 
-        <div class="stat-card">
-
-            <div class="stat-icon">
-
-                <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
 
             </div>
 
-            <h2>
+        </div>
 
-                ₹<%= totalDonated %>
+        <!-- HISTORY -->
+
+        <div class="history-card">
+
+            <h2 class="table-heading">
+
+                Donation History
 
             </h2>
 
-            <p>
+            <table>
 
-                Total Donated
-
-            </p>
-
-        </div>
-
-    </div>
-
-    <!-- TABLE -->
-
-    <div class="table-wrapper">
-
-        <h2 class="table-heading">
-
-            Donation History
-
-        </h2>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Case Name</th>
-
-                    <th>Amount</th>
-
-                    <th>Date</th>
-
-                    <th>Status</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <% donations.forEach(donation => { %>
+                <thead>
 
                     <tr>
 
-                        <td>
+                        <th>Case Name</th>
 
-                            <%= donation.caseId?.title || 'Deleted Case' %>
+                        <th>Amount</th>
 
-                        </td>
+                        <th>Date</th>
 
-                        <td>
-
-                            ₹<%= donation.amount %>
-
-                        </td>
-
-                        <td>
-
-                            <%= new Date(donation.createdAt)
-                                .toLocaleDateString() %>
-
-                        </td>
-
-                        <td>
-
-                            <span class="<%= donation.status %>">
-
-                                <%= donation.status %>
-
-                            </span>
-
-                        </td>
+                        <th>Status</th>
 
                     </tr>
 
-                <% }) %>
+                </thead>
 
-            </tbody>
+                <tbody>
 
-        </table>
+                    <% donations.forEach(donation => { %>
 
-    </div>
+                        <tr>
 
-    <!-- FOOTER -->
+                            <td>
 
-    <div class="footer-text">
+                                <%= donation.caseId?.title || 'Deleted Case' %>
 
-        Protected by end-to-end encryption
+                            </td>
+
+                            <td>
+
+                                ₹<%= donation.amount.toLocaleString('en-IN') %>
+
+                            </td>
+
+                            <td>
+
+                                <%= new Date(donation.createdAt)
+                                    .toLocaleDateString('en-IN') %>
+
+                            </td>
+
+                            <td>
+
+                                <span class="success-badge">
+
+                                    <%= donation.status %>
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 

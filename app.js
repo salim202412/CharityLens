@@ -4,16 +4,12 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
 const session = require('express-session');
-const helmet = require('helmet');
 const path = require('path');
 const mongoSanitize = require('express-mongo-sanitize');
 
 
 
 const app = express();
-
-// security headers
-app.use(helmet());
 
 
 // connecting database
@@ -52,14 +48,53 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // session setup (to keep user logged in)
 app.use(session({
+
   secret: process.env.SESSION_SECRET,
+
   resave: false,
+
   saveUninitialized: false,
+
+  rolling: true,
+
   cookie: {
-    secure: false, // will be true in production (https)
-    httpOnly: true
+
+    secure: false,
+
+    httpOnly: true,
+
+    sameSite: 'lax',
+
+    maxAge: 1000 * 60 * 60 // 1 hour
+
   }
+
 }));
+
+// =============================
+// DISABLE CACHE FOR ALL PAGES
+// =============================
+
+app.use((req, res, next) => {
+
+  res.setHeader(
+    'Cache-Control',
+    'no-store, no-cache, must-revalidate, private'
+  );
+
+  res.setHeader(
+    'Pragma',
+    'no-cache'
+  );
+
+  res.setHeader(
+    'Expires',
+    '0'
+  );
+
+  next();
+
+});
 
 
 // setting view engine (EJS)
@@ -68,9 +103,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use((req, res, next) => {
 
-  res.locals.req = req;
+    req.user = req.session.user || null;
 
-  next();
+    res.locals.user = req.user;
+
+    res.locals.req = req;
+
+    next();
 
 });
 // ----------------------
@@ -120,7 +159,7 @@ app.get('/', (req, res) => {
 
 
 // starting server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

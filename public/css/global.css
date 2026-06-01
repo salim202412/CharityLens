@@ -1,0 +1,361 @@
+/* =========================
+   GOOGLE FONTS
+========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   CSS CUSTOM PROPERTIES
+========================= */
+
+:root {
+    --bg-main:          #f8fafc;
+    --bg-secondary:     #eef2f7;
+    --bg-card:          #ffffff;
+
+    --text-main:        #111827;
+    --text-soft:        #6b7280;
+
+    --primary:          #16a34a;
+    --primary-hover:    #22c55e;
+
+    --green:            #22c55e;
+    --yellow:           #facc15;
+    --orange:           #f97316;
+    --red:              #ef4444;
+
+    --border-light:     rgba(0, 0, 0, 0.06);
+
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-hover));
+
+    --radius-sm:        14px;
+    --radius-md:        24px;
+
+    --transition:       0.3s ease;
+    --transition-fast:  0.25s ease;
+}
+
+
+/* =========================
+   BASE
+========================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    color: var(--text-main);
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+p {
+    color: var(--text-soft);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    padding: 12px 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 4px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.logo h2 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    transition: var(--transition-fast);
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   USER AVATAR
+========================= */
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.avatar-admin       { background: linear-gradient(135deg, #ef4444, #7f1d1d); }
+.avatar-donor       { background: linear-gradient(135deg, #22c55e, #166534); }
+.avatar-beneficiary { background: linear-gradient(135deg, #f97316, #9a3412); }
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    padding: 14px 24px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--primary);
+    border: 1px solid rgba(22, 163, 74, 0.18);
+    background: white;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card,
+.case-card,
+.stat-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================
+   PRIORITY BATTERY
+========================= */
+
+.priority-battery {
+    width: 140px;
+    height: 14px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+}
+
+.battery-level {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.priority-low      { width: 25%;  background: var(--green); }
+.priority-medium   { width: 50%;  background: var(--yellow); }
+.priority-high     { width: 75%;  background: var(--orange); }
+
+.priority-critical {
+    width: 100%;
+    background: var(--red);
+    animation: criticalPulse 0.8s infinite alternate;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
+}
+
+@keyframes criticalPulse {
+    from { opacity: 0.7;  transform: scaleX(1); }
+    to   { opacity: 1;    transform: scaleX(1.02); }
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    padding: 100px 20px 80px;
+    text-align: center;
+    background: radial-gradient(circle at top, rgba(34, 197, 94, 0.12), transparent 45%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hero h1 {
+    max-width: 900px;
+    margin: 0 auto 24px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+}
+
+.hero-buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 18px;
+        min-height: 72px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+.logo {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-logo {
+
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    margin-right: -6px;
+    transition: 0.2s ease;
+
+}
+
+.navbar-logo:hover {
+
+    transform: rotate(-6deg) scale(1.05);
+}
