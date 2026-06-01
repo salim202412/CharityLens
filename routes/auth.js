@@ -187,15 +187,15 @@ router.post(
 
                 await User.findOne({ email });
 
-            if (existingUser) {
+           if (existingUser) {
 
-                return res.redirect(
+    return res.render('register', {
 
-                    '/register?error=Email already exists'
+        error: 'Email already exists'
 
-                );
+    });
 
-            }
+}
 
 
            // generate OTP
