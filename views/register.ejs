@@ -12,206 +12,7 @@
 <link rel="stylesheet" href="/css/dashboard.css">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <!-- <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body{
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background: linear-gradient(
-        180deg,
-        #5a5df0 0%,
-        #8f2fff 55%,
-        #ff3ba7 100%
-      );
-    }
-
-    .main-container{
-      width: 30%;
-      padding:20px;
-    }
-
-    .register-card{
-      background:#ebe6f2;
-      border-radius:18px;
-      padding:70px 28px 35px;
-      position:relative;
-      box-shadow:0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    .icon-box{
-      width:65px;
-      height:65px;
-      border-radius:50%;
-      background:linear-gradient(135deg,#5d5fff,#b100ff);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:white;
-      font-size:24px;
-
-      position:absolute;
-      top:-32px;
-      left:50%;
-      transform:translateX(-50%);
-
-      box-shadow:0 8px 20px rgba(128,0,255,0.4);
-    }
-
-    h1{
-      text-align:center;
-      color:#1f2937;
-      margin-bottom:10px;
-      font-size:36px;
-      font-weight:700;
-    }
-
-    .subtitle{
-      text-align:center;
-      color:#666;
-      margin-bottom:35px;
-      font-size:15px;
-    }
-
-    .form-group{
-      margin-bottom:20px;
-    }
-
-    .form-group label{
-      display:block;
-      margin-bottom:8px;
-      font-weight:600;
-      color:#374151;
-      font-size:15px;
-    }
-
-    .input-box{
-      position:relative;
-    }
-
-    .input-box input,
-    .input-box select{
-      width:100%;
-      padding:14px 45px;
-      border:1px solid #d1d5db;
-      border-radius:10px;
-      outline:none;
-      background:#f4f4f4;
-      font-size:14px;
-    }
-
-    .input-box input:focus,
-    .input-box select:focus{
-      border-color:#7c3aed;
-      background:white;
-    }
-
-    .input-box i{
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      color:#9ca3af;
-      font-size:15px;
-    }
-
-    .input-box .left-icon{
-      left:15px;
-    }
-
-    .register-btn{
-      width:100%;
-      padding:14px;
-      border:none;
-      border-radius:10px;
-      margin-top:15px;
-      background:linear-gradient(
-        90deg,
-        #4f46e5,
-        #a200ff
-      );
-      color:white;
-      font-size:16px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.3s;
-    }
-
-    .register-btn:hover{
-      opacity:0.9;
-      transform:translateY(-1px);
-    }
-
-    .divider{
-      display:flex;
-      align-items:center;
-      margin:28px 0;
-      color:#999;
-      font-size:14px;
-    }
-
-    .divider::before,
-    .divider::after{
-      content:"";
-      flex:1;
-      height:1px;
-      background:#d1d5db;
-    }
-
-    .divider span{
-      margin:0 12px;
-      background:#ebe6f2;
-      padding:0 8px;
-    }
-
-    .login-link{
-      text-align:center;
-      font-size:15px;
-      color:#555;
-    }
-
-    .login-link a{
-      text-decoration:none;
-      color:#6d28d9;
-      font-weight:600;
-    }
-
-    .login-link a:hover{
-      text-decoration:underline;
-    }
-
-    .footer-text{
-      text-align:center;
-      margin-top:22px;
-      color:white;
-      font-size:13px;
-    }
-
-    select{
-      appearance:none;
-      cursor:pointer;
-    }
-
-    @media(max-width:400px){
-
-      .main-container{
-        width: 100%;
-      }
-
-      h1{
-        font-size:30px;
-      }
-
-    }
-
-  </style> -->
+ 
 </head>
 <body>
   <%- include('partials/navbar', { currentPage: 'register' }) %>
@@ -232,6 +33,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       <p class="auth-subtext">
     Register to start helping and receiving support
 </p>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+
+    <div class="error-alert">
+        <%= error %>
+    </div>
+
+      <% } %>
 
       <form action="/auth/register" method="POST">
 
