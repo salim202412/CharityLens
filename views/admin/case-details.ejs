@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Case Details</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+</head>
+
+<body>
+
+    <%- include('../partials/navbar') %>
+
+    <%- include('../partials/page-navigation') %>
+
+    <%
+    let status = 'Pending Verification';
+    let badgeClass = 'pending';
+
+    if (singleCase.isRejected) {
+
+        status = 'Rejected';
+        badgeClass = 'rejected';
+
+    }
+    else if (singleCase.isClosed) {
+
+        status = 'Closed';
+        badgeClass = 'closed';
+
+    }
+    else if (singleCase.isVerified) {
+
+        status = 'Verified';
+        badgeClass = 'verified';
+
+    }
+
+    const progress =
+        singleCase.requiredAmount > 0
+            ? Math.min(
+                (singleCase.collectedAmount /
+                singleCase.requiredAmount) * 100,
+                100
+              )
+            : 0;
+    %>
+
+    <div class="main-container">
+
+        <div class="case-details-container">
+
+            <div class="status-badge <%= badgeClass %>">
+
+                <%= status %>
+
+            </div>
+
+            <h1 class="case-title">
+
+                <%= singleCase.title %>
+
+            </h1>
+
+            <p class="page-subtitle">
+
+                Review submitted case details and supporting documents.
+
+            </p>
+
+            <div class="details-grid">
+
+                <!-- CASE INFO -->
+
+                <div class="details-card">
+
+                    <h3>Case Information</h3>
+
+                    <p>
+                        <strong>Category:</strong>
+                        <%= singleCase.category %>
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong><br>
+                        <%= singleCase.description %>
+                    </p>
+
+                    <p>
+                        <strong>Required Amount:</strong>
+                        ₹<%= singleCase.requiredAmount.toLocaleString() %>
+                    </p>
+
+                    <p>
+                        <strong>Priority:</strong>
+
+                        <%= singleCase.priority === 0
+                            ? 'Low'
+                            : singleCase.priority === 1
+                            ? 'Medium'
+                            : singleCase.priority === 2
+                            ? 'High'
+                            : 'Critical'
+                        %>
+
+                    </p>
+
+                    <p>
+                        <strong>Submitted:</strong>
+
+                        <%= new Date(singleCase.createdAt)
+                            .toLocaleDateString() %>
+
+                    </p>
+
+                </div>
+
+                <!-- FUNDRAISING -->
+
+                <% if (
+                    singleCase.isVerified &&
+                    !singleCase.isRejected
+                ) { %>
+
+                <div class="details-card">
+
+                    <h3>Fundraising Progress</h3>
+
+                    <p>
+
+                        <strong>Raised:</strong>
+
+                        ₹<%= (singleCase.collectedAmount || 0)
+                            .toLocaleString() %>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Goal:</strong>
+
+                        ₹<%= singleCase.requiredAmount
+                            .toLocaleString() %>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Progress:</strong>
+
+                        <%= progress.toFixed(1) %>%
+
+                    </p>
+
+                    <div class="progress-wrapper">
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                style="width:<%= progress %>%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <% } %>
+
+                <!-- RIGHT COLUMN -->
+
+                <div class="right-column">
+
+                    <!-- BENEFICIARY -->
+
+                    <div class="details-card">
+
+                        <h3>Beneficiary Information</h3>
+
+                        <p>
+
+                            <strong>Name:</strong>
+
+                            <%= singleCase.beneficiaryId?.name || 'N/A' %>
+
+                        </p>
+
+                        <p>
+
+                            <strong>Email:</strong>
+
+                            <%= singleCase.beneficiaryId?.email || 'N/A' %>
+
+                        </p>
+
+                    </div>
+
+                    <!-- PROOF DOCUMENT -->
+
+                    <% if (singleCase.proofImage) { %>
+
+                    <div class="details-card">
+
+                        <h3>Proof Document</h3>
+
+                        <img
+                            src="/<%= singleCase.proofImage %>"
+                            alt="Proof Document"
+                            class="proof-preview"
+                        >
+
+                        <a
+                            href="/<%= singleCase.proofImage %>"
+                            target="_blank"
+                            class="view-proof-btn"
+                        >
+
+                            Open Full Document
+
+                        </a>
+
+                    </div>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -195,7 +195,8 @@ body {
 }
 
 .forgot-link:hover {
-    color: white;
+    color: var(--color-primary);
+    text-decoration: underline;
 }
 
 .auth-links {
