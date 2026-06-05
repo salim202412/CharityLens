@@ -116,35 +116,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                         </td>
 
-                        <!-- STATUS -->
+                       <!-- STATUS -->
 
-                        <td>
+<td>
 
-                            <% if(singleCase.isClosed) { %>
+    <% if(singleCase.isRejected) { %>
 
-                                <span class="closed-badge">
+        <span class="rejected-badge">
+            Rejected
+        </span>
 
-                                    Closed
+    <% } else if(singleCase.isClosed) { %>
 
-                                </span>
+        <span class="closed-badge">
+            Closed
+        </span>
 
-                            <% } else if(singleCase.isVerified) { %>
+    <% } else if(singleCase.isVerified) { %>
 
-                                <span class="verified-badge">
+        <span class="verified-badge">
+            Verified
+        </span>
 
-                                    Verified
+    <% } else { %>
 
-                                </span>
+        <span class="pending-badge">
+            Pending
+        </span>
 
-                            <% } else { %>
-
-                                <span class="pending-badge">
-
-                                    Pending
-
-                                </span>
-
-                            <% } %>
+    <% } %>
 
                         </td>
 
@@ -216,22 +216,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <% if(!singleCase.isRejected) { %>
 
-            <form
-                action="/admin/cases/<%= singleCase._id %>/reject"
-                method="POST"
-            >
+<button
+    type="button"
+    class="reject-btn open-reject-modal"
+    data-caseid="<%= singleCase._id %>"
+    data-title="<%= singleCase.title %>"
+>
 
-                <button class="reject-btn">
+    <i class="fa-solid fa-xmark"></i>
 
-                    <i class="fa-solid fa-xmark"></i>
+    Reject
 
-                    Reject
+</button>
 
-                </button>
-
-            </form>
-
-        <% } %>
+<% } %>
 
     </div>
 
@@ -246,7 +244,136 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     </div>
 
-   
+ <!-- REJECT MODAL -->
+
+<div
+    id="rejectModal"
+    class="modal-overlay"
+    style="display:none;"
+>
+
+    <div class="modal-card">
+
+        <h2>Reject Case</h2>
+
+        <p id="modalCaseTitle"></p>
+
+        <form
+            id="rejectForm"
+            method="POST"
+        >
+
+            <label>
+
+                Rejection Reason
+
+            </label>
+
+            <textarea
+                name="reason"
+                rows="5"
+                required
+                placeholder="Enter detailed rejection reason..."
+            ></textarea>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="closeModal"
+                    class="view-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="reject-btn"
+                >
+                    Reject Case
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div> 
+
+<script>
+
+const modal =
+    document.getElementById(
+        'rejectModal'
+    );
+
+const rejectForm =
+    document.getElementById(
+        'rejectForm'
+    );
+
+const modalCaseTitle =
+    document.getElementById(
+        'modalCaseTitle'
+    );
+
+document
+.querySelectorAll(
+    '.open-reject-modal'
+)
+.forEach(button => {
+
+    button.addEventListener(
+        'click',
+        () => {
+
+            const caseId =
+                button.dataset.caseid;
+
+            const title =
+                button.dataset.title;
+
+            rejectForm.action =
+                `/admin/cases/${caseId}/reject`;
+
+            modalCaseTitle.innerHTML =
+                `<strong>${title}</strong>`;
+
+            modal.style.display =
+                'flex';
+
+        }
+    );
+
+});
+
+document
+.getElementById(
+    'closeModal'
+)
+.addEventListener(
+    'click',
+    () => {
+
+        modal.style.display =
+            'none';
+
+    }
+);
+
+window.onclick = function(event) {
+
+    if (event.target === modal) {
+
+        modal.style.display =
+            'none';
+
+    }
+
+};
+
+</script>
 </body>
 
 </html>

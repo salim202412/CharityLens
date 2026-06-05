@@ -147,10 +147,7 @@ router.post('/admin/cases/:id/verify', isAdmin, async (req, res) => {
     await foundCase.save();
 
     // response
-    res.status(200).json({
-      message: "Case verified successfully",
-      case: foundCase
-    });
+   res.redirect('/admin/cases');
 
   } catch (error) {
 
@@ -198,10 +195,7 @@ router.post('/admin/cases/:id/reject', isAdmin, async (req, res) => {
     await foundCase.save();
 
     // response
-    res.status(200).json({
-      message: "Case rejected successfully",
-      case: foundCase
-    });
+    res.redirect('/admin/cases');
 
   } catch (error) {
 
@@ -242,10 +236,7 @@ router.post('/admin/cases/:id/close', isAdmin, async (req, res) => {
     await foundCase.save();
 
     // response
-    res.status(200).json({
-      message: "Case closed successfully",
-      case: foundCase
-    });
+    res.redirect('/admin/cases');
 
   } catch (error) {
 
