@@ -195,7 +195,8 @@ body {
 }
 
 .forgot-link:hover {
-    color: white;
+    color: var(--color-primary);
+    text-decoration: underline;
 }
 
 .auth-links {
@@ -376,4 +377,16 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.error-alert {
+
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: 600;
 }

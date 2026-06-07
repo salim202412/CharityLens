@@ -151,7 +151,8 @@ router.get('/cases', async (req, res) => {
     // fetch verified and active cases
     const cases = await Case.find({
       isVerified: true,
-      isClosed: false
+      isClosed: false,
+      isRejected: false
     })
 
     // sort by highest priority first
@@ -237,7 +238,8 @@ router.get('/cases-view', async (req, res) => {
 
     const cases = await Case.find({
       isVerified: true,
-      isClosed: false
+      isClosed: false,
+      isRejected: false
     }).sort({ priority: -1 });
 
     res.render('cases/list', { cases });
@@ -267,10 +269,23 @@ router.get('/cases-view/:id', async (req, res) => {
     const foundCase = await Case.findById(caseId)
       .populate('beneficiaryId', 'name email');
 
+
     // check case exists
     if (!foundCase) {
       return res.status(404).send("Case not found");
     }
+
+    if (
+    foundCase.isRejected ||
+    !foundCase.isVerified ||
+    foundCase.isClosed
+) {
+
+    return res.redirect(
+        '/cases-view'
+    );
+
+}
 
     // render page
    res.render('cases/detail', {

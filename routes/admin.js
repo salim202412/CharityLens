@@ -74,6 +74,45 @@ router.get('/admin/cases', isAdmin, async (req, res) => {
 
 });
 
+router.get('/admin/cases/:id', isAdmin, async (req, res) => {
+
+    try {
+
+        const singleCase = await Case.findById(
+            req.params.id
+        ).populate(
+            'beneficiaryId',
+            'name email'
+        );
+
+        if (!singleCase) {
+
+            return res.status(404).send(
+                'Case not found'
+            );
+
+        }
+
+        res.render('admin/case-details', {
+
+            singleCase,
+
+            user: req.session.user
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).send(
+            'Server Error'
+        );
+
+    }
+
+});
+
 // ----------------------
 // verify case and assign priority
 // ----------------------
@@ -108,10 +147,7 @@ router.post('/admin/cases/:id/verify', isAdmin, async (req, res) => {
     await foundCase.save();
 
     // response
-    res.status(200).json({
-      message: "Case verified successfully",
-      case: foundCase
-    });
+   res.redirect('/admin/cases');
 
   } catch (error) {
 
@@ -159,10 +195,7 @@ router.post('/admin/cases/:id/reject', isAdmin, async (req, res) => {
     await foundCase.save();
 
     // response
-    res.status(200).json({
-      message: "Case rejected successfully",
-      case: foundCase
-    });
+    res.redirect('/admin/cases');
 
   } catch (error) {
 
@@ -203,10 +236,7 @@ router.post('/admin/cases/:id/close', isAdmin, async (req, res) => {
     await foundCase.save();
 
     // response
-    res.status(200).json({
-      message: "Case closed successfully",
-      case: foundCase
-    });
+    res.redirect('/admin/cases');
 
   } catch (error) {
 

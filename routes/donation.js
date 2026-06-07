@@ -84,17 +84,41 @@ router.post(
       }
 
 
-      // check case closed
-      if (foundCase.isClosed) {
+      // case rejected
+if (foundCase.isRejected) {
 
-        return res.status(400).json({
+  return res.status(400).json({
 
-          message:
-            "This case is already closed"
+    message:
+      "This case has been rejected"
 
-        });
+  });
 
-      }
+}
+
+// case not verified
+if (!foundCase.isVerified) {
+
+  return res.status(400).json({
+
+    message:
+      "This case is not approved for donations"
+
+  });
+
+}
+
+// case closed
+if (foundCase.isClosed) {
+
+  return res.status(400).json({
+
+    message:
+      "This case is already closed"
+
+  });
+
+}
 
 
       // remaining amount
@@ -188,9 +212,7 @@ router.post(
 // verify razorpay payment
 // ----------------------
 
-router.post(
-
-  '/donate/verify',
+router.post('/donate/verify',
 
   isDonor,
 
@@ -277,6 +299,25 @@ router.post(
         await Case.findById(
           donation.caseId
         );
+        
+        if (
+    foundCase.isRejected ||
+    !foundCase.isVerified ||
+    foundCase.isClosed
+) {
+
+    donation.status = 'failed';
+
+    await donation.save();
+
+    return res.status(400).json({
+
+        message:
+            'This case is not accepting donations'
+
+    });
+
+}
 
 
       foundCase.collectedAmount +=

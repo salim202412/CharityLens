@@ -85,7 +85,11 @@ const registerLimiter = rateLimit({
 
 router.get('/register', (req, res) => {
 
-    res.render('register');
+    res.render('register', {
+
+        error: null
+
+    });
 
 });
 
@@ -152,13 +156,13 @@ router.post(
 
             if (!errors.isEmpty()) {
 
-                return res.redirect(
+    return res.render('register', {
 
-                    '/register?error=Invalid input'
+        error: 'Invalid input'
 
-                );
+    });
 
-            }
+}
 
             const {
 
@@ -187,15 +191,15 @@ router.post(
 
                 await User.findOne({ email });
 
-            if (existingUser) {
+           if (existingUser) {
 
-                return res.redirect(
+    return res.render('register', {
 
-                    '/register?error=Email already exists'
+        error: 'Email already exists'
 
-                );
+    });
 
-            }
+}
 
 
            // generate OTP
