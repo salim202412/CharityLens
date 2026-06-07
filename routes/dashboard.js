@@ -62,7 +62,9 @@ router.get(
 
 const pendingCases = cases.filter(
 
-    singleCase => !singleCase.isVerified
+    singleCase =>
+        !singleCase.isVerified &&
+        !singleCase.isRejected
 
 ).length;
 
@@ -71,7 +73,18 @@ const approvedCases = cases.filter(
     singleCase => singleCase.isVerified
 
 ).length;
-            
+
+const rejectedCases = cases.filter(
+
+    singleCase => singleCase.isRejected
+
+).length;
+
+const activeCases = cases.filter(
+
+    singleCase => !singleCase.isRejected
+
+).length;            
                 res.render(
                 'beneficiary/dashboard',
 
@@ -80,7 +93,9 @@ const approvedCases = cases.filter(
                     cases,
                     totalRaised,
                     pendingCases,
-                    approvedCases
+                    approvedCases,
+                    rejectedCases,
+                    activeCases
                 }
             );
 

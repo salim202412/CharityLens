@@ -27,6 +27,8 @@
     <!-- PAGE NAVIGATION -->
     <%- include('../partials/page-navigation') %>
 
+    
+
     <div class="dashboard-page">
 
         <!-- HERO -->
@@ -65,82 +67,122 @@
 
         </section>
 
-        <!-- STATS -->
-        <section class="stats-grid">
+       <div class="dashboard-grid">
 
-            <div class="stats-card">
+    <!-- ACTIVE CASES -->
+    <div class="card">
 
-                <div class="stats-icon purple">
-                    <i class="fa-solid fa-folder-open"></i>
-                </div>
+        <div class="card-icon">
 
-                <div>
+            <i class="fa-solid fa-folder-open"></i>
 
-                    <h3>
-                        <%= cases ? cases.length : 0 %>
-                    </h3>
+        </div>
 
-                    <p>Active Cases</p>
+        <h2>
 
-                </div>
+           <%= activeCases || 0 %>
 
-            </div>
+        </h2>
 
-            <div class="stats-card">
+        <p>
 
-                <div class="stats-icon pink">
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-                </div>
+            Active Cases
 
-                <div>
+        </p>
 
-                    <h3>
-                        ₹<%= (totalRaised || 0).toLocaleString('en-IN') %>
-                    </h3>
+    </div>
 
-                    <p>Total Donations</p>
+    <!-- DONATIONS -->
+    <div class="card">
 
-                </div>
+        <div class="card-icon">
 
-            </div>
+            <i class="fa-solid fa-hand-holding-heart"></i>
 
-            <div class="stats-card">
+        </div>
 
-                <div class="stats-icon orange">
-                    <i class="fa-solid fa-clock"></i>
-                </div>
+        <h2>
 
-                <div>
+            ₹<%= (totalRaised || 0).toLocaleString('en-IN') %>
 
-                    <h3>
-                        <%= pendingCases || 0 %>
-                    </h3>
+        </h2>
 
-                    <p>Pending Verification</p>
+        <p>
 
-                </div>
+            Total Donations
 
-            </div>
+        </p>
 
-            <div class="stats-card">
+    </div>
 
-                <div class="stats-icon green">
-                    <i class="fa-solid fa-circle-check"></i>
-                </div>
+    <!-- PENDING -->
+    <div class="card">
 
-                <div>
+        <div class="card-icon">
 
-                    <h3>
-                        <%= approvedCases || 0 %>
-                    </h3>
+            <i class="fa-solid fa-clock"></i>
 
-                    <p>Approved Cases</p>
+        </div>
 
-                </div>
+        <h2>
 
-            </div>
+            <%= pendingCases || 0 %>
 
-        </section>
+        </h2>
+
+        <p>
+
+            Pending Verification
+
+        </p>
+
+    </div>
+
+    <!-- APPROVED -->
+    <div class="card">
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+        <h2>
+
+            <%= approvedCases || 0 %>
+
+        </h2>
+
+        <p>
+
+            Approved Cases
+
+        </p>
+
+    </div>
+    <div class="card">
+
+    <div class="card-icon">
+
+        <i class="fa-solid fa-circle-xmark"></i>
+
+    </div>
+
+    <h2>
+
+        <%= rejectedCases || 0 %>
+
+    </h2>
+
+    <p>
+
+        Rejected Cases
+
+    </p>
+
+</div>
+
+</div>
 
         <!-- RECENT CASES -->
         <section class="dashboard-section">
@@ -161,7 +203,30 @@
 
                     <% cases.forEach(singleCase => { %>
 
-                        <div class="case-card">
+                        <div
+    class="case-card open-case-modal"
+
+    data-title="<%= singleCase.title %>"
+
+    data-description="<%= singleCase.description %>"
+
+    data-category="<%= singleCase.category %>"
+
+    data-required="<%= singleCase.requiredAmount %>"
+
+    data-collected="<%= singleCase.collectedAmount || 0 %>"
+
+    data-status="<%= singleCase.isRejected
+        ? 'Rejected'
+        : singleCase.isVerified
+        ? 'Verified'
+        : 'Pending Verification'
+    %>"
+
+    data-reason="<%= singleCase.rejectionReason || '' %>"
+
+    data-document="<%= singleCase.proofImage || '' %>"
+>
 
                             <div class="case-card-top">
 
@@ -265,6 +330,9 @@
         </section>
 
     </div>
+
+<!-- CASE MODAL -->
+    <%- include('../partials/case-modal') %>
 <%- include('../partials/footer') %>
 </body>
 

@@ -11,23 +11,23 @@
     <!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-   <link rel="stylesheet" href="/css/global.css">
-
+   
+    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
-    
-    
     
 </head>
 
 <body>
     
+    <!-- NAVBAR -->
     <%- include('../partials/navbar') %>
-    <%- include('../partials/page-navigation') %>
+    
+    <!-- PAGE NAVIGATION -->
+<%- include('../partials/page-navigation') %>
 
-
+   
 
     <!-- TITLE -->
-
     <h1 class="page-title">
 
         My Submitted Cases
@@ -47,7 +47,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <% cases.forEach(caseItem => { %>
 
-            <div class="case-card">
+           <div
+    class="case-card open-case-modal"
+
+    data-title="<%= caseItem.title %>"
+    data-category="<%= caseItem.category %>"
+    data-description="<%= caseItem.description %>"
+    data-required="<%= caseItem.requiredAmount %>"
+    data-collected="<%= caseItem.collectedAmount %>"
+    data-status="<%= caseItem.isRejected ? 'Rejected' : caseItem.isVerified ? 'Verified' : 'Pending Verification' %>"
+    data-reason="<%= caseItem.rejectionReason || '' %>"
+    data-document="<%= caseItem.proofImage || '' %>"
+>
 
                 <!-- TITLE -->
 
@@ -69,11 +80,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                     </p>
 
-                    <p>
+                    <p class="case-description">
 
                         <strong>Description:</strong>
 
-                        <%= caseItem.description %>
+                       <span><%= caseItem.description %></span>
 
                     </p>
 
@@ -105,16 +116,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                     </p>
 
-                    <!-- REASON -->
-
-                    <div class="reason-box">
-
-                        <strong>Reason:</strong>
-
-                        <%= caseItem.rejectionReason %>
-
-                    </div>
-
                 <% } else if (caseItem.isVerified) { %>
 
                     <p class="status verified">
@@ -138,7 +139,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <% }) %>
 
     </div>
-
+ <!-- CASE MODAL -->
+    <%- include('../partials/case-modal') %>
    
 <%- include('../partials/footer') %>
 </body>

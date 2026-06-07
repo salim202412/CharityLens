@@ -334,12 +334,21 @@ router.get('/beneficiary/dashboard', isAuth, async (req, res) => {
 );
 
 const pendingCases = cases.filter(
-  c => !c.isVerified
+  c => !c.isVerified && !c.isRejected
 ).length;
 
 const approvedCases = cases.filter(
   c => c.isVerified
 ).length;
+
+const rejectedCases = cases.filter(
+  c => c.isRejected
+).length;
+
+const activeCases = cases.filter(
+  c => !c.isRejected
+).length;
+
 
 console.log("BENEFICIARY DASHBOARD ROUTE HIT");
 console.log(totalRaised);
@@ -349,7 +358,9 @@ res.render('beneficiary/dashboard', {
     user: req.session.user,
     totalRaised,
     pendingCases,
-    approvedCases
+    approvedCases,
+    rejectedCases,
+    activeCases
 });
 
   } catch (error) {
