@@ -69,7 +69,11 @@
 
        <div class="dashboard-grid">
 
-    <!-- ACTIVE CASES -->
+    <a
+    href="/beneficiary/my-cases?status=active"
+    class="dashboard-card-link"
+>
+
     <div class="card">
 
         <div class="card-icon">
@@ -80,7 +84,7 @@
 
         <h2>
 
-           <%= activeCases || 0 %>
+            <%= activeCases || 0 %>
 
         </h2>
 
@@ -92,7 +96,10 @@
 
     </div>
 
+</a>
+
     <!-- DONATIONS -->
+   
     <div class="card">
 
         <div class="card-icon">
@@ -114,8 +121,14 @@
         </p>
 
     </div>
+</a>
 
     <!-- PENDING -->
+     <a
+    href="/beneficiary/my-cases?status=pending"
+    class="dashboard-card-link"
+>
+    
     <div class="card">
 
         <div class="card-icon">
@@ -137,8 +150,14 @@
         </p>
 
     </div>
+     </a>
 
     <!-- APPROVED -->
+      <a
+    href="/beneficiary/my-cases?status=approved"
+    class="dashboard-card-link"
+>
+
     <div class="card">
 
         <div class="card-icon">
@@ -160,6 +179,12 @@
         </p>
 
     </div>
+</a>
+    <!-- REJECTED -->
+<a
+    href="/beneficiary/my-cases?status=rejected"
+    class="dashboard-card-link"
+>
     <div class="card">
 
     <div class="card-icon">
@@ -181,6 +206,7 @@
     </p>
 
 </div>
+</a>    
 
 </div>
 

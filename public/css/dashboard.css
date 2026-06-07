@@ -61,6 +61,7 @@
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
+    flex: 1;
 }
 
 
@@ -72,6 +73,7 @@
     width: 92%;
     max-width: 1400px;
     margin: 40px auto 60px;
+    flex: 1;
 }
 
 
@@ -107,6 +109,7 @@
 .dashboard-page {
     padding: 40px 70px;
     color: var(--color-text);
+    flex: 1;
 }
 
 .dashboard-hero {
@@ -257,10 +260,11 @@
 /* transition already inherited from .dashboard-grid .card — only override needed */
 .dashboard-card-link .card {
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .dashboard-card-link .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
 }
 
@@ -440,11 +444,12 @@ tbody tr {
     gap: 20px;
     box-shadow: var(--shadow-sm);
     width: 100%;
-    min-height: auto;
-    height: 380px;
+    height: 100%;
     justify-content: space-between;
     cursor: pointer;
+    min-height: 380px;
 }
+
 
 
 .case-card:hover {
@@ -1109,9 +1114,10 @@ tbody tr {
     margin: 50px auto;
     padding: 0 40px;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 32px;
-    align-items: start;
+    grid-template-columns:
+        repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    align-items: stretch;
 }
 
 

@@ -61,6 +61,8 @@ body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     color: var(--text-main);
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -148,6 +150,7 @@ p {
     display: flex;
     align-items: center;
     gap: 24px;
+    white-space: nowrap;
 }
 
 .nav-links a {
@@ -156,6 +159,7 @@ p {
     font-weight: 600;
     transition: var(--transition-fast);
     font-size: 0.95rem;
+    flex: 1;
 }
 
 .nav-links a:hover {
