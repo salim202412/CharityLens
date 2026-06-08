@@ -70,47 +70,98 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <!-- DETAILS -->
 
-                <div class="case-details">
+                <div class="case-card-top">
 
-                    <p>
+    <div class="case-avatar">
 
-                        <strong>Category:</strong>
+        <i class="fa-solid fa-user"></i>
 
-                        <%= caseItem.category %>
+    </div>
 
-                    </p>
+    <span class="case-category">
 
-                    <p class="case-description">
+        <%= caseItem.category %>
 
-                        <strong>Description:</strong>
+    </span>
 
-                       <span><%= caseItem.description %></span>
+</div>
 
-                    </p>
+<p class="case-description">
 
-                    <p>
+    <%= caseItem.description %>
 
-                        <strong>Required:</strong>
+</p>
 
-                        ₹<%= caseItem.requiredAmount %>
+<div class="case-progress">
 
-                    </p>
+    <div class="progress-info">
 
-                    <p>
+        <span>
 
-                        <strong>Collected:</strong>
+            ₹<%= (caseItem.collectedAmount || 0)
+            .toLocaleString('en-IN') %>
 
-                        ₹<%= caseItem.collectedAmount %>
+        </span>
 
-                    </p>
+        <span>
 
-                </div>
+            ₹<%= (caseItem.requiredAmount || 0)
+            .toLocaleString('en-IN') %>
+
+        </span>
+
+    </div>
+
+    <%
+    const progress = Math.min(
+        ((caseItem.collectedAmount || 0) /
+        (caseItem.requiredAmount || 1)) * 100,
+        100
+    );
+    %>
+
+    <div class="progress-bar">
+
+        <div
+            class="progress-fill"
+            style="width:<%= progress %>%"
+        ></div>
+
+    </div>
+
+</div>
+
+<p class="funding-percent">
+
+    <%= Math.floor(progress) %>% Funded
+
+</p>
+
+<div class="priority-wrapper">
+
+    <span class="priority-label">
+
+        <%= caseItem.priority || 'Medium' %>
+
+    </span>
+
+    <div class="priority-battery">
+
+        <div
+            class="battery-level
+            priority-<%= (caseItem.priority || 'medium')
+            .toLowerCase() %>"
+        ></div>
+
+    </div>
+
+</div>
 
                 <!-- STATUS -->
 
                 <% if (caseItem.isRejected) { %>
 
-                    <p class="status rejected">
+                    <p class="status-badge rejected">
 
                         Rejected
 
@@ -118,7 +169,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <% } else if (caseItem.isVerified) { %>
 
-                    <p class="status verified">
+                    <p class="status-badge verified">
 
                         Verified
 
@@ -126,7 +177,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <% } else { %>
 
-                    <p class="status pending">
+                    <p class="status-badge pending">
 
                         Pending Verification
 

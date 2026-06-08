@@ -477,11 +477,19 @@ tbody tr {
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: var(--gradient-primary);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
+     width:56px;
+    height:56px;
+    background:linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a);
+    color:white;
+    font-size:22px;
+    box-shadow:
+        0 10px 25px rgba(34,197,94,.25);
 }
 
 .case-category {
@@ -1507,12 +1515,28 @@ tbody tr {
         .status-badge {
 
             display: inline-block;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-weight: 600;
             margin-bottom: 20px;
+            margin-top:15px;
+            padding:8px 12px;
+            border-radius:8px;
+            font-weight:600;
+            width:fit-content;
 
         }
+        .status-badge.verified{
+        background:#dcfce7;
+        color:#15803d;
+}
+
+    .status-badge.pending{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+    .status-badge.rejected{
+    background:#fee2e2;
+    color:#b91c1c;
+}
 
         .verified {
 
@@ -1748,4 +1772,9 @@ tbody tr {
 .open-case-modal:hover{
 
     transform:translateY(-4px);
+}
+.funding-percent{
+    margin-top:10px;
+    font-weight:600;
+    color:#16a34a;
 }

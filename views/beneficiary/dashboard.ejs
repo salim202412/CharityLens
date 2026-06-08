@@ -256,9 +256,23 @@
 
                             <div class="case-card-top">
 
-                                <div class="case-avatar">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
+                               <div class="case-avatar">
+
+<% if(singleCase.category === 'Masjid') { %>
+
+    <i class="fa-solid fa-mosque"></i>
+
+<% } else if(singleCase.category === 'Dar-ul-Uloom') { %>
+
+    <i class="fa-solid fa-book-quran"></i>
+
+<% } else { %>
+
+    <i class="fa-solid fa-user"></i>
+
+<% } %>
+
+</div>
 
                                 <span class="case-category">
                                     <%= singleCase.category %>
