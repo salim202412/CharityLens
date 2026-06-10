@@ -59,8 +59,8 @@
 .page-container {
     width: 100%;
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 30px auto;
+    padding: 0 15px;
     flex: 1;
 }
 
@@ -72,7 +72,7 @@
 .admin-container {
     width: 92%;
     max-width: 1400px;
-    margin: 40px auto 60px;
+    margin: 30px auto 45px;
     flex: 1;
 }
 
@@ -83,20 +83,20 @@
 
 .page-title {
     max-width: 1400px;
-    margin: 40px auto 10px;
-    padding: 0 24px;
-    font-size: 2.7rem;
+    margin: 30px auto 8px;
+    padding: 0 18px;
+    font-size: 2rem;
     font-weight: 800;
     color: var(--color-text-dark);
     line-height: 1.1;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
 }
 
 .subtitle {
     max-width: 1400px;
-    margin: 0 auto 20px;
-    padding: 0 24px;
-    font-size: 1.05rem;
+    margin: 0 auto 15px;
+    padding: 0 18px;
+    font-size: 0.95rem;
     color: var(--color-text-muted);
     line-height: 1.7;
 }
@@ -107,7 +107,7 @@
 ========================= */
 
 .dashboard-page {
-    padding: 40px 70px;
+    padding: 30px 52px;
     color: var(--color-text);
     flex: 1;
 }
@@ -116,22 +116,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
-    gap: 30px;
+    margin-bottom: 38px;
+    gap: 22px;
 }
 
 .dashboard-tag {
     color: var(--color-primary-light);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 2px;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
 }
 
 /* Shares font-size / line-height with .page-title */
 .dashboard-hero h1 {
-    font-size: 2.7rem;
-    margin-bottom: 12px;
+    font-size: 2rem;
+    margin-bottom: 9px;
     line-height: 1.1;
 }
 
@@ -161,26 +161,26 @@
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin: 32px 0;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+    margin: 24px 0;
 }
 
 .stat-card {
     background: var(--color-bg-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 28px;
+    padding: 21px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     box-shadow: var(--shadow-sm);
 }
 
 /* Shared base for .stat-icon and .card-icon */
 .stat-icon,
 .card-icon {
-    border-radius: 16px;
+    border-radius: 12px;
     background: rgba(34, 197, 94, 0.12);
     display: flex;
     align-items: center;
@@ -189,21 +189,21 @@
 }
 
 .stat-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 18px; /* slightly larger curve than card-icon */
-    font-size: 1.4rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 1.1rem;
 }
 
 .card-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+    width: 42px;
+    height: 42px;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
 }
 
 .stat-card h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 4px;
 }
 
@@ -220,17 +220,16 @@
 .dashboard-grid {
     width: 90%;
     max-width: 1400px;
-    /* Removed duplicate margin / margin-bottom — unified here */
-    margin: 50px auto;
+    margin: 38px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
 }
 
 .dashboard-grid .card {
     background: var(--color-bg-white);
     border-radius: var(--radius-lg);
-    padding: 28px;
+    padding: 21px;
     border: 1px solid var(--color-border-medium);
     box-shadow: var(--shadow-sm);
     transition: var(--transition-fast);
@@ -241,9 +240,9 @@
 }
 
 .dashboard-grid .card h2 {
-    font-size: 2.2rem;
+    font-size: 1.65rem;
     color: var(--color-text-dark);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .dashboard-grid .card p {
@@ -275,18 +274,18 @@
 
 .table-wrapper {
     width: 92%;
-    margin: 40px auto;
+    margin: 30px auto;
     background: var(--color-bg-white);
     border-radius: var(--radius-lg);
-    padding: 28px;
+    padding: 21px;
     border: 1px solid var(--color-border-medium);
     box-shadow: var(--shadow-md);
     overflow-x: auto;
 }
 
 .table-heading {
-    font-size: var(--text-2xl);
-    margin-bottom: 24px;
+    font-size: var(--text-xl);
+    margin-bottom: 18px;
     color: var(--color-text-dark);
 }
 
@@ -1492,6 +1491,19 @@ tbody tr {
 .case-status.rejected {
     background: #fee2e2;
     color: var(--color-red-dark);
+}
+
+.rejected-case{
+    border:2px solid #ef4444 !important;
+    background:#fff5f5 !important;
+}
+
+.rejected-case .progress-fill{
+    background:#ef4444 !important;
+}
+
+.rejected-case .priority-battery{
+    opacity:0.7;
 }
 
 .rejection-box {

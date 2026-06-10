@@ -5,6 +5,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const session = require('express-session');
 const path = require('path');
+const Case = require('./models/Case');
 const mongoSanitize = require('express-mongo-sanitize');
 
 
@@ -151,12 +152,57 @@ app.get('/login', (req, res) => {
 
 
 // home route (just to check app is running)
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 
-  res.render('home');
+    try {
+
+        const masjidCount =
+            await Case.countDocuments({
+
+                category: 'Masjid',
+                isVerified: true,
+                isRejected: false,
+                isClosed: false
+
+            });
+
+        const darulUloomCount =
+            await Case.countDocuments({
+
+                category: 'DarulUloom',
+                isVerified: true,
+                isRejected: false,
+                isClosed: false
+
+            });
+
+        const individualCount =
+            await Case.countDocuments({
+
+                category: 'Individual',
+                isVerified: true,
+                isRejected: false,
+                isClosed: false
+
+            });
+
+        res.render('home', {
+
+            masjidCount,
+            darulUloomCount,
+            individualCount
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).send('Server Error');
+
+    }
 
 });
-
 
 // starting server
 const PORT = process.env.PORT || 4000;

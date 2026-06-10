@@ -229,8 +229,9 @@
 
                     <% cases.forEach(singleCase => { %>
 
-                        <div
-    class="case-card open-case-modal"
+    <div
+    class="case-card open-case-modal
+    <%= singleCase.isRejected ? 'rejected-case' : '' %>"
 
     data-title="<%= singleCase.title %>"
 
