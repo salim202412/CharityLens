@@ -4,8 +4,9 @@
     <title>CharityLens - Home</title>
 
     <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/dashboard.css">   
-    <link
+    <link rel="stylesheet" href="/css/dashboard.css"> 
+    <link rel="stylesheet" href="/css/home.css">  
+    <linkh
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 /> 
@@ -28,7 +29,7 @@
                 powered by modern web technologies.
         </p>
 
-        <div class="hero-buttons">
+        <!-- <div class="hero-buttons">
 
     <a href="/register"
        class="btn btn-primary">
@@ -38,11 +39,59 @@
     <a href="/cases-view"
        class="btn btn-secondary">
        View Cases
-    </a>
+    </a> -->
 
 </div>
 
     </div>
+</section>
+<section class="categories-section">
+
+    <h2>Browse Categories</h2>
+
+    <div class="categories-grid">
+
+        <a href="/cases/category/Masjid"
+           class="category-card">
+
+            <i class="fa-solid fa-mosque"></i>
+
+            <h3>Masjid</h3>
+
+            <p>
+                <%= masjidCount %> Active Cases
+            </p>
+
+        </a>
+
+        <a href="/cases/category/DarulUloom"
+           class="category-card">
+
+            <i class="fa-solid fa-book-quran"></i>
+
+            <h3>Dar-ul-Uloom</h3>
+
+            <p>
+                <%= darulUloomCount %> Active Cases
+            </p>
+
+        </a>
+
+        <a href="/cases/category/Individual"
+           class="category-card">
+
+            <i class="fa-solid fa-user"></i>
+
+            <h3>Needy Individuals</h3>
+
+            <p>
+                <%= individualCount %> Active Cases
+            </p>
+
+        </a>
+
+    </div>
+
 </section>
 
 <%- include('partials/footer') %>
