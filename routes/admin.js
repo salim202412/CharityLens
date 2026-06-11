@@ -113,8 +113,52 @@ router.get('/admin/cases/:id', isAdmin, async (req, res) => {
 
 });
 
+// ─────────────────────────────────────────────────────────────
+// PRIORITY ENGINE — helper: compute score + label + bypass
+// ─────────────────────────────────────────────────────────────
+
+function computePriority(urgency, impact, sustainability) {
+
+  const u = Number(urgency) || 0;
+  const i = Number(impact) || 0;
+  const s = Number(sustainability) || 0;
+
+  // Emergency bypass rule: urgency >= 9
+  if (u >= 9) {
+    return {
+      urgency: u,
+      impact: i,
+      sustainability: s,
+      priorityScore: 10,
+      priority: 'Critical',
+      emergencyBypass: true
+    };
+  }
+
+  // Weighted formula
+  const score = parseFloat(
+    ((u * 0.40) + (i * 0.35) + (s * 0.25)).toFixed(2)
+  );
+
+  // Label mapping
+  let label;
+  if (score >= 8.5)       label = 'Critical';
+  else if (score >= 7)    label = 'High';
+  else if (score >= 5)    label = 'Medium';
+  else                    label = 'Low';
+
+  return {
+    urgency: u,
+    impact: i,
+    sustainability: s,
+    priorityScore: score,
+    priority: label,
+    emergencyBypass: false
+  };
+}
+
 // ----------------------
-// verify case and assign priority
+// verify case and assign priority (NEW weighted system)
 // ----------------------
 
 router.post('/admin/cases/:id/verify', isAdmin, async (req, res) => {
@@ -124,8 +168,8 @@ router.post('/admin/cases/:id/verify', isAdmin, async (req, res) => {
     // get case id from URL
     const caseId = req.params.id;
 
-    // get priority from request body
-    const { priority } = req.body;
+    // get the three scoring factors from form
+    const { urgency, impact, sustainability } = req.body;
 
     // find case
     const foundCase = await Case.findById(caseId);
@@ -137,17 +181,25 @@ router.post('/admin/cases/:id/verify', isAdmin, async (req, res) => {
       });
     }
 
+    // compute weighted priority
+    const result = computePriority(urgency, impact, sustainability);
+
+    // apply all priority fields
+    foundCase.urgency        = result.urgency;
+    foundCase.impact         = result.impact;
+    foundCase.sustainability = result.sustainability;
+    foundCase.priorityScore  = result.priorityScore;
+    foundCase.priority       = result.priority;
+    foundCase.emergencyBypass = result.emergencyBypass;
+
     // verify case
     foundCase.isVerified = true;
-
-    // assign priority
-    foundCase.priority = priority || 0;
 
     // save changes
     await foundCase.save();
 
     // response
-   res.redirect('/admin/cases');
+    res.redirect('/admin/cases');
 
   } catch (error) {
 
@@ -208,6 +260,7 @@ router.post('/admin/cases/:id/reject', isAdmin, async (req, res) => {
   }
 
 });
+
 // ----------------------
 // manually close case
 // ----------------------
@@ -274,6 +327,7 @@ router.get('/admin/cases-view', isAdmin, async (req, res) => {
   }
 
 });
+
 // ----------------------
 // admin dashboard stats
 // ----------------------
@@ -314,7 +368,6 @@ router.get('/admin/dashboard', isAdmin, async (req, res) => {
     });
 
 
-    // render dashboard
    // pending verification count
 const pendingVerifications =
   await Case.countDocuments({

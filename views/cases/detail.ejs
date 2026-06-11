@@ -46,9 +46,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <span class="priority">
 
-                    <%= foundCase.priority %>
+                    <%= foundCase.priority || 'Low' %>
 
                 </span>
+
+                <% if (foundCase.emergencyBypass) { %>
+                <span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;margin-left:4px;">
+                    <i class="fa-solid fa-bolt"></i> EMERGENCY
+                </span>
+                <% } %>
 
             </div>
 
@@ -59,6 +65,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <%= foundCase.title %>
 
             </h1>
+
+            <!-- PRIORITY SCORE INFO -->
+
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+                <span style="font-size:0.85rem;color:#555;">
+                    <strong>Priority Score:</strong>
+                    <%= (foundCase.priorityScore || 0).toFixed(2) %> / 10
+                </span>
+                <% if (foundCase.urgency) { %>
+                <span style="font-size:0.8rem;color:#888;">
+                    U: <%= foundCase.urgency %> &nbsp;·&nbsp;
+                    I: <%= foundCase.impact %> &nbsp;·&nbsp;
+                    S: <%= foundCase.sustainability %>
+                </span>
+                <% } %>
+            </div>
 
             <!-- DESCRIPTION -->
 

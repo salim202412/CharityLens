@@ -141,19 +141,31 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     <span class="priority-label">
 
-        <%= caseItem.priority || 'Medium' %>
+        <%= caseItem.priority || 'Low' %>
 
     </span>
+
+    <% if (caseItem.emergencyBypass) { %>
+    <span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:20px;font-size:0.72rem;font-weight:700;margin-left:4px;">
+        <i class="fa-solid fa-bolt"></i> EMERGENCY
+    </span>
+    <% } %>
 
     <div class="priority-battery">
 
         <div
             class="battery-level
-            priority-<%= (caseItem.priority || 'medium')
+            priority-<%= (caseItem.priority || 'low')
             .toLowerCase() %>"
         ></div>
 
     </div>
+
+    <% if (caseItem.isVerified && caseItem.priorityScore) { %>
+    <span style="font-size:0.72rem;color:#888;margin-left:6px;">
+        Score: <%= caseItem.priorityScore.toFixed(2) %>
+    </span>
+    <% } %>
 
 </div>
 
