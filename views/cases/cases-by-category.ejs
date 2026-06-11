@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title><%= category %> Cases</title>
+
+    <link rel="stylesheet"
+          href="/css/global.css">
+
+    <link rel="stylesheet"
+          href="/css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <%- include('../partials/navbar') %>
+
+    <%- include('../partials/page-navigation') %>
+
+    <div class="dashboard-page">
+
+        <section class="dashboard-hero">
+
+            <div>
+
+                <h1>
+
+                    <% if(category === 'Masjid') { %>
+
+                        🕌 Masjid Cases
+
+                    <% } else if(category === 'DarulUloom') { %>
+
+                        📖 Dar-ul-Uloom Cases
+
+                    <% } else { %>
+
+                        👤 Needy Individual Cases
+
+                    <% } %>
+
+                </h1>
+
+                <p class="dashboard-subtitle">
+
+                    Browse all active fundraising cases
+                    in this category.
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <div class="cases-grid">
+
+            <% if(cases.length > 0) { %>
+
+                <% cases.forEach(singleCase => { %>
+
+                    <div
+                        class="case-card open-case-modal"
+
+                        data-id="<%= singleCase._id %>"
+                        data-title="<%= singleCase.title %>"
+                        data-description="<%= singleCase.description %>"
+                        data-category="<%= singleCase.category %>"
+                        data-required="<%= singleCase.requiredAmount %>"
+                        data-collected="<%= singleCase.collectedAmount || 0 %>"
+                        data-status="Verified"
+                        data-document="<%= singleCase.proofImage || '' %>"
+                    >
+
+                        <div class="case-card-top">
+
+                            <div class="case-avatar">
+
+                                <% if(singleCase.category === 'Masjid') { %>
+
+                                    <i class="fa-solid fa-mosque"></i>
+
+                                <% } else if(singleCase.category === 'DarulUloom') { %>
+
+                                    <i class="fa-solid fa-book-quran"></i>
+
+                                <% } else { %>
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                <% } %>
+
+                            </div>
+
+                            <span class="case-category">
+
+                                <%= singleCase.category %>
+
+                            </span>
+
+                        </div>
+
+                        <h3>
+
+                            <%= singleCase.title %>
+
+                        </h3>
+
+                        <p class="case-description">
+
+                            <%= singleCase.description %>
+
+                        </p>
+
+                        <div class="case-progress">
+
+                            <div class="progress-info">
+
+                                <span>
+
+                                    ₹<%= (singleCase.collectedAmount || 0).toLocaleString('en-IN') %>
+
+                                </span>
+
+                                <span>
+
+                                    ₹<%= (singleCase.requiredAmount || 0).toLocaleString('en-IN') %>
+
+                                </span>
+
+                            </div>
+
+                            <%
+                            const progress = Math.min(
+                                ((singleCase.collectedAmount || 0) /
+                                (singleCase.requiredAmount || 1)) * 100,
+                                100
+                            );
+                            %>
+
+                            <div class="progress-bar">
+
+                                <div
+                                    class="progress-fill"
+                                    style="width: <%= progress %>%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            <% } else { %>
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    <h3>
+
+                        No Cases Found
+
+                    </h3>
+
+                    <p>
+
+                        There are currently no active
+                        cases in this category.
+
+                    </p>
+
+                </div>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+    <%- include('../partials/case-modal') %>
+
+    <%- include('../partials/footer') %>
+
+</body>
+
+</html>
