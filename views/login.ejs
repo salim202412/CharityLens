@@ -46,6 +46,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
       <form action="/auth/login" method="POST">
 
+        <input
+    type="hidden"
+    name="redirect"
+    value="<%= typeof redirect !== 'undefined' ? redirect : '' %>"
+>
+
         <!-- email -->
 
         <div class="form-group">

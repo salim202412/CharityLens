@@ -24,6 +24,7 @@
     </div>
 
 </div>
+
 <script>
 
 const modal =
@@ -45,6 +46,12 @@ document
     card.addEventListener(
         'click',
         () => {
+            const caseId =
+    card.dataset.id;
+
+    document
+    .getElementById('donateButton')
+    .href =`/donate/${caseId}`;
 
             const title =
                 card.dataset.title;
@@ -169,6 +176,17 @@ document
                     ''
                 }
 
+                    <br>
+
+                    <a
+                        href="/cases-view/${caseId}"
+                        class="btn btn-primary"
+                    >
+
+                        View & Donate
+
+                    </a>
+
             `;
 
             modal.style.display =
@@ -209,4 +227,18 @@ window.addEventListener(
     }
 );
 
+
 </script>
+<div class="modal-actions">
+
+    <a
+        id="donateButton"
+        href="#"
+        class="btn btn-primary"
+    >
+
+    Donate Now 
+
+    </a>
+
+</div>

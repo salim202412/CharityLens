@@ -147,7 +147,14 @@ app.get('/register', (req, res) => {
 
 // login page
 app.get('/login', (req, res) => {
-  res.render('login');
+
+    res.render('login', {
+
+        redirect:
+            req.query.redirect || ''
+
+    });
+
 });
 
 

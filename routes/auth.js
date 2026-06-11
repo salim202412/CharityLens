@@ -100,7 +100,11 @@ router.get('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
 
-    res.render('login');
+    res.render('login', {
+
+        redirect: req.query.redirect || ''
+
+    });
 
 });
 
@@ -423,7 +427,8 @@ router.post(
             const {
 
                 email,
-                password
+                password,
+                redirect
 
             } = req.body;
 
@@ -470,32 +475,39 @@ router.post(
             };
 
 
-            // redirect by role
-            if (user.role === 'admin') {
+            // user was trying to access a case
+if (redirect) {
 
-                return res.redirect(
-                    '/admin/dashboard'
-                );
+    return res.redirect(redirect);
 
-            }
+}
 
-            if (user.role === 'donor') {
+// normal role redirects
+if (user.role === 'admin') {
 
-                return res.redirect(
-                    '/donor/dashboard'
-                );
+    return res.redirect(
+        '/admin/dashboard'
+    );
 
-            }
+}
 
-            if (user.role === 'beneficiary') {
+if (user.role === 'donor') {
 
-                return res.redirect(
-                    '/beneficiary/dashboard'
-                );
+    return res.redirect(
+        '/donor/dashboard'
+    );
 
-            }
+}
 
-            res.redirect('/');
+if (user.role === 'beneficiary') {
+
+    return res.redirect(
+        '/beneficiary/dashboard'
+    );
+
+}
+
+res.redirect('/');
 
         } catch (error) {
 
