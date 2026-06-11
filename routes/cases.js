@@ -182,6 +182,58 @@ router.get('/cases', async (req, res) => {
 });
 
 // ----------------------
+// get catergory-wise cases
+// ----------------------
+router.get(
+    '/cases/category/:category',
+
+    async (req, res) => {
+
+        try {
+
+            const cases =
+                await Case.find({
+
+                    category:
+                        req.params.category,
+
+                    isVerified: true,
+
+                    isRejected: false,
+
+                    isClosed: false
+
+                });
+
+            res.render(
+
+                'cases/cases-by-category',
+
+                {
+
+                    category:
+                        req.params.category,
+
+                    cases
+
+                }
+
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+            res.status(500).send(
+                'Server Error'
+            );
+
+        }
+
+    }
+);
+
+// ----------------------
 // get single case details
 // ----------------------
 

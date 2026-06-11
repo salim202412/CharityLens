@@ -54,6 +54,7 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 75%;
 }
 
 body {
@@ -118,7 +119,7 @@ p {
     top: 0;
     z-index: 999;
     width: 100%;
-    padding: 12px 4%;
+    padding: 9px 4%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,8 +137,8 @@ p {
 }
 
 .logo-icon {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 .logo h2 {
@@ -149,7 +150,7 @@ p {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 18px;
     white-space: nowrap;
 }
 
@@ -173,13 +174,13 @@ p {
 ========================= */
 
 .user-avatar {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.15);
 }
@@ -197,7 +198,7 @@ p {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 24px;
+    padding: 10px 18px;
     border-radius: var(--radius-sm);
     text-decoration: none;
     border: none;
@@ -217,7 +218,7 @@ p {
 }
 
 .btn-secondary {
-    padding: 14px 24px;
+    padding: 10px 18px;
     border-radius: var(--radius-sm);
     text-decoration: none;
     font-weight: 700;
@@ -245,7 +246,7 @@ p {
     backdrop-filter: blur(18px);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-md);
-    padding: 28px;
+    padding: 21px;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
@@ -291,7 +292,7 @@ p {
 ========================= */
 
 .hero {
-    padding: 100px 20px 80px;
+    padding: 75px 20px 60px;
     text-align: center;
     background: radial-gradient(circle at top, rgba(34, 197, 94, 0.12), transparent 45%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -312,9 +313,9 @@ p {
 }
 
 .hero-buttons {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
-    gap: 18px;
+    gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -351,8 +352,8 @@ p {
 
 .navbar-logo {
 
-    width: 52px;
-    height: 52px;
+    width: 39px;
+    height: 39px;
     object-fit: contain;
     margin-right: -6px;
     transition: 0.2s ease;
@@ -370,7 +371,7 @@ p {
 
     background: #111827;
     color: white;
-    margin-top: 80px;
+    margin-top: auto;
 
 }
 
@@ -378,11 +379,11 @@ p {
 
     max-width: 1200px;
     margin: auto;
-    padding: 50px 20px;
+    padding: 38px 20px;
     display: grid;
     grid-template-columns:
         repeat(auto-fit, minmax(220px, 1fr));
-    gap: 40px;
+    gap: 30px;
 
 }
 
