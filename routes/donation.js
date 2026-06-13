@@ -338,6 +338,17 @@ router.post('/donate/verify',
 
 
       await foundCase.save();
+      const io = req.app.get('io');
+
+io.emit('newDonation', {
+
+    caseId: foundCase._id,
+
+    amount: donation.amount,
+
+    donorId: donation.donorId
+
+});
 
 
       // response
