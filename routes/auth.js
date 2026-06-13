@@ -1,3 +1,4 @@
+console.log('AUTH ROUTES LOADED');
 const express = require('express');
 
 const router = express.Router();
@@ -85,6 +86,34 @@ const registerLimiter = rateLimit({
 
 router.get('/register', (req, res) => {
 
+    if (req.session.user) {
+
+        if (req.session.user.role === 'admin') {
+
+            return res.redirect(
+                '/admin/dashboard'
+            );
+
+        }
+
+        if (req.session.user.role === 'donor') {
+
+            return res.redirect(
+                '/donor/dashboard'
+            );
+
+        }
+
+        if (req.session.user.role === 'beneficiary') {
+
+            return res.redirect(
+                '/beneficiary/dashboard'
+            );
+
+        }
+
+    }
+
     res.render('register', {
 
         error: null
@@ -93,12 +122,39 @@ router.get('/register', (req, res) => {
 
 });
 
-
 // ======================
 // RENDER LOGIN
 // ======================
 
 router.get('/login', (req, res) => {
+
+    if (req.session.user) {
+
+        if (req.session.user.role === 'admin') {
+
+            return res.redirect(
+                '/admin/dashboard'
+            );
+
+        }
+
+        if (req.session.user.role === 'donor') {
+
+            return res.redirect(
+                '/donor/dashboard'
+            );
+
+        }
+
+        if (req.session.user.role === 'beneficiary') {
+
+            return res.redirect(
+                '/beneficiary/dashboard'
+            );
+
+        }
+
+    }
 
     res.render('login', {
 
@@ -369,7 +425,7 @@ router.post(
             delete req.session.otpExpiry;
 
 
-            res.redirect('/login');
+            res.redirect('/auth/login');
 
         }
 
@@ -418,7 +474,7 @@ router.post(
 
                 return res.redirect(
 
-                    '/login?error=Invalid login details'
+                    '/auth/login?error=Invalid login details'
 
                 );
 
@@ -440,7 +496,7 @@ router.post(
 
                 return res.redirect(
 
-                    '/login?error=Invalid email or password'
+                    '/auth/login?error=Invalid email or password'
 
                 );
 
@@ -456,7 +512,7 @@ router.post(
 
                 return res.redirect(
 
-                    '/login?error=Invalid email or password'
+                    '/auth/login?error=Invalid email or password'
 
                 );
 
@@ -507,7 +563,7 @@ if (user.role === 'beneficiary') {
 
 }
 
-res.redirect('/');
+res.redirect('/auth/login');
 
         } catch (error) {
 
@@ -726,7 +782,7 @@ router.post('/reset-password/:token',
             await user.save();
 
 
-            res.redirect('/login');
+            res.redirect('/auth/login');
 
         } catch (error) {
 
@@ -761,7 +817,7 @@ router.get('/logout', (req, res) => {
 
         res.clearCookie('connect.sid');
 
-        res.redirect('/');
+        res.redirect('/auth/login');
 
     });
 

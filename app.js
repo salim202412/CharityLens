@@ -140,22 +140,7 @@ app.use('/', donationRoutes);
 // pages rendering
 // ----------------------
 
-// register page
-app.get('/register', (req, res) => {
-  res.render('register');
-});
 
-// login page
-app.get('/login', (req, res) => {
-
-    res.render('login', {
-
-        redirect:
-            req.query.redirect || ''
-
-    });
-
-});
 
 
 // home route (just to check app is running)
