@@ -49,9 +49,7 @@ document
             const caseId =
     card.dataset.id;
 
-    document
-    .getElementById('donateButton')
-    .href =`/donate/${caseId}`;
+
 
             const title =
                 card.dataset.title;
@@ -178,14 +176,16 @@ document
 
                     <br>
 
-                    <a
-                        href="/cases-view/${caseId}"
-                        class="btn btn-primary"
-                    >
+                    <div class="modal-actions">
 
-                        View & Donate
+    <a
+        href="/cases-view/${caseId}"
+        class="btn btn-primary"
+    >
+        Donate Now
+    </a>
 
-                    </a>
+</div>
 
             `;
 
@@ -229,16 +229,5 @@ window.addEventListener(
 
 
 </script>
-<div class="modal-actions">
-
-    <a
-        id="donateButton"
-        href="#"
-        class="btn btn-primary"
-    >
-
-    Donate Now 
-
-    </a>
 
 </div>

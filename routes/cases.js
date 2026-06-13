@@ -444,4 +444,65 @@ router.get(
   }
 
 );
+
+// =========================
+// api route to get case progress
+// =========================
+
+router.get('/api/case/:id', async (req, res) => {
+
+    try {
+
+        const foundCase =
+            await Case.findById(
+                req.params.id
+            );
+
+        if (!foundCase) {
+
+            return res.status(404).json({
+
+                message: 'Case not found'
+
+            });
+
+        }
+
+        const progress = Math.min(
+
+            (
+                foundCase.collectedAmount /
+                foundCase.requiredAmount
+            ) * 100,
+
+            100
+
+        );
+
+        res.json({
+
+            collectedAmount:
+                foundCase.collectedAmount,
+
+            requiredAmount:
+                foundCase.requiredAmount,
+
+            progress,
+
+            isClosed:
+                foundCase.isClosed
+
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+
+            message: 'Server Error'
+
+        });
+
+    }
+
+});
 module.exports = router;
