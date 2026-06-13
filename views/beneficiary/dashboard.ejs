@@ -329,18 +329,30 @@
                             <div class="priority-wrapper">
 
                                 <span class="priority-label">
-                                    <%= singleCase.priority || 'Medium' %>
+                                    <%= singleCase.priority || 'Low' %>
                                 </span>
+
+                                <% if (singleCase.emergencyBypass) { %>
+                                <span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:20px;font-size:0.72rem;font-weight:700;margin-left:4px;">
+                                    <i class="fa-solid fa-bolt"></i> EMERGENCY
+                                </span>
+                                <% } %>
 
                                 <div class="priority-battery">
 
                                     <div class="
                                         battery-level
-                                        priority-<%= (singleCase.priority || 'medium')
+                                        priority-<%= (singleCase.priority || 'low')
                                         .toLowerCase() %>
                                     "></div>
 
                                 </div>
+
+                                <% if (singleCase.isVerified && singleCase.priorityScore) { %>
+                                <span style="font-size:0.72rem;color:#888;margin-left:6px;">
+                                    Score: <%= singleCase.priorityScore.toFixed(2) %>
+                                </span>
+                                <% } %>
 
                             </div>
 

@@ -155,8 +155,8 @@ router.get('/cases', async (req, res) => {
       isRejected: false
     })
 
-    // sort by highest priority first
-    .sort({ priority: -1 })
+    // emergency bypass first, then highest score, then newest
+    .sort({ emergencyBypass: -1, priorityScore: -1, createdAt: -1 })
 
     // show beneficiary details
     .populate('beneficiaryId', 'name email');
@@ -292,7 +292,7 @@ router.get('/cases-view', async (req, res) => {
       isVerified: true,
       isClosed: false,
       isRejected: false
-    }).sort({ priority: -1 });
+    }).sort({ emergencyBypass: -1, priorityScore: -1, createdAt: -1 });
 
     res.render('cases/list', { cases });
 

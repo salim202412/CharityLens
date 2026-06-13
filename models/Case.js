@@ -45,23 +45,59 @@ const caseSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+
   // whether admin rejected the case
-    isRejected: {
+  isRejected: {
     type: Boolean,
     default: false
   },
 
-// reason for rejection
-    rejectionReason: {
+  // reason for rejection
+  rejectionReason: {
     type: String,
     default: null
-    },
+  },
 
-  // higher value = higher priority
-  priority: {
+  // ── PRIORITY ENGINE ──────────────────────────────────────
+
+  // Admin-assigned urgency score (1-10)
+  urgency: {
+    type: Number,
+    default: null
+  },
+
+  // Admin-assigned impact score (1-10)
+  impact: {
+    type: Number,
+    default: null
+  },
+
+  // Admin-assigned sustainability score (1-10)
+  sustainability: {
+    type: Number,
+    default: null
+  },
+
+  // Computed weighted score: (U×0.40)+(I×0.35)+(S×0.25)
+  priorityScore: {
     type: Number,
     default: 0
   },
+
+  // Priority label: Low / Medium / High / Critical
+  priority: {
+    type: String,
+    enum: ['Low', 'Medium', 'High', 'Critical'],
+    default: 'Low'
+  },
+
+  // Emergency bypass: true if urgency >= 9
+  emergencyBypass: {
+    type: Boolean,
+    default: false
+  },
+
+  // ─────────────────────────────────────────────────────────
 
   // beneficiary who created the case
   beneficiaryId: {
