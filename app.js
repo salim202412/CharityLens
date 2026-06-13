@@ -2,6 +2,8 @@
 require('dotenv').config();
 
 const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
 const connectDB = require('./config/db');
 const session = require('express-session');
 const path = require('path');
@@ -9,8 +11,21 @@ const Case = require('./models/Case');
 const mongoSanitize = require('express-mongo-sanitize');
 
 
-
 const app = express();
+
+const server = http.createServer(app);
+
+const io = new Server(server);
+app.set('io', io);
+
+io.on('connection', socket => {
+
+    console.log(
+        'Socket connected:',
+        socket.id
+    );
+
+});
 
 
 // connecting database
@@ -199,6 +214,10 @@ app.get('/', async (req, res) => {
 // starting server
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+server.listen(PORT, () => {
+
+    console.log(
+        `Server running on port ${PORT}`
+    );
+
 });
