@@ -126,12 +126,16 @@
                                 </span>
 
                             </div>
-
+                            
+                            <span id="progressPercent">
+                                 <%= progress %>%
+                                   </span>
                             <div class="progress-container">
-
+                                
                                 <div
-                                    class="progress-bar"
-                                    style="width: <%= progress %>%"
+                                id="progressBar"
+                                class="progress-fill"
+                                style="width:<%= progress %>%"
                                 ></div>
 
                             </div>
