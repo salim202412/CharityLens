@@ -86,31 +86,14 @@ const registerLimiter = rateLimit({
 
 router.get('/register', (req, res) => {
 
-    if (req.session.user) {
+    // Already logged in → redirect to dashboard
+    if (req.session && req.session.user) {
 
-        if (req.session.user.role === 'admin') {
+        const role = req.session.user.role;
 
-            return res.redirect(
-                '/admin/dashboard'
-            );
-
-        }
-
-        if (req.session.user.role === 'donor') {
-
-            return res.redirect(
-                '/donor/dashboard'
-            );
-
-        }
-
-        if (req.session.user.role === 'beneficiary') {
-
-            return res.redirect(
-                '/beneficiary/dashboard'
-            );
-
-        }
+        if (role === 'admin')       return res.redirect('/admin/dashboard');
+        if (role === 'donor')       return res.redirect('/donor/dashboard');
+        if (role === 'beneficiary') return res.redirect('/beneficiary/dashboard');
 
     }
 
@@ -128,31 +111,14 @@ router.get('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
 
-    if (req.session.user) {
+    // Already logged in → redirect to dashboard
+    if (req.session && req.session.user) {
 
-        if (req.session.user.role === 'admin') {
+        const role = req.session.user.role;
 
-            return res.redirect(
-                '/admin/dashboard'
-            );
-
-        }
-
-        if (req.session.user.role === 'donor') {
-
-            return res.redirect(
-                '/donor/dashboard'
-            );
-
-        }
-
-        if (req.session.user.role === 'beneficiary') {
-
-            return res.redirect(
-                '/beneficiary/dashboard'
-            );
-
-        }
+        if (role === 'admin')       return res.redirect('/admin/dashboard');
+        if (role === 'donor')       return res.redirect('/donor/dashboard');
+        if (role === 'beneficiary') return res.redirect('/beneficiary/dashboard');
 
     }
 
@@ -815,7 +781,19 @@ router.get('/logout', (req, res) => {
 
         }
 
-        res.clearCookie('connect.sid');
+        // Clear the session cookie
+        res.clearCookie('connect.sid', {
+            httpOnly: true,
+            sameSite: 'lax'
+        });
+
+        // Force browser not to cache the logout response
+        res.setHeader(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, private'
+        );
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
 
         res.redirect('/auth/login');
 
