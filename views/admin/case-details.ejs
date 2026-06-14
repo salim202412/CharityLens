@@ -17,21 +17,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
 
-<style>
-  .priority-engine-form { margin-top: 24px; }
-  .scoring-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px; }
-  .score-field label { display:block; font-weight:600; margin-bottom:6px; font-size:0.85rem; }
-  .score-field input[type=number] { width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; }
-  .score-hint { font-size:0.75rem; color:#888; margin-top:4px; }
-  .verify-submit-btn { background:#16a34a; color:#fff; padding:12px 28px; border:none; border-radius:8px; font-size:1rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:8px; }
-  .verify-submit-btn:hover { background:#15803d; }
-  .priority-score-display { display:inline-block; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; }
-  .priority-Low      { background:#f3f4f6; color:#374151; }
-  .priority-Medium   { background:#fef9c3; color:#854d0e; }
-  .priority-High     { background:#fef3c7; color:#92400e; }
-  .priority-Critical { background:#fee2e2; color:#991b1b; }
-  .emergency-badge { display:inline-flex; align-items:center; gap:6px; background:#dc2626; color:#fff; padding:4px 14px; border-radius:20px; font-weight:700; font-size:0.82rem; }
-</style>
+
 
 </head>
 
@@ -98,278 +84,312 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 Review submitted case details and supporting documents.
 
             </p>
-            <div class="details-grid">
+           <div class="details-grid">
 
-                <!-- CASE INFO -->
+    <!-- LEFT COLUMN -->
+    <div class="left-column">
 
-                <div class="details-card">
+        <!-- CASE INFORMATION -->
+        <div class="details-card">
 
-                    <h3>Case Information</h3>
+            <h3>Case Information</h3>
 
-                    <p>
-                        <strong>Category:</strong>
-                        <%= singleCase.category %>
-                    </p>
+            <p>
+                <strong>Category:</strong>
+                <%= singleCase.category %>
+            </p>
 
-                    <p>
-                        <strong>Description:</strong><br>
-                        <%= singleCase.description %>
-                    </p>
+            <p>
+                <strong>Description:</strong><br>
+                <%= singleCase.description %>
+            </p>
 
-                    <p>
-                        <strong>Required Amount:</strong>
-                        ₹<%= singleCase.requiredAmount.toLocaleString() %>
-                    </p>
+            <p>
+                <strong>Required Amount:</strong>
+                ₹<%= singleCase.requiredAmount.toLocaleString() %>
+            </p>
 
-                    <!-- PRIORITY DISPLAY (shown after verification) -->
-                    <% if (singleCase.isVerified) { %>
+            <% if (singleCase.isVerified) { %>
 
-                    <p>
-                        <strong>Priority:</strong>
-                        <span class="priority-score-display priority-<%= singleCase.priority || 'Low' %>">
-                            <%= singleCase.priority || 'Low' %>
+                <p>
+                    <strong>Priority:</strong>
+
+                    <span class="priority-score-display priority-<%= singleCase.priority || 'Low' %>">
+                        <%= singleCase.priority || 'Low' %>
+                    </span>
+
+                    <% if (singleCase.emergencyBypass) { %>
+
+                        <span class="emergency-badge">
+                            <i class="fa-solid fa-bolt"></i>
+                            EMERGENCY
                         </span>
-                        <% if (singleCase.emergencyBypass) { %>
-                        &nbsp;<span class="emergency-badge"><i class="fa-solid fa-bolt"></i> EMERGENCY</span>
-                        <% } %>
-                    </p>
-
-                    <p>
-                        <strong>Priority Score:</strong>
-                        <%= (singleCase.priorityScore || 0).toFixed(2) %> / 10
-                    </p>
-
-                    <p>
-                        <strong>Urgency:</strong> <%= singleCase.urgency || 'N/A' %> &nbsp;
-                        <strong>Impact:</strong> <%= singleCase.impact || 'N/A' %> &nbsp;
-                        <strong>Sustainability:</strong> <%= singleCase.sustainability || 'N/A' %>
-                    </p>
 
                     <% } %>
 
-                    <p>
-                        <strong>Submitted:</strong>
-
-                        <%= new Date(singleCase.createdAt)
-                            .toLocaleDateString() %>
-
-                    </p>
-
-                </div>
-
-                <!-- FUNDRAISING -->
-
-                <% if (
-                    singleCase.isVerified &&
-                    !singleCase.isRejected
-                ) { %>
-
-                <div class="details-card">
-
-                    <h3>Fundraising Progress</h3>
-
-                    <p>
-
-                        <strong>Raised:</strong>
-
-                        ₹<%= (singleCase.collectedAmount || 0)
-                            .toLocaleString() %>
-
-                    </p>
-
-                    <p>
-
-                        <strong>Goal:</strong>
-
-                        ₹<%= singleCase.requiredAmount
-                            .toLocaleString() %>
-
-                    </p>
-
-                    <p>
-
-                        <strong>Progress:</strong>
-
-                        <%= progress.toFixed(1) %>%
-
-                    </p>
-
-                    <div class="progress-wrapper">
-
-                        <div class="progress-bar">
-
-                            <div
-                                class="progress-fill"
-                                style="width:<%= progress %>%"
-                            ></div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <% } %>
-
-                <!-- RIGHT COLUMN -->
-
-                <div class="right-column">
-
-                    <!-- BENEFICIARY -->
-
-                    <div class="details-card">
-
-                        <h3>Beneficiary Information</h3>
-
-                        <p>
-
-                            <strong>Name:</strong>
-
-                            <%= singleCase.beneficiaryId?.name || 'N/A' %>
-
-                        </p>
-
-                        <p>
-
-                            <strong>Email:</strong>
-
-                            <%= singleCase.beneficiaryId?.email || 'N/A' %>
-
-                        </p>
-
-                    </div>
-
-                    <!-- PROOF DOCUMENT -->
-
-                    <% if (singleCase.proofImage) { %>
-
-                    <div class="details-card">
-
-                        <h3>Proof Document</h3>
-
-                        <img
-                            src="<%= singleCase.proofImage %>"
-                            alt="Proof Document"
-                            class="proof-preview"
-                        >
-
-                        <a
-                            href="<%= singleCase.proofImage %>"
-                            target="_blank"
-                            class="view-proof-btn"
-                            >
-
-                            Open Full Document                              
-
-                        </a>
-
-                    </div>
-
-                    <% } %>
-
-                    <!-- PRIORITY ENGINE FORM (only for unverified cases) -->
-
-                    <% if (!singleCase.isVerified && !singleCase.isRejected) { %>
-
-                    <div class="details-card priority-engine-form">
-
-                        <h3>
-                            <i class="fa-solid fa-brain"></i>
-                            Assign Priority &amp; Verify
-                        </h3>
-
-                        <p style="font-size:0.85rem;color:#555;margin-bottom:16px;">
-                            Score each factor from 1 to 10. The system will calculate
-                            the weighted priority score automatically.
-                            <strong>Emergency bypass activates if Urgency ≥ 9.</strong>
-                        </p>
-
-                        <form
-                            action="/admin/cases/<%= singleCase._id %>/verify"
-                            method="POST"
-                        >
-
-                            <div class="scoring-grid">
-
-                                <div class="score-field">
-                                    <label for="urgency">
-                                        Urgency (U) — 40%
-                                    </label>
-                                    <input
-                                        type="number"
-                                        id="urgency"
-                                        name="urgency"
-                                        min="1" max="10"
-                                        required
-                                        placeholder="1–10"
-                                    >
-                                    <p class="score-hint">
-                                        9–10 = Life-threatening &nbsp;·&nbsp;
-                                        7–8 = Critical &nbsp;·&nbsp;
-                                        4–6 = Moderate &nbsp;·&nbsp;
-                                        1–3 = Low
-                                    </p>
-                                </div>
-
-                                <div class="score-field">
-                                    <label for="impact">
-                                        Impact (I) — 35%
-                                    </label>
-                                    <input
-                                        type="number"
-                                        id="impact"
-                                        name="impact"
-                                        min="1" max="10"
-                                        required
-                                        placeholder="1–10"
-                                    >
-                                    <p class="score-hint">
-                                        9–10 = Community-wide &nbsp;·&nbsp;
-                                        7–8 = Group &nbsp;·&nbsp;
-                                        4–6 = Moderate &nbsp;·&nbsp;
-                                        1–3 = Individual
-                                    </p>
-                                </div>
-
-                                <div class="score-field">
-                                    <label for="sustainability">
-                                        Sustainability (S) — 25%
-                                    </label>
-                                    <input
-                                        type="number"
-                                        id="sustainability"
-                                        name="sustainability"
-                                        min="1" max="10"
-                                        required
-                                        placeholder="1–10"
-                                    >
-                                    <p class="score-hint">
-                                        9–10 = Long-term &nbsp;·&nbsp;
-                                        7–8 = Med-term &nbsp;·&nbsp;
-                                        4–6 = Short-term &nbsp;·&nbsp;
-                                        1–3 = One-time
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <button type="submit" class="verify-submit-btn">
-                                <i class="fa-solid fa-check"></i>
-                                Calculate &amp; Verify Case
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                    <% } %>
-
-                </div>
-
-            </div>
+                </p>
+
+                <p>
+                    <strong>Priority Score:</strong>
+                    <%= (singleCase.priorityScore || 0).toFixed(2) %> / 10
+                </p>
+
+                <p>
+                    <strong>Urgency:</strong>
+                    <%= singleCase.urgency || 'N/A' %>
+                </p>
+
+                <p>
+                    <strong>Impact:</strong>
+                    <%= singleCase.impact || 'N/A' %>
+                </p>
+
+                <p>
+                    <strong>Sustainability:</strong>
+                    <%= singleCase.sustainability || 'N/A' %>
+                </p>
+
+            <% } %>
+
+            <p>
+                <strong>Submitted:</strong>
+                <%= new Date(singleCase.createdAt).toLocaleDateString() %>
+            </p>
 
         </div>
 
+        <!-- PRIORITY ENGINE (moved here into left column) -->
+        <% if (!singleCase.isVerified && !singleCase.isRejected) { %>
+
+        <div class="details-card priority-engine-form">
+
+            <h3>
+                <i class="fa-solid fa-brain"></i>
+                Assign Priority & Verify
+            </h3>
+
+            <p style="font-size:0.85rem;color:#555;margin-bottom:16px;">
+                Score each factor from 1 to 10.
+                The system will calculate the weighted
+                priority score automatically.
+                <strong>
+                    Emergency bypass activates if Urgency ≥ 9.
+                </strong>
+            </p>
+
+            <form
+                action="/admin/cases/<%= singleCase._id %>/verify"
+                method="POST"
+            >
+
+                <div class="scoring-grid">
+
+                    <div class="score-field">
+
+                        <label for="urgency">
+                            Urgency (U) — 40%
+                        </label>
+
+                        <input
+                            type="number"
+                            id="urgency"
+                            name="urgency"
+                            min="1"
+                            max="10"
+                            required
+                            placeholder="1–10"
+                        >
+
+                        <p class="score-hint">
+                            9–10 = Life-threatening &nbsp;·&nbsp;
+                            7–8 = Critical &nbsp;·&nbsp;
+                            4–6 = Moderate &nbsp;·&nbsp;
+                            1–3 = Low
+                        </p>
+
+                    </div>
+
+                    <div class="score-field">
+
+                        <label for="impact">
+                            Impact (I) — 35%
+                        </label>
+
+                        <input
+                            type="number"
+                            id="impact"
+                            name="impact"
+                            min="1"
+                            max="10"
+                            required
+                            placeholder="1–10"
+                        >
+
+                        <p class="score-hint">
+                            9–10 = Community-wide &nbsp;·&nbsp;
+                            7–8 = Group &nbsp;·&nbsp;
+                            4–6 = Moderate &nbsp;·&nbsp;
+                            1–3 = Individual
+                        </p>
+
+                    </div>
+
+                    <div class="score-field">
+
+                        <label for="sustainability">
+                            Sustainability (S) — 25%
+                        </label>
+
+                        <input
+                            type="number"
+                            id="sustainability"
+                            name="sustainability"
+                            min="1"
+                            max="10"
+                            required
+                            placeholder="1–10"
+                        >
+
+                        <p class="score-hint">
+                            9–10 = Long-term &nbsp;·&nbsp;
+                            7–8 = Medium-term &nbsp;·&nbsp;
+                            4–6 = Short-term &nbsp;·&nbsp;
+                            1–3 = One-time
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="verify-submit-btn"
+                >
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Calculate & Verify Case
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <% } %>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-column">
+
+        <!-- BENEFICIARY -->
+        <div class="details-card">
+
+            <h3>Beneficiary Information</h3>
+
+            <p>
+                <strong>Name:</strong>
+                <%= singleCase.beneficiaryId?.name || 'N/A' %>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <%= singleCase.beneficiaryId?.email || 'N/A' %>
+            </p>
+
+        </div>
+
+        <!-- PROOF DOCUMENT -->
+        <% if (singleCase.proofImage) { %>
+
+        <div class="details-card">
+
+            <h3>Proof Document</h3>
+
+            <img
+                src="<%= singleCase.proofImage %>"
+                alt="Proof Document"
+                class="proof-preview"
+            >
+
+            
+               <a
+                href="<%= singleCase.proofImage %>"
+                target="_blank"
+                class="view-proof-btn">
+
+                Open Full Document
+            </a>
+
+        </div>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+<!-- FUNDRAISING FULL WIDTH -->
+
+<% if (
+    singleCase.isVerified &&
+    !singleCase.isRejected
+) { %>
+
+<div
+    class="details-card"
+    style="margin-top:24px;"
+>
+
+    <h3>Fundraising Progress</h3>
+
+    <p>
+
+        <strong>Raised:</strong>
+
+        ₹<%= (singleCase.collectedAmount || 0)
+        .toLocaleString() %>
+
+    </p>
+
+    <p>
+
+        <strong>Goal:</strong>
+
+        ₹<%= singleCase.requiredAmount
+        .toLocaleString() %>
+
+    </p>
+
+    <p>
+
+        <strong>Progress:</strong>
+
+        <%= progress.toFixed(1) %>%
+
+    </p>
+
+    <div class="progress-wrapper">
+
+        <div class="progress-container">
+
+            <div
+                class="progress-bar"
+                style="width:<%= progress %>%"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<% } %>
+
+    </div>
+
+    
     </div>
 <%- include('../partials/footer') %>
 </body>
