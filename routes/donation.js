@@ -338,6 +338,25 @@ router.post('/donate/verify',
 
 
       await foundCase.save();
+      const io = req.app.get('io');
+io.emit('newDonation', {
+
+    caseId:
+        foundCase._id.toString(),
+
+    collectedAmount:
+        foundCase.collectedAmount,
+
+    progress:
+        Math.min(
+            (
+                foundCase.collectedAmount /
+                foundCase.requiredAmount
+            ) * 100,
+            100
+        )
+
+});
 
 
       // response

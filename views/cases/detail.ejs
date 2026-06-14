@@ -120,23 +120,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                     <span>Donation Progress</span>
 
-                    <span><%= progress %>%</span>
+                    <span id="progressPercent">
+    <%= progress %>%
+</span>
 
                 </div>
 
                 <div class="progress-container">
 
-                    <div
+    <div
+        id="progressBar"
+        class="progress-fill"
+        style="width:<%= progress %>%"
+    >
+    </div>
 
-                        class="progress-bar"
-
-                        style="width: <%= progress %>%"
-
-                    >
-
-                    </div>
-
-                </div>
+</div>
 
             </div>
 
@@ -146,11 +145,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <p>
 
-                    <strong>Collected:</strong>
+    <strong>Collected:</strong>
 
-                    ₹<%= foundCase.collectedAmount.toLocaleString('en-IN') %>
+    ₹<span id="collectedAmount">
 
-                </p>
+        <%= foundCase.collectedAmount.toLocaleString('en-IN') %>
+
+    </span>
+
+</p>
 
                 <p>
 
@@ -321,7 +324,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     <% if (typeof user === 'undefined' || !user) { %>
 
-        window.location.href = '/login';
+        window.location.href = '/auth/login';
 
         return;
 
@@ -657,6 +660,64 @@ if (proofModal) {
     </div>
 
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+const socket = io();
+socket.on('newDonation', data => {
+
+    console.log(
+        'NEW DONATION EVENT:',
+        data
+    );
+
+});
+
+socket.on('newDonation', async data => {
+
+    const currentCaseId =
+        '<%= foundCase._id %>';
+
+    if (
+        data.caseId !== currentCaseId
+    ) return;
+
+    const response =
+        await fetch(
+
+            `/api/case/${currentCaseId}`
+
+        );
+
+    const caseData =
+        await response.json();
+
+    document.getElementById(
+    'collectedAmount'
+).innerText =
+
+    Number(
+        caseData.collectedAmount
+    ).toLocaleString('en-IN');
+
+document.getElementById(
+    'progressPercent'
+).innerText =
+
+    caseData.progress.toFixed(1)
+    + '%';
+
+document.getElementById(
+    'progressBar'
+).style.width =
+
+    caseData.progress + '%';
+
+});
+
+</script>
+
 <%- include('../partials/footer') %>
 </body>
 
