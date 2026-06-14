@@ -1,25 +1,40 @@
+// ─────────────────────────────────────────────────────────
+// isDonor — ensures user is logged in AND has donor role
+// Unauthenticated → redirect to /login
+// Wrong role → redirect to own dashboard
+// ─────────────────────────────────────────────────────────
+
 const isDonor = (req, res, next) => {
 
-  // check login
+  // Not logged in at all
   if (!req.session || !req.session.user) {
 
-    return res.status(401).send(
-      "Please login first"
-    );
+    return res.redirect('/login');
 
   }
 
-
-  // check donor role
+  // Logged in but not donor
   if (req.session.user.role !== 'donor') {
 
-    return res.status(403).send(
-      "Donor access only"
-    );
+    const role = req.session.user.role;
+
+    if (role === 'admin') {
+
+      return res.redirect('/admin/dashboard');
+
+    }
+
+    if (role === 'beneficiary') {
+
+      return res.redirect('/beneficiary/dashboard');
+
+    }
+
+    return res.redirect('/');
 
   }
 
-
+  // Donor confirmed → proceed
   next();
 
 };

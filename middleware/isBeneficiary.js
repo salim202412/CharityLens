@@ -1,27 +1,40 @@
+// ─────────────────────────────────────────────────────────
+// isBeneficiary — ensures user is logged in AND has beneficiary role
+// Unauthenticated → redirect to /login
+// Wrong role → redirect to own dashboard
+// ─────────────────────────────────────────────────────────
+
 const isBeneficiary = (req, res, next) => {
 
-  // check login
+  // Not logged in at all
   if (!req.session || !req.session.user) {
 
-    return res.status(401).send(
-      "Please login first"
-    );
+    return res.redirect('/login');
 
   }
 
+  // Logged in but not beneficiary
+  if (req.session.user.role !== 'beneficiary') {
 
-  // check beneficiary role
-  if (
-    req.session.user.role !== 'beneficiary'
-  ) {
+    const role = req.session.user.role;
 
-    return res.status(403).send(
-      "Beneficiary access only"
-    );
+    if (role === 'admin') {
+
+      return res.redirect('/admin/dashboard');
+
+    }
+
+    if (role === 'donor') {
+
+      return res.redirect('/donor/dashboard');
+
+    }
+
+    return res.redirect('/');
 
   }
 
-
+  // Beneficiary confirmed → proceed
   next();
 
 };

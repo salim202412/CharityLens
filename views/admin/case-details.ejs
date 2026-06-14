@@ -111,19 +111,34 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <% if (singleCase.isVerified) { %>
 
-                <p>
-                    <strong>Priority:</strong>
+                    <!-- PRIORITY DISPLAY (shown after verification) -->
+                    <% if (singleCase.isVerified) { %>
 
-                    <span class="priority-score-display priority-<%= singleCase.priority || 'Low' %>">
-                        <%= singleCase.priority || 'Low' %>
-                    </span>
-
-                    <% if (singleCase.emergencyBypass) { %>
-
-                        <span class="emergency-badge">
-                            <i class="fa-solid fa-bolt"></i>
-                            EMERGENCY
+                    <p>
+                        <strong>Priority:</strong>
+                        <span class="priority-score-display priority-<%= singleCase.priority || 'Low' %>">
+                            <%= singleCase.priority || 'Low' %>
                         </span>
+                        <% if (singleCase.emergencyBypass) { %>
+                        &nbsp;<span class="emergency-badge"><i class="fa-solid fa-bolt"></i> EMERGENCY</span>
+                        <% } %>
+                    </p>
+
+                    <p>
+                        <strong>Priority Score:</strong>
+                        <%= (singleCase.priorityScore || 0).toFixed(2) %> / 10
+                    </p>
+
+                    <p>
+                        <strong>Urgency:</strong> <%= singleCase.urgency || 'N/A' %> &nbsp;
+                        <strong>Impact:</strong> <%= singleCase.impact || 'N/A' %> &nbsp;
+                        <strong>Sustainability:</strong> <%= singleCase.sustainability || 'N/A' %>
+                    </p>
+
+                    <% } %>
+
+                    <p>
+                        <strong>Submitted:</strong>
 
                     <% } %>
 

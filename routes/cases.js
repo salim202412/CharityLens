@@ -105,7 +105,7 @@ Number(
 // get logged-in beneficiary cases
 // ----------------------
 
-router.get('/beneficiary/my-cases', isAuth, async (req, res) => {
+router.get('/beneficiary/my-cases', isBeneficiary, async (req, res) => {
 
   try {
 
@@ -362,7 +362,7 @@ router.get('/cases-view/:id', async (req, res) => {
 // beneficiary dashboard
 // ----------------------
 
-router.get('/beneficiary/dashboard', isAuth, async (req, res) => {
+router.get('/beneficiary/dashboard', isBeneficiary, async (req, res) => {
 
   try {
 
