@@ -199,6 +199,8 @@ app.get('/login', (req, res) => {
 
   });
 
+});
+
 
 
 // home route

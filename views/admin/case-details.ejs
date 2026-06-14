@@ -111,65 +111,50 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <% if (singleCase.isVerified) { %>
 
-                    <!-- PRIORITY DISPLAY (shown after verification) -->
-                    <% if (singleCase.isVerified) { %>
+<p>
+    <strong>Priority:</strong>
 
-                    <p>
-                        <strong>Priority:</strong>
-                        <span class="priority-score-display priority-<%= singleCase.priority || 'Low' %>">
-                            <%= singleCase.priority || 'Low' %>
-                        </span>
-                        <% if (singleCase.emergencyBypass) { %>
-                        &nbsp;<span class="emergency-badge"><i class="fa-solid fa-bolt"></i> EMERGENCY</span>
-                        <% } %>
-                    </p>
+    <span class="priority-score-display priority-<%= singleCase.priority || 'Low' %>">
+        <%= singleCase.priority || 'Low' %>
+    </span>
 
-                    <p>
-                        <strong>Priority Score:</strong>
-                        <%= (singleCase.priorityScore || 0).toFixed(2) %> / 10
-                    </p>
+    <% if (singleCase.emergencyBypass) { %>
 
-                    <p>
-                        <strong>Urgency:</strong> <%= singleCase.urgency || 'N/A' %> &nbsp;
-                        <strong>Impact:</strong> <%= singleCase.impact || 'N/A' %> &nbsp;
-                        <strong>Sustainability:</strong> <%= singleCase.sustainability || 'N/A' %>
-                    </p>
+        <span class="emergency-badge">
+            <i class="fa-solid fa-bolt"></i>
+            EMERGENCY
+        </span>
 
-                    <% } %>
+    <% } %>
 
-                    <p>
-                        <strong>Submitted:</strong>
+</p>
 
-                    <% } %>
+<p>
+    <strong>Priority Score:</strong>
+    <%= (singleCase.priorityScore || 0).toFixed(2) %> / 10
+</p>
 
-                </p>
+<p>
+    <strong>Urgency:</strong>
+    <%= singleCase.urgency || 'N/A' %>
+</p>
 
-                <p>
-                    <strong>Priority Score:</strong>
-                    <%= (singleCase.priorityScore || 0).toFixed(2) %> / 10
-                </p>
+<p>
+    <strong>Impact:</strong>
+    <%= singleCase.impact || 'N/A' %>
+</p>
 
-                <p>
-                    <strong>Urgency:</strong>
-                    <%= singleCase.urgency || 'N/A' %>
-                </p>
+<p>
+    <strong>Sustainability:</strong>
+    <%= singleCase.sustainability || 'N/A' %>
+</p>
 
-                <p>
-                    <strong>Impact:</strong>
-                    <%= singleCase.impact || 'N/A' %>
-                </p>
+<% } %>
 
-                <p>
-                    <strong>Sustainability:</strong>
-                    <%= singleCase.sustainability || 'N/A' %>
-                </p>
-
-            <% } %>
-
-            <p>
-                <strong>Submitted:</strong>
-                <%= new Date(singleCase.createdAt).toLocaleDateString() %>
-            </p>
+<p>
+    <strong>Submitted:</strong>
+    <%= new Date(singleCase.createdAt).toLocaleDateString() %>
+</p>
 
         </div>
 
