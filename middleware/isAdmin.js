@@ -1,17 +1,43 @@
+// ─────────────────────────────────────────────────────────
+// isAdmin — ensures user is logged in AND has admin role
+// Unauthenticated → redirect to /login
+// Wrong role → redirect to own dashboard
+// ─────────────────────────────────────────────────────────
+
 const isAdmin = (req, res, next) => {
-  // Check if user is logged in
+
+  // Not logged in at all
   if (!req.session || !req.session.user) {
-   return res.status(401).send("Unauthorized: Please login first"); 
-    
+
+    return res.redirect('/login');
+
   }
 
-  // Check if user role is admin
+  // Logged in but not admin
   if (req.session.user.role !== 'admin') {
-    return res.status(403).send("Forbidden: Admin access only");
+
+    // Send them to their own dashboard
+    const role = req.session.user.role;
+
+    if (role === 'donor') {
+
+      return res.redirect('/donor/dashboard');
+
+    }
+
+    if (role === 'beneficiary') {
+
+      return res.redirect('/beneficiary/dashboard');
+
+    }
+
+    return res.redirect('/');
+
   }
 
-  // If admin → allow access
+  // Admin confirmed → proceed
   next();
+
 };
 
 module.exports = isAdmin;

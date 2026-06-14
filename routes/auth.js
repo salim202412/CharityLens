@@ -85,6 +85,17 @@ const registerLimiter = rateLimit({
 
 router.get('/register', (req, res) => {
 
+    // Already logged in → redirect to dashboard
+    if (req.session && req.session.user) {
+
+        const role = req.session.user.role;
+
+        if (role === 'admin')       return res.redirect('/admin/dashboard');
+        if (role === 'donor')       return res.redirect('/donor/dashboard');
+        if (role === 'beneficiary') return res.redirect('/beneficiary/dashboard');
+
+    }
+
     res.render('register', {
 
         error: null
@@ -99,6 +110,17 @@ router.get('/register', (req, res) => {
 // ======================
 
 router.get('/login', (req, res) => {
+
+    // Already logged in → redirect to dashboard
+    if (req.session && req.session.user) {
+
+        const role = req.session.user.role;
+
+        if (role === 'admin')       return res.redirect('/admin/dashboard');
+        if (role === 'donor')       return res.redirect('/donor/dashboard');
+        if (role === 'beneficiary') return res.redirect('/beneficiary/dashboard');
+
+    }
 
     res.render('login', {
 
@@ -759,9 +781,21 @@ router.get('/logout', (req, res) => {
 
         }
 
-        res.clearCookie('connect.sid');
+        // Clear the session cookie
+        res.clearCookie('connect.sid', {
+            httpOnly: true,
+            sameSite: 'lax'
+        });
 
-        res.redirect('/');
+        // Force browser not to cache the logout response
+        res.setHeader(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, private'
+        );
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+
+        res.redirect('/login');
 
     });
 
