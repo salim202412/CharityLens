@@ -201,16 +201,12 @@
 <script>
 
 const socket = io();
+socket.on('newDonation', data => {
 
-socket.on('newDonation', async data => {
-
-    const response =
-        await fetch(
-            `/api/case/${data.caseId}`
-        );
-
-    const caseData =
-        await response.json();
+    console.log(
+        'Donation received:',
+        data
+    );
 
     const amountElement =
         document.querySelector(
@@ -233,7 +229,7 @@ socket.on('newDonation', async data => {
             '₹' +
 
             Number(
-                caseData.collectedAmount
+                data.collectedAmount
             ).toLocaleString('en-IN');
 
     }
@@ -242,7 +238,7 @@ socket.on('newDonation', async data => {
 
         progressElement.style.width =
 
-            caseData.progress + '%';
+            data.progress + '%';
 
     }
 
