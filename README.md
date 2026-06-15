@@ -63,15 +63,15 @@ Cases with very high urgency can automatically receive emergency priority treatm
 
 ## Categories Supported
 
-### 🕌 Masjid
+###  Masjid
 
 Mosque construction, repairs, maintenance, and community projects.
 
-### 📖 Dar-ul-Uloom
+###  Dar-ul-Uloom
 
 Islamic educational institutions and related infrastructure.
 
-### 👤 Needy Individuals
+###  Needy Individuals
 
 Medical assistance, education support, and emergency financial aid.
 
