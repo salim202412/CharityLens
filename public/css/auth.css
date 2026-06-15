@@ -199,23 +199,6 @@ body {
     text-decoration: underline;
 }
 
-.auth-links {
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.auth-links a {
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.auth-links a:hover {
-    color: white;
-}
-
 
 /* =========================
    AUTH FOOTER
