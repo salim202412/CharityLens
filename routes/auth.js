@@ -449,8 +449,7 @@ router.post(
             const {
 
                 email,
-                password,
-                redirect
+                password
 
             } = req.body;
 
@@ -497,39 +496,42 @@ router.post(
             };
 
 
-            // user was trying to access a case
-if (redirect) {
+            // ── POST-LOGIN REDIRECTION ──────────────────────────
+            // If user was trying to access a specific page before
+            // being sent to login, return them there now.
+            // Otherwise, send them to their role dashboard.
 
-    return res.redirect(redirect);
+            const returnTo = req.session.returnTo;
 
-}
+            // Clear returnTo so it isn't reused on next login
+            delete req.session.returnTo;
 
-// normal role redirects
-if (user.role === 'admin') {
+            if (returnTo) {
 
-    return res.redirect(
-        '/admin/dashboard'
-    );
+                return res.redirect(returnTo);
 
-}
+            }
 
-if (user.role === 'donor') {
+            // Default role-based dashboard redirect
+            if (user.role === 'admin') {
 
-    return res.redirect(
-        '/donor/dashboard'
-    );
+                return res.redirect('/admin/dashboard');
 
-}
+            }
 
-if (user.role === 'beneficiary') {
+            if (user.role === 'donor') {
 
-    return res.redirect(
-        '/beneficiary/dashboard'
-    );
+                return res.redirect('/donor/dashboard');
 
-}
+            }
 
-res.redirect('/');
+            if (user.role === 'beneficiary') {
+
+                return res.redirect('/beneficiary/dashboard');
+
+            }
+
+            res.redirect('/');
 
         } catch (error) {
 

@@ -444,4 +444,34 @@ router.get(
   }
 
 );
+
+// ─────────────────────────────────────────────────────────
+// REQUEST LOGIN — saves the case URL to session then
+// redirects guest to login. After login they return here.
+// Called when a guest clicks Donate on a case detail page.
+// ─────────────────────────────────────────────────────────
+
+router.get('/cases/:id/request-login', (req, res) => {
+
+  // If already logged in, just go to the case page
+  if (req.session && req.session.user) {
+
+    return res.redirect(
+
+    `/cases-view/${req.params.id}`
+
+);
+
+  }
+
+  // Save the case detail URL as the return destination
+  req.session.returnTo =
+
+    `/cases-view/${req.params.id}`;
+
+  // Send to login page
+  res.redirect('/login');
+
+});
+
 module.exports = router;

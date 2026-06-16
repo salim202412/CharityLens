@@ -321,7 +321,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     <% if (typeof user === 'undefined' || !user) { %>
 
-        window.location.href = '/login';
+        window.location.href = '/cases/<%= foundCase._id %>/request-login';
 
         return;
 

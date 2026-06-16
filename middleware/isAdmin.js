@@ -1,41 +1,31 @@
 // ─────────────────────────────────────────────────────────
 // isAdmin — ensures user is logged in AND has admin role
-// Unauthenticated → redirect to /login
-// Wrong role → redirect to own dashboard
+// Unauthenticated → saves returnTo, redirects to /login
+// Wrong role → redirects to own dashboard
 // ─────────────────────────────────────────────────────────
 
 const isAdmin = (req, res, next) => {
 
-  // Not logged in at all
   if (!req.session || !req.session.user) {
+
+    // Save the URL the user was trying to reach
+    req.session.returnTo = req.originalUrl;
 
     return res.redirect('/login');
 
   }
 
-  // Logged in but not admin
   if (req.session.user.role !== 'admin') {
 
-    // Send them to their own dashboard
     const role = req.session.user.role;
 
-    if (role === 'donor') {
-
-      return res.redirect('/donor/dashboard');
-
-    }
-
-    if (role === 'beneficiary') {
-
-      return res.redirect('/beneficiary/dashboard');
-
-    }
+    if (role === 'donor')       return res.redirect('/donor/dashboard');
+    if (role === 'beneficiary') return res.redirect('/beneficiary/dashboard');
 
     return res.redirect('/');
 
   }
 
-  // Admin confirmed → proceed
   next();
 
 };
