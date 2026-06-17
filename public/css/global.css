@@ -270,17 +270,6 @@ p {
     border-radius: 20px;
 }
 
-.priority-low      { width: 25%;  background: var(--green); }
-.priority-medium   { width: 50%;  background: var(--yellow); }
-.priority-high     { width: 75%;  background: var(--orange); }
-
-.priority-critical {
-    width: 100%;
-    background: var(--red);
-    animation: criticalPulse 0.8s infinite alternate;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
-}
-
 @keyframes criticalPulse {
     from { opacity: 0.7;  transform: scaleX(1); }
     to   { opacity: 1;    transform: scaleX(1.02); }

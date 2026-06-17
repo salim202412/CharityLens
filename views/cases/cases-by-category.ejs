@@ -69,7 +69,8 @@
 
                     <div
                         class="case-card open-case-modal"
-
+                        
+                        data-case-id="<%= singleCase._id %>"
                         data-id="<%= singleCase._id %>"
                         data-title="<%= singleCase.title %>"
                         data-description="<%= singleCase.description %>"
@@ -124,13 +125,19 @@
 
                             <div class="progress-info">
 
-                                <span>
+                                <span
+    class="collected-amount"
+    data-case-id="<%= singleCase._id %>"
+>
 
-                                    ₹<%= (singleCase.collectedAmount || 0).toLocaleString('en-IN') %>
+    ₹<%= (singleCase.collectedAmount || 0).toLocaleString('en-IN') %>
 
-                                </span>
+</span>
 
-                                <span>
+                                <span
+    class="required-amount"
+    data-case-id="<%= singleCase._id %>"
+>
 
                                     ₹<%= (singleCase.requiredAmount || 0).toLocaleString('en-IN') %>
 
@@ -148,10 +155,11 @@
 
                             <div class="progress-bar">
 
-                                <div
-                                    class="progress-fill"
-                                    style="width: <%= progress %>%"
-                                ></div>
+                              <div
+    class="progress-fill"
+    data-case-id="<%= singleCase._id %>"
+    style="width: <%= progress %>%"
+></div>
 
                             </div>
 
@@ -187,6 +195,56 @@
         </div>
 
     </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+const socket = io();
+socket.on('newDonation', data => {
+
+    console.log(
+        'Donation received:',
+        data
+    );
+
+    const amountElement =
+        document.querySelector(
+
+            `.collected-amount[data-case-id="${data.caseId}"]`
+
+        );
+
+    const progressElement =
+        document.querySelector(
+
+            `.progress-fill[data-case-id="${data.caseId}"]`
+
+        );
+
+    if (amountElement) {
+
+        amountElement.innerText =
+
+            '₹' +
+
+            Number(
+                data.collectedAmount
+            ).toLocaleString('en-IN');
+
+    }
+
+    if (progressElement) {
+
+        progressElement.style.width =
+
+            data.progress + '%';
+
+    }
+
+});
+
+</script>
 
     <%- include('../partials/case-modal') %>
 

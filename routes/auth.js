@@ -1,3 +1,4 @@
+console.log('AUTH ROUTES LOADED');
 const express = require('express');
 
 const router = express.Router();
@@ -103,7 +104,6 @@ router.get('/register', (req, res) => {
     });
 
 });
-
 
 // ======================
 // RENDER LOGIN
@@ -391,7 +391,7 @@ router.post(
             delete req.session.otpExpiry;
 
 
-            res.redirect('/login');
+            res.redirect('/auth/login');
 
         }
 
@@ -440,7 +440,7 @@ router.post(
 
                 return res.redirect(
 
-                    '/login?error=Invalid login details'
+                    '/auth/login?error=Invalid login details'
 
                 );
 
@@ -461,7 +461,7 @@ router.post(
 
                 return res.redirect(
 
-                    '/login?error=Invalid email or password'
+                    '/auth/login?error=Invalid email or password'
 
                 );
 
@@ -477,7 +477,7 @@ router.post(
 
                 return res.redirect(
 
-                    '/login?error=Invalid email or password'
+                    '/auth/login?error=Invalid email or password'
 
                 );
 
@@ -531,7 +531,7 @@ router.post(
 
             }
 
-            res.redirect('/');
+res.redirect('/auth/login');
 
         } catch (error) {
 
@@ -750,7 +750,7 @@ router.post('/reset-password/:token',
             await user.save();
 
 
-            res.redirect('/login');
+            res.redirect('/auth/login');
 
         } catch (error) {
 
@@ -797,7 +797,7 @@ router.get('/logout', (req, res) => {
         res.setHeader('Pragma', 'no-cache');
         res.setHeader('Expires', '0');
 
-        res.redirect('/login');
+        res.redirect('/auth/login');
 
     });
 
