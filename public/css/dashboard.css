@@ -723,7 +723,7 @@ tbody tr {
 
 .submit-page {
     min-height: 100vh;
-    padding: 60px 70px;
+    padding: 0px 0px;
     position: relative;
     overflow: hidden;
 }
@@ -741,11 +741,17 @@ tbody tr {
 
 .submit-layout {
     position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+}
+
+.submit-info {
+    padding-left:40px;
 }
 
 .submit-info h1 {
@@ -792,18 +798,25 @@ tbody tr {
 /* =========================
    FORM CARD
 ========================= */
+.submit-form-section {
+    width: 80%;
+    margin-top: 0;
+    height: 100%;
+}
+
 
 .form-card {
     background: var(--color-bg-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-2xl);
-    padding: 40px;
+    padding: 50px;
     backdrop-filter: blur(18px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
+    
 }
 
 .form-group label {
@@ -816,6 +829,7 @@ tbody tr {
 
 .form-group i {
     display: none;
+    width: 80%;
 }
 
 .form-group input,
@@ -833,7 +847,7 @@ tbody tr {
 }
 
 .form-group textarea {
-    min-height: 140px;
+    min-height: 100px;
     resize: vertical;
 }
 
@@ -882,7 +896,7 @@ tbody tr {
     padding: 18px;
     border: none;
     border-radius: 18px;
-    background: var(--gradient-submit-btn);
+    background: black;
     color: white;
     font-size: 1rem;
     font-weight: 700;
