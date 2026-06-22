@@ -186,23 +186,23 @@ app.get('/register', (req, res) => {
 // login page — redirect to dashboard if already authenticated
 app.get('/login', (req, res) => {
 
-  // Already logged in → redirect to their dashboard
-  if (req.session && req.session.user) {
+    if (req.session && req.session.user) {
 
-    return redirectToDashboard(req.session.user.role, res);
+        if (req.query.redirect) {
+            return res.redirect(req.query.redirect);
+        }
 
-  }
+        return redirectToDashboard(
+            req.session.user.role,
+            res
+        );
+    }
 
-  res.render('login', {
-
-    redirect: req.query.redirect || ''
-
-  });
+    res.render('login', {
+        redirect: req.query.redirect || ''
+    });
 
 });
-
-
-
 // home route
 app.get('/', async (req, res) => {
 
@@ -295,5 +295,4 @@ server.listen(PORT, () => {
     console.log(
         `Server running on port ${PORT}`
     );
-
 });
