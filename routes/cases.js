@@ -445,64 +445,33 @@ router.get(
 
 );
 
-// =========================
-// api route to get case progress
-// =========================
+// ─────────────────────────────────────────────────────────
+// REQUEST LOGIN — saves the case URL to session then
+// redirects guest to login. After login they return here.
+// Called when a guest clicks Donate on a case detail page.
+// ─────────────────────────────────────────────────────────
 
-router.get('/api/case/:id', async (req, res) => {
+router.get('/cases/:id/request-login', (req, res) => {
 
-    try {
+  // If already logged in, just go to the case page
+  if (req.session && req.session.user) {
 
-        const foundCase =
-            await Case.findById(
-                req.params.id
-            );
+    return res.redirect(
 
-        if (!foundCase) {
+    `/cases-view/${req.params.id}`
 
-            return res.status(404).json({
+);
 
-                message: 'Case not found'
+  }
 
-            });
+  // Save the case detail URL as the return destination
+  req.session.returnTo =
 
-        }
+    `/cases-view/${req.params.id}`;
 
-        const progress = Math.min(
-
-            (
-                foundCase.collectedAmount /
-                foundCase.requiredAmount
-            ) * 100,
-
-            100
-
-        );
-
-        res.json({
-
-            collectedAmount:
-                foundCase.collectedAmount,
-
-            requiredAmount:
-                foundCase.requiredAmount,
-
-            progress,
-
-            isClosed:
-                foundCase.isClosed
-
-        });
-
-    } catch (error) {
-
-        res.status(500).json({
-
-            message: 'Server Error'
-
-        });
-
-    }
+  // Send to login page
+  res.redirect('/login');
 
 });
+
 module.exports = router;

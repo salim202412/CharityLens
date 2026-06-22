@@ -1,18 +1,20 @@
 // ─────────────────────────────────────────────────────────
 // isAuth — verifies a valid session exists
-// Redirects to /login if not authenticated
+// Saves the originally requested URL to session before
+// redirecting to login, so we can return there after login.
 // ─────────────────────────────────────────────────────────
 
 const isAuth = (req, res, next) => {
 
-  // Check active session with user object
   if (req.session && req.session.user) {
 
     return next();
 
   }
 
-  // Not logged in → redirect to login
+  // Save the URL the user was trying to reach
+  req.session.returnTo = req.originalUrl;
+
   return res.redirect('/login');
 
 };
