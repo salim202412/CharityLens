@@ -116,15 +116,16 @@
 
                 <% if (user.role === 'admin') { %>
 
-                    <i class="fa-solid fa-user-shield"></i>
+                    <strong title="Admin">Admin</strong>
+                    
 
                 <% } else if (user.role === 'donor') { %>
 
-                    <i class="fa-solid fa-hand-holding-heart"></i>
+                    <strong title="Donor">Donor</strong>
 
                 <% } else { %>
 
-                    <i class="fa-solid fa-user"></i>
+                    <strong title="Beneficiary">Beneficiary</strong>
 
                 <% } %>
 
