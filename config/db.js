@@ -16,8 +16,8 @@ const connectDB = async () => {
     if (!adminExists) {
       const admin = new User({
         name: "Admin",
-        email: "salim.lone444@gmail.com",
-        password: "Salim@123$", //  hashed automatically
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD, //  hashed automatically
         role: "admin"
       });
 
