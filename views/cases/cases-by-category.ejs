@@ -36,15 +36,15 @@
 
                     <% if(category === 'Masjid') { %>
 
-                        🕌 Masjid Cases
+                         Masjid Cases
 
                     <% } else if(category === 'DarulUloom') { %>
 
-                        📖 Dar-ul-Uloom Cases
+                         Dar-ul-Uloom Cases
 
                     <% } else { %>
 
-                        👤 Needy Individual Cases
+                         Needy Individual Cases
 
                     <% } %>
 
@@ -88,6 +88,7 @@
                                 <% if(singleCase.category === 'Masjid') { %>
 
                                     <i class="fa-solid fa-mosque"></i>
+                                    
 
                                 <% } else if(singleCase.category === 'DarulUloom') { %>
 
@@ -106,6 +107,17 @@
                                 <%= singleCase.category %>
 
                             </span>
+                             <span class="priority">
+
+                                <%= singleCase.priority || 'Low' %>
+
+                            </span>
+
+                            <% if (singleCase.emergencyBypass) { %>
+                            <span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;margin-left:4px;">
+                                <i class="fa-solid fa-bolt"></i> EMERGENCY
+                            </span>
+                            <% } %>
 
                         </div>
 
