@@ -16,6 +16,46 @@ const {
 
 const rateLimit = require('express-rate-limit');
 
+const getSafeRedirect = redirect => {
+
+    if (
+        typeof redirect !== 'string' ||
+        !redirect.startsWith('/') ||
+        redirect.startsWith('//') ||
+        redirect.includes('\\')
+    ) {
+
+        return '';
+
+    }
+
+    return redirect;
+
+};
+
+const getLoginUrl = (redirect, error) => {
+
+    const safeRedirect = getSafeRedirect(redirect);
+    const params = new URLSearchParams();
+
+    if (safeRedirect) {
+
+        params.set('redirect', safeRedirect);
+
+    }
+
+    if (error) {
+
+        params.set('error', error);
+
+    }
+
+    const query = params.toString();
+
+    return query ? `/auth/login?${query}` : '/auth/login';
+
+};
+
 
 // ======================
 // NODEMAILER
@@ -111,8 +151,15 @@ router.get('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
 
-    // Already logged in → redirect to dashboard
+    const redirect = getSafeRedirect(req.query.redirect);
+
     if (req.session && req.session.user) {
+
+        if (redirect) {
+
+            return res.redirect(redirect);
+
+        }
 
         const role = req.session.user.role;
 
@@ -124,7 +171,7 @@ router.get('/login', (req, res) => {
 
     res.render('login', {
 
-        redirect: req.query.redirect || ''
+        redirect
 
     });
 
@@ -440,7 +487,10 @@ router.post(
 
                 return res.redirect(
 
-                    '/auth/login?error=Invalid login details'
+                    getLoginUrl(
+                        req.body.redirect,
+                        'Invalid login details'
+                    )
 
                 );
 
@@ -461,7 +511,10 @@ router.post(
 
                 return res.redirect(
 
-                    '/auth/login?error=Invalid email or password'
+                    getLoginUrl(
+                        req.body.redirect,
+                        'Invalid email or password'
+                    )
 
                 );
 
@@ -477,7 +530,10 @@ router.post(
 
                 return res.redirect(
 
-                    '/auth/login?error=Invalid email or password'
+                    getLoginUrl(
+                        req.body.redirect,
+                        'Invalid email or password'
+                    )
 
                 );
 
@@ -501,7 +557,9 @@ router.post(
             // being sent to login, return them there now.
             // Otherwise, send them to their role dashboard.
 
-            const returnTo = req.session.returnTo;
+            const returnTo =
+                getSafeRedirect(req.body.redirect) ||
+                getSafeRedirect(req.session.returnTo);
 
             // Clear returnTo so it isn't reused on next login
             delete req.session.returnTo;
