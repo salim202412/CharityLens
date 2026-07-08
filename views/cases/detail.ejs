@@ -499,22 +499,87 @@ if (amount > maxAmount) {
 
                     },
 
-                    modal: {
+                   modal: {
 
-                        ondismiss: function () {
+    ondismiss: async function () {
 
-                            console.log("Payment cancelled");
+        console.log("Payment cancelled");
 
-                        }
+        try {
 
-                    }
+            await fetch('/donate/payment-failed', {
 
+                method: 'POST',
+
+                headers: {
+
+                    'Content-Type': 'application/json'
+
+                },
+
+                body: JSON.stringify({
+
+                    razorpay_order_id: data.order.id
+
+                })
+
+            });
+
+        } catch (err) {
+
+            console.error(err);
+
+        }
+
+    }
+
+}
                 };
 
-                const rzp =
-                    new Razorpay(options);
+                const rzp = new Razorpay(options);
 
-                rzp.open();
+// Handle payment failure
+rzp.on('payment.failed', async function (response) {
+
+    console.log('Payment Failed:', response);
+
+    try {
+
+        await fetch('/donate/payment-failed', {
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify({
+
+                razorpay_order_id:
+                    response.error.metadata.order_id
+
+            })
+
+        });
+
+    } catch (err) {
+
+        console.error(
+            'Failed to update donation status:',
+            err
+        );
+
+    }
+
+    alert(
+        'Payment failed. Please try again.'
+    );
+
+});
+
+rzp.open();
 
             } catch (error) {
 
