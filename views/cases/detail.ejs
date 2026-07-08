@@ -11,7 +11,13 @@
     <link rel="manifest" href="/manifest.json">
 
     <meta name="theme-color" content="#7c3aed">
-
+ <script>
+         (function () {
+           const saved = localStorage.getItem('theme');
+           const theme = saved || 'light';
+           document.documentElement.setAttribute('data-theme', theme);
+         })();
+       </script>
     <!-- Font Awesome -->
 
    <link rel="stylesheet" href="/css/global.css">
@@ -782,6 +788,7 @@ document.getElementById(
 });
 
 </script>
+<script src="/js/dark-mode.js" defer></script>
 
 <%- include('../partials/footer') %>
 </body>

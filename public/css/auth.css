@@ -11,10 +11,16 @@
     --color-text-placeholder: #6b7280;
     --color-text-faint:     #9ca3af;
 
+    --color-card-bg:        #ffffff;
     --color-bg-input:       #f9fafb;
     --color-border:         rgba(0, 0, 0, 0.1);
     --color-border-subtle:  rgba(0, 0, 0, 0.06);
     --color-icon:           rgba(0, 0, 0, 0.45);
+    --color-select-arrow:   rgba(0, 0, 0, 0.5);
+
+    --alert-bg:             #fee2e2;
+    --alert-text:           #b91c1c;
+    --alert-border:         #fecaca;
 
     --gradient-primary:     linear-gradient(135deg, #16a34a, #22c55e);
 
@@ -22,6 +28,29 @@
     --radius-input:         14px;
 
     --transition:           0.25s ease;
+}
+
+/* =========================
+   DARK THEME OVERRIDES
+   (toggled via [data-theme="dark"] on <html>)
+========================= */
+
+[data-theme="dark"] {
+    --color-text:           #e5e7eb;
+    --color-text-muted:     #9ca3af;
+    --color-text-placeholder: #9ca3af;
+    --color-text-faint:     #6b7280;
+
+    --color-card-bg:        #1e1e1e;
+    --color-bg-input:       #262626;
+    --color-border:         rgba(255, 255, 255, 0.12);
+    --color-border-subtle:  rgba(255, 255, 255, 0.08);
+    --color-icon:           rgba(255, 255, 255, 0.5);
+    --color-select-arrow:   rgba(255, 255, 255, 0.55);
+
+    --alert-bg:             rgba(239, 68, 68, 0.15);
+    --alert-text:           #fca5a5;
+    --alert-border:         rgba(239, 68, 68, 0.3);
 }
 
 
@@ -59,7 +88,7 @@ body {
 .register-card {
     width: 100%;
     max-width: 440px;
-    background: white;
+    background: var(--color-card-bg);
     border-radius: var(--radius-card);
     border: 1px solid var(--color-border-subtle);
     padding: 24px 24px 20px;
@@ -147,8 +176,8 @@ body {
     -moz-appearance: none;
     cursor: pointer;
     background-image:
-        linear-gradient(45deg, transparent 50%, rgba(0, 0, 0, 0.5) 50%),
-        linear-gradient(135deg, rgba(0, 0, 0, 0.5) 50%, transparent 50%);
+        linear-gradient(45deg, transparent 50%, var(--color-select-arrow) 50%),
+        linear-gradient(135deg, var(--color-select-arrow) 50%, transparent 50%);
     background-position:
         calc(100% - 22px) calc(50% - 3px),
         calc(100% - 16px) calc(50% - 3px);
@@ -279,7 +308,7 @@ body {
     width: 90%;
     max-width: 315px;
 
-    background: white;
+    background: var(--color-card-bg);
 
     border-radius: 24px;
 
@@ -321,7 +350,7 @@ body {
 
 .success-box p {
 
-    color: #6b7280;
+    color: var(--color-text-muted);
 
     margin-bottom: 26px;
 }
@@ -364,9 +393,9 @@ body {
 
 .error-alert {
 
-    background: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
+    background: var(--alert-bg);
+    color: var(--alert-text);
+    border: 1px solid var(--alert-border);
     padding: 12px 16px;
     border-radius: 10px;
     margin-bottom: 16px;

@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Submit Case</title>
+     <script>
+         (function () {
+           const saved = localStorage.getItem('theme');
+           const theme = saved || 'light';
+           document.documentElement.setAttribute('data-theme', theme);
+         })();
+       </script>
 
     <!-- Font Awesome -->
 
@@ -338,6 +345,7 @@ amountInput.addEventListener('input', e => {
 
 </script>
 </body>
+<script src="/js/dark-mode.js" defer></script>
 <%- include('../partials/footer') %>
 
 </html>

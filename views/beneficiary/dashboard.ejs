@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Beneficiary Dashboard</title>
+     <script>
+         (function () {
+           const saved = localStorage.getItem('theme');
+           const theme = saved || 'light';
+           document.documentElement.setAttribute('data-theme', theme);
+         })();
+       </script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/global.css">
@@ -389,6 +396,7 @@
 <!-- CASE MODAL -->
     <%- include('../partials/case-modal') %>
 <%- include('../partials/footer') %>
+<script src="/js/dark-mode.js" defer></script>
 </body>
 
 </html>

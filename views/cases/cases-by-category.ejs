@@ -8,6 +8,13 @@
           content="width=device-width, initial-scale=1.0">
 
     <title><%= category %> Cases</title>
+     <script>
+         (function () {
+           const saved = localStorage.getItem('theme');
+           const theme = saved || 'light';
+           document.documentElement.setAttribute('data-theme', theme);
+         })();
+       </script>
 
     <link rel="stylesheet"
           href="/css/global.css">
@@ -270,7 +277,7 @@ socket.on('newDonation', data => {
 });
 
 </script>
-
+<script src="/js/dark-mode.js" defer></script>
     <%- include('../partials/case-modal') %>
 
     <%- include('../partials/footer') %>

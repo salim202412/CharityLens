@@ -11,6 +11,13 @@
     >
 
     <title>Case Details</title>
+     <script>
+         (function () {
+           const saved = localStorage.getItem('theme');
+           const theme = saved || 'light';
+           document.documentElement.setAttribute('data-theme', theme);
+         })();
+       </script>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -392,6 +399,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     
     </div>
 <%- include('../partials/footer') %>
+<script src="/js/dark-mode.js" defer></script>
 </body>
 
 </html>

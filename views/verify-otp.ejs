@@ -10,6 +10,13 @@
     />
 
     <title>Verify Email</title>
+     <script>
+         (function () {
+           const saved = localStorage.getItem('theme');
+           const theme = saved || 'light';
+           document.documentElement.setAttribute('data-theme', theme);
+         })();
+       </script>
 
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/auth.css">
@@ -142,6 +149,7 @@
 
     </div>
 <%- include('partials/footer') %>
+<script src="public/js/dark-mode.js" defer></script>
 </body>
 
 </html>
