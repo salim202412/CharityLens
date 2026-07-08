@@ -287,13 +287,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     autocomplete="off"
 
 >
-
+                
                 <p class="max-amount">
-
+                    
                     Maximum allowed:
                     ₹<%= remainingAmount.toLocaleString('en-IN') %>
-
+                    
                 </p>
+                <p id="donationWarning" class="donation-warning"></p>
+
 
                 <button
 
@@ -344,7 +346,45 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     <% } %>
 
+    
     startPayment();
+}
+const donationWarning =
+    document.getElementById("donationWarning");
+
+function validateDonationAmount() {
+
+    const amount = Number(
+        document
+            .getElementById("donationAmount")
+            .value
+            .replace(/,/g, "")
+    );
+
+    const maxAmount =
+        <%= remainingAmount %>;
+
+    if (amount > maxAmount) {
+
+        donationWarning.innerHTML =
+            '<i class="fa-solid fa-circle-exclamation"></i> Donation amount cannot exceed the remaining required amount.';
+
+        donationWarning.classList.add("show");
+
+        donationInput.classList.add("max-allowed");
+
+        return false;
+
+    }
+
+    donationWarning.innerHTML = "";
+
+    donationWarning.classList.remove("show");
+
+    donationInput.classList.remove("max-allowed");
+
+    return true;
+
 }
         async function startPayment() {
 
@@ -367,13 +407,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 const maxAmount =
     <%= remainingAmount %>;
 
-if (amount > maxAmount) {
-
-    alert(
-        `Maximum donation allowed is ₹${maxAmount.toLocaleString('en-IN')}`
-    );
+if (!validateDonationAmount()) {
 
     return;
+
 }
 
                 const response = await fetch(
@@ -545,23 +582,21 @@ if (amount > maxAmount) {
                 const rzp = new Razorpay(options);
 
 // Handle payment failure
-rzp.on('payment.failed', async function (response) {
+rzp.on("payment.failed", async function(response){
 
-    console.log('Payment Failed:', response);
+    console.log(response);
 
-    try {
+    try{
 
-        await fetch('/donate/payment-failed', {
+        await fetch("/donate/payment-failed",{
 
-            method: 'POST',
+            method:"POST",
 
-            headers: {
-
-                'Content-Type': 'application/json'
-
+            headers:{
+                "Content-Type":"application/json"
             },
 
-            body: JSON.stringify({
+            body:JSON.stringify({
 
                 razorpay_order_id:
                     response.error.metadata.order_id
@@ -570,18 +605,13 @@ rzp.on('payment.failed', async function (response) {
 
         });
 
-    } catch (err) {
+    }catch(err){
 
-        console.error(
-            'Failed to update donation status:',
-            err
-        );
+        console.error(err);
 
     }
 
-    alert(
-        'Payment failed. Please try again.'
-    );
+    showFailureModal();
 
 });
 
@@ -619,6 +649,21 @@ rzp.open();
 
     window.location.href =
         '/donor/dashboard';
+}
+function showFailureModal() {
+
+    document
+        .getElementById('failureModal')
+        .classList.add('active');
+
+}
+
+function closeFailureModal() {
+
+    document
+        .getElementById('failureModal')
+        .classList.remove('active');
+
 }
 
     const proofModal =
@@ -696,6 +741,7 @@ if (proofModal) {
 
         e.target.value =
             Number(value).toLocaleString('en-IN');
+            validateDonationAmount();
 
     });
 
@@ -725,6 +771,37 @@ if (proofModal) {
         <button onclick="closeSuccessModal()">
 
             Continue
+
+        </button>
+
+    </div>
+
+</div>
+<!-- FAILURE MODAL -->
+
+<div class="success-modal" id="failureModal">
+
+    <div class="success-box">
+
+        <div class="success-icon failure-icon">
+
+            <i class="fa-solid fa-circle-xmark"></i>
+
+        </div>
+
+        <h2>Payment Failed</h2>
+
+        <p>
+
+            Unfortunately, your donation could not be processed.
+            No amount has been deducted.
+            Please try again.
+
+        </p>
+
+        <button onclick="closeFailureModal()">
+
+            Try Again
 
         </button>
 
