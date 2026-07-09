@@ -136,7 +136,7 @@ body {
     align-items: center;
 }
 
-.input-box i {
+.input-box > i {
     position: absolute;
     left: 16px;
     color: var(--color-icon);
@@ -148,7 +148,7 @@ body {
 .input-box input,
 .input-box select {
     width: 100%;
-    padding: 10px 14px 10px 38px;
+    padding: 10px 52px 10px 38px;
     border-radius: var(--radius-input);
     border: 1px solid var(--color-border);
     background: var(--color-bg-input);
@@ -183,6 +183,39 @@ body {
         calc(100% - 16px) calc(50% - 3px);
     background-size: 6px 6px;
     background-repeat: no-repeat;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-icon);
+    transition: var(--transition);
+    z-index: 5;
+}
+
+.toggle-password i {
+    font-size: 1.05rem;
+}
+
+.toggle-password:hover {
+    color: var(--color-primary);
+    background: rgba(34,197,94,.08);
+}
+
+.toggle-password:focus-visible {
+    box-shadow: 0 0 0 3px rgba(34,197,94,.15);
 }
 
 

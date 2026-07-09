@@ -305,7 +305,7 @@ req.session.otpExpiry =
 // send email
 await transporter.sendMail({
 
-    from: process.env.EMAIL_USER,
+   from: `"CharityLens" <${process.env.EMAIL_USER}>`,
 
     to: email,
 

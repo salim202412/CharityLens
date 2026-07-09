@@ -903,10 +903,10 @@ tbody tr {
     font-size: var(--text-sm);
 }
 
-.form-group i {
-    display: none;
+/* .form-group i {
+    /* display: none;
     width: 80%;
-}
+} */
 
 .form-group input,
 .form-group textarea,

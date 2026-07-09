@@ -59,8 +59,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
           <div class="input-box">
 
-            <i class="fa-regular fa-user left-icon"></i>
-
             <input
               type="text"
               name="name"
@@ -79,8 +77,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           <label>Email</label>
 
           <div class="input-box">
-
-            <i class="fa-regular fa-envelope left-icon"></i>
 
             <input
               type="email"
@@ -101,14 +97,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
           <div class="input-box">
 
-            <i class="fa-solid fa-lock left-icon"></i>
-
             <input
               type="password"
               name="password"
               placeholder="Enter your password"
               required
             />
+            <button
+                type="button"
+                class="toggle-password"
+                aria-label="Toggle password visibility"
+              >
+              <i class="fa-solid fa-eye"></i>
+            </button>
 
           </div>
 
@@ -121,8 +122,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           <label>Select Role</label>
 
           <div class="input-box select-box">
-
-            <i class="fa-solid fa-user-tag left-icon"></i>
 
             <select name="role">
 
@@ -173,7 +172,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
    
   </div>
   <script src="/js/dark-mode.js" defer></script>
-<%- include('partials/footer') %>
+<script src="/js/password-toggle.js"></script>
+  <%- include('partials/footer') %>
 </body>
 </html>
 
