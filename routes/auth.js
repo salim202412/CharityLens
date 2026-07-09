@@ -1,4 +1,4 @@
-console.log('AUTH ROUTES LOADED');
+
 const express = require('express');
 
 const router = express.Router();
@@ -614,18 +614,18 @@ res.redirect('/auth/login');
 router.post('/forgot-password', async (req, res) => {
 
     try {
-
+          
         const { email } = req.body;
-
         const user = await User.findOne({ email });
 
-        if (!user) {
+if (!user) {
 
-            return res.send(
-                "No account found with this email"
-            );
+    return res.render('forgot-password', {
+        success: true,
+        message: "If an account with that email exists, a password reset link has been sent."
+    });
 
-        }
+}
 
 
         // generate token
@@ -655,7 +655,7 @@ router.post('/forgot-password', async (req, res) => {
         // send email
         await transporter.sendMail({
 
-            from: process.env.EMAIL_USER,
+            from: `"CharityLens" <${process.env.EMAIL_USER}>`,
 
             to: user.email,
 
@@ -699,7 +699,8 @@ router.post('/forgot-password', async (req, res) => {
         });
 
         res.render('forgot-password', {
-          success: true
+          success: true,
+          message: "If an account with that email exists, a password reset link has been sent"
         });
 
     } catch (error) {
