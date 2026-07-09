@@ -32,7 +32,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <%- include('../partials/navbar', {
     currentPage: 'cases'
 }) %>
-<%- include('../partials/page-navigation') %>
+<!-- <%- include('../partials/page-navigation') %> -->
 
     <div class="case-details-page">
 
@@ -304,29 +304,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     onclick="handleDonation()"
 
                 >
-
-                    <i class="fa-solid fa-hand-holding-heart"></i>
+                
+                <i class="fa-solid fa-hand-holding-heart"></i>
 
                     Donate Now
 
                 </button>
 
             </div>
-
+            
         </div>
-
+        
     </div>
-
+    
 </div>
-   
 
-    <!-- RAZORPAY -->
+
+
+<!-- RAZORPAY -->
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <!-- YOUR EXISTING PAYMENT SCRIPT -->
 
     <script>
+        const donationInput =
+    document.getElementById('donationAmount');
         
         function handleDonation() {
 
@@ -355,19 +358,31 @@ const donationWarning =
 function validateDonationAmount() {
 
     const amount = Number(
-        document
-            .getElementById("donationAmount")
-            .value
-            .replace(/,/g, "")
+        donationInput.value.replace(/,/g, "")
     );
 
-    const maxAmount =
-        <%= remainingAmount %>;
+    const maxAmount = <%= remainingAmount %>;
 
+    // Empty or zero
+    if (!amount || amount <= 0) {
+
+        donationWarning.innerHTML =
+            '<i class="fa-solid fa-circle-exclamation"></i> Please enter a valid donation amount.';
+
+        donationWarning.classList.add("show");
+
+        donationInput.classList.add("max-allowed");
+
+        return false;
+
+    }
+
+    // Above maximum
     if (amount > maxAmount) {
 
         donationWarning.innerHTML =
-            '<i class="fa-solid fa-circle-exclamation"></i> Donation amount cannot exceed the remaining required amount.';
+            `<i class="fa-solid fa-circle-exclamation"></i>
+            Donation amount cannot exceed ₹${maxAmount.toLocaleString('en-IN')}.`;
 
         donationWarning.classList.add("show");
 
@@ -393,19 +408,9 @@ function validateDonationAmount() {
             try {
 
                 const amount = Number(document
-                    .getElementById('donationAmount')
+                .getElementById('donationAmount')
                     .value
                     .replace(/,/g, ''));
-
-               if (!amount || amount <= 0) {
-
-    alert("Valid donation amount required");
-
-    return;
-}
-
-const maxAmount =
-    <%= remainingAmount %>;
 
 if (!validateDonationAmount()) {
 
@@ -676,9 +681,9 @@ if (proofModal) {
         if (e.target === proofModal) {
 
             closeProofModal();
-
+            
         }
-
+        
     });
 
 }
@@ -718,8 +723,6 @@ if (proofModal) {
     </script>
     <script>
 
-    const donationInput =
-        document.getElementById('donationAmount');
 
     donationInput.addEventListener('input', function(e) {
 
@@ -734,6 +737,8 @@ if (proofModal) {
         if (!value) {
 
             e.target.value = '';
+
+            validateDonationAmount();
 
             return;
 

@@ -117,7 +117,7 @@ h3 {
 p {
     color: var(--text-soft);
     line-height: 1.7;
-    font-size: 1rem;
+    font-size: 1.2em;
 }
 
 
@@ -405,7 +405,7 @@ p {
 
 .footer {
 
-    background: #111827;
+    background: #121212;
     color: white;
     margin-top: auto;
     width: 100vw;
