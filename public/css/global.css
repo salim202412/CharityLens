@@ -99,7 +99,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 18px;
 }
@@ -117,7 +117,7 @@ h3 {
 p {
     color: var(--text-soft);
     line-height: 1.7;
-    font-size: 1.2em;
+    font-size: 1.10rem;
 }
 
 
@@ -357,26 +357,6 @@ p {
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.8rem;
-    }
-
-    .navbar {
-        flex-direction: column;
-        gap: 18px;
-        min-height: 72px;
-    }
-
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
 .logo {
 
     display: flex;
@@ -405,10 +385,10 @@ p {
 
 .footer {
 
-    background: #121212;
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-main) 100%);
     color: white;
     margin-top: auto;
-    width: 100vw;
+    width: 100%;
 
 }
 
@@ -428,13 +408,14 @@ p {
 .footer-section h4 {
 
     margin-bottom: 15px;
+    color: var(--text-main);
 
 }
 
 .footer-section p,
 .footer-section li {
 
-    color: #d1d5db;
+    color: var(--text-main);
     line-height: 1.7;
 
 }
@@ -449,14 +430,14 @@ p {
 .footer-section a {
 
     text-decoration: none;
-    color: #d1d5db;
+    color: var(--text-main);
     transition: 0.3s;
 
 }
 
 .footer-section a:hover {
 
-    color: #22c55e;
+    color: var(--primary);
 
 }
 
@@ -465,6 +446,87 @@ p {
     text-align: center;
     padding: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
-    color: #9ca3af;
+    color: var(--text-main);
+}
 
+
+/* =========================
+   RESPONSIVE
+   (kept at the end of the file so these overrides
+   actually win against the base rules above)
+========================= */
+
+/* Tablet */
+@media (max-width: 900px) {
+    h1 {
+        font-size: 3.2rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .hero {
+        padding: 55px 20px 45px;
+    }
+}
+
+/* Tablet portrait / large phone */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 14px 5%;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+    .container {
+        width: 94%;
+    }
+
+    h1 {
+        font-size: 2.1rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero {
+        padding: 40px 16px 32px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+
+    .footer-container {
+        padding: 30px 16px;
+        gap: 24px;
+    }
 }

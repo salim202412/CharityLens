@@ -17,8 +17,7 @@
 
     display: grid;
 
-    grid-template-columns:
-        repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 25px;
 
@@ -69,4 +68,31 @@
 
     color: var(--text-soft);
 
+}
+
+@media (max-width: 768px) {
+    .categories-section {
+        margin: 50px auto;
+        padding: 0 16px;
+    }
+
+    .categories-section h2 {
+        margin-bottom: 26px;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-card {
+        padding: 26px 20px;
+    }
 }

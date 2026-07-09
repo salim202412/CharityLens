@@ -319,6 +319,30 @@ body {
     animation: popup 0.3s ease;
 }
 
+.success-icon {
+
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+
+    font-size: 1.5rem;
+}
+
 .success-box h2 {
 
     margin-bottom: 14px;
@@ -377,4 +401,30 @@ body {
     margin-bottom: 16px;
     text-align: center;
     font-weight: 600;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 14px;
+        margin: 30px auto;
+    }
+
+    .login-card,
+    .register-card {
+        padding: 22px 18px 18px;
+    }
+
+    .login-card h1,
+    .register-card h1 {
+        font-size: 1.7rem;
+    }
+
+    .success-box {
+        padding: 24px 18px;
+    }
 }
